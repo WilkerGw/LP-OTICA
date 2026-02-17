@@ -14,7 +14,7 @@ export function ContactSection() {
                                 Visite Nossa Loja
                             </h2>
                             <p className="text-lg text-muted-foreground">
-                                Venha conhecer nossa estrutura completa e realizar seu exame de vista com nossos especialistas.
+                                Venha conhecer nossa loja e tirar suas duvidas com nossos especialistas.
                             </p>
                         </div>
 
