@@ -1,5 +1,6 @@
 import { HeroCarousel } from "@/components/HeroCarousel";
 import { BenefitCards } from "@/components/BenefitCards";
+import { LensSurvey } from "@/components/survey/LensSurvey";
 import { AboutSection } from "@/components/AboutSection";
 import { LensDiagram } from "@/components/educational/LensDiagram";
 import { ProductLines } from "@/components/educational/ProductLines";
@@ -16,6 +17,7 @@ export default function Home() {
         <HeroCarousel />
         <BenefitCards />
       </div>
+      <LensSurvey />
       <AboutSection />
 
       <div id="multifocais">
