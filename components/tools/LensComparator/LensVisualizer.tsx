@@ -26,29 +26,29 @@ const LensVisualizer: React.FC<LensVisualizerProps> = ({
         }>
             <div className="w-full">
                 <span className={isMobile
-                    ? "text-[10px] font-bold text-slate-800 uppercase tracking-wider mb-0.5 block opacity-70"
-                    : "text-xs font-bold text-slate-600 uppercase tracking-wider block mb-2"
+                    ? "text-[10px] font-bold text-primary uppercase tracking-wider mb-0.5 block opacity-70"
+                    : "text-xs font-bold text-muted-foreground uppercase tracking-wider block mb-2"
                 }>
                     Índice Selecionado
                 </span>
                 <div className={isMobile ? "flex items-baseline gap-2" : "block"}>
                     <h3 className={isMobile
-                        ? "text-xl font-extrabold text-slate-900"
-                        : "text-4xl font-extrabold text-slate-900 leading-tight"
+                        ? "text-xl font-extrabold text-primary"
+                        : "text-4xl font-extrabold text-primary leading-tight"
                     }>
                         {selectedRefractiveIndex.value.toFixed(2)}
                     </h3>
                     <p className={isMobile
-                        ? "text-xs font-semibold text-slate-700"
-                        : "text-xl font-medium text-slate-700 mt-1"
+                        ? "text-xs font-semibold text-foreground"
+                        : "text-xl font-medium text-foreground mt-1"
                     }>
                         {selectedRefractiveIndex.material}
                     </p>
                 </div>
             </div>
 
-            <div className={isMobile ? "hidden" : "space-y-4 pt-4 border-t border-slate-900/10"}>
-                <span className="text-xs font-bold text-slate-600 uppercase tracking-wider block pb-2">
+            <div className={isMobile ? "hidden" : "space-y-4 pt-4 border-t border-border"}>
+                <span className="text-xs font-bold text-muted-foreground uppercase tracking-wider block pb-2">
                     Características
                 </span>
                 <ul className="space-y-3">
@@ -58,9 +58,9 @@ const LensVisualizer: React.FC<LensVisualizerProps> = ({
                             initial={{ opacity: 0, x: 10 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ delay: idx * 0.1 }}
-                            className="flex items-start gap-3 text-sm font-medium text-slate-800"
+                            className="flex items-start gap-3 text-sm font-medium text-primary"
                         >
-                            <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-teal-600 shrink-0 shadow-sm" />
+                            <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-secondary shrink-0 shadow-sm" />
                             {feature}
                         </motion.li>
                     ))}
@@ -68,7 +68,7 @@ const LensVisualizer: React.FC<LensVisualizerProps> = ({
             </div>
             {/* Mobile specific features text if needed */}
             {isMobile && (
-                <p className="text-[10px] text-slate-900 leading-tight mt-2 opacity-80 font-medium">
+                <p className="text-[10px] text-primary leading-tight mt-2 opacity-80 font-medium">
                     {selectedRefractiveIndex.features.slice(0, 2).join(" • ")}
                 </p>
             )}
@@ -95,18 +95,18 @@ const LensVisualizer: React.FC<LensVisualizerProps> = ({
                                 : "h-16 px-8 rounded-xl shadow-lg border backdrop-blur-md"
                             }
                             ${isSelected
-                                ? "bg-teal-500 hover:bg-teal-600 border-teal-500 text-white shadow-teal-500/30"
+                                ? "bg-secondary hover:bg-secondary/90 border-secondary text-primary shadow-secondary/30"
                                 : isMobile
-                                    ? "bg-white/30 hover:bg-white/50 text-slate-800 border-white/40"
-                                    : "bg-white/60 hover:bg-white/80 border-white/50 text-slate-800"
+                                    ? "bg-white/30 hover:bg-white/50 text-primary border-white/40"
+                                    : "bg-white/60 hover:bg-white/80 border-white/50 text-primary"
                             }
                             ${!isMobile ? "rounded-2xl" : "rounded-full"}
                         `}
                     >
                         <div className="flex items-center justify-center gap-2 z-10 w-full">
                             {/* Star Icon - Only show on Mobile or if selected on Desktop for cleaner look? Keeping as is for consistency */}
-                            <div className={`flex items-center justify-center w-5 h-5 rounded-full border shrink-0 ${isSelected ? "border-teal-300/50 bg-white/20" : "border-slate-400/30 bg-black/5"}`}>
-                                <span className={`text-[10px] ${isSelected ? "text-white" : "text-slate-600"}`}>★</span>
+                            <div className={`flex items-center justify-center w-5 h-5 rounded-full border shrink-0 ${isSelected ? "border-secondary/50 bg-secondary/20" : "border-primary/20 bg-primary/5"}`}>
+                                <span className={`text-[10px] ${isSelected ? "text-primary" : "text-muted-foreground"}`}>★</span>
                             </div>
                             <span className={`font-bold tracking-tight ${isMobile ? "text-sm" : "text-base"}`}>
                                 {index.value.toFixed(2)}
@@ -119,7 +119,7 @@ const LensVisualizer: React.FC<LensVisualizerProps> = ({
     );
 
     return (
-        <div className="relative w-full max-w-7xl mx-auto aspect-3/4 md:aspect-auto md:h-[700px] bg-slate-100 rounded-3xl shadow-2xl overflow-hidden">
+        <div className="relative w-full max-w-7xl mx-auto aspect-3/4 md:aspect-auto md:h-[700px] bg-muted rounded-3xl shadow-2xl overflow-hidden">
 
             {/* Desktop Buttons Overlay - Top Left */}
             <div className="hidden md:absolute md:top-8 md:left-8 md:flex md:items-center md:gap-4 z-30">
@@ -132,7 +132,7 @@ const LensVisualizer: React.FC<LensVisualizerProps> = ({
             </div>
 
             {/* Main Image Container */}
-            <div className="relative w-full h-full bg-slate-200">
+            <div className="relative w-full h-full bg-muted">
                 {/* Mobile Buttons (Overlay inside Image container - Top Right) */}
                 {renderButtons(true)}
 

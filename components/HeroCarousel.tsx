@@ -26,7 +26,7 @@ const slides: Slide[] = [
         title: "Dois óculos de grau",
         price: "10x de R$ 39,90",
         subtitle: "Aproveite esta oferta imperdível. Válido para dioptrias de até 2 graus.",
-        ctaText: "Saiba Mais",
+        ctaText: "Aproveite",
         ctaLink: "https://wa.me/551123628799?text=Olá,%20gostaria%20de%20saber%20mais%20sobre%20a%20promoção%20de%20dois%20óculos.",
     },
     {
@@ -36,7 +36,7 @@ const slides: Slide[] = [
         title: "Óculos multifocal digital",
         price: "10x R$ 79,90",
         subtitle: "Tecnologia digital para uma visão perfeita em todas as distâncias.",
-        ctaText: "Saiba Mais",
+        ctaText: "Aproveite",
         ctaLink: "https://wa.me/551123628799?text=Olá,%20gostaria%20de%20saber%20mais%20sobre%20a%20promoção%20de%20multifocal.",
     },
     {
@@ -46,7 +46,7 @@ const slides: Slide[] = [
         title: "Monofocal com Filtro Azul",
         price: "10x R$ 24,90",
         subtitle: "Proteção contra telas digitais. Válido para dioptrias de até 2 graus.",
-        ctaText: "Saiba Mais",
+        ctaText: "Aproveite",
         ctaLink: "https://wa.me/551123628799?text=Olá,%20gostaria%20de%20saber%20mais%20sobre%20a%20promoção%20de%20filtro%20azul.",
     },
     {
@@ -56,7 +56,7 @@ const slides: Slide[] = [
         title: "Monofocal com Antirreflexo",
         price: "10x R$ 17,90",
         subtitle: "Elimine reflexos indesejados. Válido para dioptrias de até 2 graus.",
-        ctaText: "Saiba Mais",
+        ctaText: "Aproveite",
         ctaLink: "https://wa.me/551123628799?text=Olá,%20gostaria%20de%20saber%20mais%20sobre%20a%20promoção%20de%20antirreflexo.",
     },
 ];
@@ -122,7 +122,7 @@ export function HeroCarousel() {
                                 transition={{ delay: 0.3, duration: 0.5 }}
                                 className="text-white"
                             >
-                                <span className="block text-xl sm:text-2xl md:text-4xl lg:text-5xl font-bold leading-tight">
+                                <span className="block text-2xl sm:text-2xl md:text-4xl lg:text-5xl font-bold leading-tight">
                                     {slides[current].title}
                                 </span>
                                 <span className="block text-secondary font-extrabold text-4xl md:text-6xl lg:text-8xl mt-2">
@@ -133,7 +133,7 @@ export function HeroCarousel() {
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.5, duration: 0.5 }}
-                                className="text-lg text-gray-200 md:text-xl"
+                                className="text-lg text-white/80 md:text-xl"
                             >
                                 {slides[current].subtitle}
                             </motion.p>
@@ -142,8 +142,10 @@ export function HeroCarousel() {
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.7, duration: 0.5 }}
                             >
-                                <Button size="lg" className="bg-secondary text-primary hover:bg-secondary/90 font-bold text-lg px-8">
-                                    {slides[current].ctaText}
+                                <Button asChild size="lg" className="bg-secondary text-primary hover:bg-secondary/90 font-bold text-lg px-8">
+                                    <a href={slides[current].ctaLink} target="_blank" rel="noopener noreferrer">
+                                        {slides[current].ctaText}
+                                    </a>
                                 </Button>
                             </motion.div>
                         </div>

@@ -8,6 +8,12 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 
+interface DistanceLevel {
+    longe: number; // percentage 0-100
+    meiaDistancia: number;
+    perto: number;
+}
+
 interface Product {
     id: string;
     name: string;
@@ -17,6 +23,7 @@ interface Product {
     image?: string;
     features?: string[];
     badge?: string;
+    distances?: DistanceLevel;
 }
 
 interface ProductLine {
@@ -32,26 +39,28 @@ const lines: ProductLine[] = [
         id: "premium",
         title: "Alta Performance",
         badge: "Premium",
-        badgeColor: "bg-amber-100 text-amber-800",
+        badgeColor: "bg-secondary/15 text-primary",
         products: [
             {
                 id: "evolution",
-                name: "Optra Evolution 2.0",
+                name: "Vizz Evolution 2.0",
                 category: "Precisão Máxima",
-                description: "Lente de maior precisão do portfólio. Utiliza a combinação máxima de dados para personalização total, adaptando-se perfeitamente ao seu estilo de vida único.",
+                description: "Campos de visão mais amplos que garantem total equilíbrio do movimento. Elimina o movimento da cabeça em busca da melhor área nobre da lente.",
                 icon: Star,
                 image: "/images/evolution.webp",
-                features: ["Personalização biométrica", "Campo de visão ampliado", "Adaptação instantânea"],
-                badge: "Premium"
+                features: ["Visão para perto com foco imediato e preciso", "Excelente e amplo campo para longe", "Adaptação natural, imediata e garantida"],
+                badge: "Premium",
+                distances: { longe: 95, meiaDistancia: 90, perto: 95 }
             },
             {
                 id: "luminous",
-                name: "Optra Luminous",
+                name: "Vizz Luminous",
                 category: "Visão Contemporânea",
-                description: "Desenvolvida para usuários conectados que alternam constantemente o foco entre dispositivos digitais e o ambiente ao redor, reduzindo a fadiga visual.",
+                description: "Campos de visão amplos que garantem equilíbrio do movimento. Diminui o movimento da cabeça em busca da melhor área nobre da lente.",
                 icon: Smartphone,
                 image: "/images/luminous.webp",
-                features: ["Otimização para telas", "Transições dinâmicas", "Conforto visual prolongado"]
+                features: ["Visão para perto com foco preciso e confortável", "Amplo campo de visão para longe", "Adaptação rápida e natural"],
+                distances: { longe: 85, meiaDistancia: 80, perto: 85 }
             },
         ],
     },
@@ -59,26 +68,28 @@ const lines: ProductLine[] = [
         id: "intermediate",
         title: "Intermediária",
         badge: "Custo-Benefício",
-        badgeColor: "bg-blue-100 text-blue-800",
+        badgeColor: "bg-primary/10 text-primary",
         products: [
             {
                 id: "elite",
-                name: "Optra Elite",
+                name: "Vizz Elite",
                 category: "Performance Dinâmica",
-                description: "Equilíbrio visual eficaz para diferentes distâncias. Indicada para quem busca qualidade superior com excelente custo-benefício para o dia a dia.",
+                description: "Campos de visão equilibrados para todas as distâncias do olhar. Campo para longe preservado e amplo com suave corredor para meia distância.",
                 icon: Shield,
                 image: "/images/elite.webp",
-                features: ["Iniciação à tecnologia digital", "Campos intermediários estáveis", "Fácil adaptação"],
-                badge: "Custo-Benefício"
+                features: ["Corredor de progressão suave", "Campo para longe preservado e amplo", "Adaptação espontânea"],
+                badge: "Custo-Benefício",
+                distances: { longe: 70, meiaDistancia: 65, perto: 60 }
             },
             {
                 id: "harmony",
-                name: "Optra Harmony",
+                name: "Vizz Harmony",
                 category: "Transição Suave",
-                description: "Focada no equilíbrio entre qualidade e investimento. Oferece um corredor de progressão suave para uma experiência visual natural.",
+                description: "Campos de visão equilibrados para todas as distâncias do olhar. Suave corredor de progressão com campo para longe preservado.",
                 icon: Zap,
                 image: "/images/harmony.webp",
-                features: ["Progressão suave", "Visão nítida", "Excelente custo-benefício"]
+                features: ["Suave corredor de progressão", "Campo para longe preservado", "Excelente relação custo e benefício"],
+                distances: { longe: 60, meiaDistancia: 55, perto: 50 }
             },
         ],
     },
@@ -86,17 +97,18 @@ const lines: ProductLine[] = [
         id: "entry",
         title: "Entrada",
         badge: "Econômica",
-        badgeColor: "bg-green-100 text-green-800",
+        badgeColor: "bg-secondary/20 text-primary",
         products: [
             {
                 id: "handok",
-                name: "Handok Multi",
+                name: "Vizz Multi",
                 category: "Essencial",
-                description: "Opção compacta e acessível com campos de visão básicos para atividades do dia a dia, mantendo a qualidade ótica necessária.",
+                description: "Campos de visão compactos e equilibrados. Corredor de progressão adequado para meia distância com adaptação espontânea.",
                 icon: Tag,
                 image: "/images/multi.webp",
-                features: ["Design funcional", "Campos visuais equilibrados", "Economia inteligente"],
-                badge: "Básica"
+                features: ["Corredor adequado para meia distância", "Adaptação espontânea", "Qualidade com investimento acessível"],
+                badge: "Básica",
+                distances: { longe: 40, meiaDistancia: 40, perto: 35 }
             },
         ],
     },
@@ -104,25 +116,27 @@ const lines: ProductLine[] = [
         id: "occupational",
         title: "Ocupacionais",
         badge: "Especializado",
-        badgeColor: "bg-purple-100 text-purple-800",
+        badgeColor: "bg-primary/15 text-primary",
         products: [
             {
                 id: "office",
-                name: "Optra Office",
+                name: "Vizz Office",
                 category: "Ambiente de Trabalho",
                 description: "Foco exclusivo em visão de perto e intermediária. Ideal para escritório, leitura e computador.",
                 icon: Monitor,
                 image: "/images/evolution.webp", // Fallback image as none was specified
-                features: ["Campo de perto ampliado", "Postura ergonômica", "Visão relaxada no PC"]
+                features: ["Campo de perto ampliado", "Postura ergonômica", "Visão relaxada no PC"],
+                distances: { longe: 20, meiaDistancia: 85, perto: 95 }
             },
             {
                 id: "sport",
-                name: "Optra Sport",
+                name: "Vizz Sport",
                 category: "Performance Esportiva",
                 description: "Projetada para armações esportivas com curvaturas acentuadas, garantindo visão periférica sem distorções.",
                 icon: Activity,
                 image: "/images/elite.webp", // Fallback image
-                features: ["Compensação de curvatura", "Visão periférica total", "Ideal para óculos curvados"]
+                features: ["Compensação de curvatura", "Visão periférica total", "Ideal para óculos curvados"],
+                distances: { longe: 90, meiaDistancia: 60, perto: 40 }
             }
         ]
     }
@@ -141,16 +155,16 @@ export function ProductLines() {
     const selectedProduct = allProducts.find(p => p.id === selectedProductId) || allProducts[0];
 
     return (
-        <section className="bg-white py-12 relative overflow-hidden min-h-[800px] flex flex-col">
+        <section className="bg-white py-8 relative overflow-hidden flex flex-col">
             <Container className="flex-1 flex flex-col">
-                <div className="mb-4 text-center">
-                    <h2 className="text-2xl font-bold tracking-tight text-slate-900 mb-6">
+                <div className="mb-2 text-center">
+                    <h2 className="text-2xl font-bold tracking-tight text-primary mb-4">
                         Lentes Multifocais
                     </h2>
                 </div>
 
                 {/* Top Navigation - Horizontal Buttons */}
-                <div className="flex flex-wrap justify-center gap-4 mb-8 z-20 relative">
+                <div className="flex flex-wrap justify-center gap-4 mb-4 z-20 relative">
                     {mainProducts.map((product) => (
                         <button
                             key={product.id}
@@ -158,16 +172,16 @@ export function ProductLines() {
                             className={cn(
                                 "relative flex items-center gap-2 px-6 py-3 rounded-xl transition-all duration-300 border font-medium text-sm shadow-sm overflow-visible",
                                 selectedProductId === product.id
-                                    ? "bg-purple-100 border-purple-200 text-purple-900 shadow-md transform scale-105"
-                                    : "bg-purple-50 border-transparent text-slate-600 hover:bg-purple-100/50 hover:border-purple-100"
+                                    ? "bg-secondary/15 border-secondary/30 text-primary shadow-md transform scale-105"
+                                    : "bg-muted border-transparent text-muted-foreground hover:bg-secondary/10 hover:border-secondary/20"
                             )}
                         >
                             {product.badge && (
                                 <span className={cn(
                                     "absolute -top-3 left-1/2 -translate-x-1/2 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider rounded-full shadow-sm whitespace-nowrap z-20",
                                     selectedProductId === product.id
-                                        ? "bg-purple-600 text-white"
-                                        : "bg-slate-200 text-slate-600"
+                                        ? "bg-secondary text-primary"
+                                        : "bg-primary/10 text-primary/60"
                                 )}>
                                     {product.badge}
                                 </span>
@@ -179,10 +193,10 @@ export function ProductLines() {
                 </div>
 
                 {/* Main Content Area */}
-                <div className="flex-1 relative mt-4 grid grid-cols-1 lg:grid-cols-12 gap-8">
+                <div className="flex-1 relative grid grid-cols-1 lg:grid-cols-12 gap-8">
 
                     {/* Lens Image - Large, Uncropped, Left/Center */}
-                    <div className="lg:col-span-8 relative min-h-[200px] lg:min-h-[450px] flex items-center justify-center">
+                    <div className="lg:col-span-8 relative min-h-[200px] lg:min-h-[350px] flex items-center justify-center">
                         <AnimatePresence mode="wait">
                             <motion.div
                                 key={selectedProduct.id}
@@ -193,7 +207,7 @@ export function ProductLines() {
                                 className="relative w-full h-full flex items-center justify-center p-4"
                             >
                                 {/* We use object-contain to ensure the "lente não seja cortada" */}
-                                <div className="relative w-full aspect-[4/3] max-w-2xl">
+                                <div className="relative w-full aspect-[4/3] max-w-lg">
                                     {selectedProduct.image ? (
                                         <Image
                                             src={selectedProduct.image}
@@ -204,7 +218,7 @@ export function ProductLines() {
                                             sizes="(max-width: 1024px) 100vw, 70vw"
                                         />
                                     ) : (
-                                        <div className="w-full h-full bg-slate-100 rounded-full flex items-center justify-center text-slate-400">
+                                        <div className="w-full h-full bg-muted rounded-full flex items-center justify-center text-muted-foreground">
                                             Imagem indisponível
                                         </div>
                                     )}
@@ -222,34 +236,57 @@ export function ProductLines() {
                                 animate={{ opacity: 1, y: 0 }}
                                 exit={{ opacity: 0, y: 10 }}
                                 transition={{ duration: 0.3, delay: 0.2 }}
-                                className="pointer-events-auto bg-white rounded-3xl p-8 shadow-[0_8px_30px_rgb(0,0,0,0.08)] border border-slate-100/60 backdrop-blur-sm"
+                                className="pointer-events-auto bg-white rounded-3xl p-8 shadow-[0_8px_30px_rgb(0,0,0,0.08)] border border-border backdrop-blur-sm"
                             >
                                 <div className="mb-4">
-                                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-purple-50 text-purple-700 text-[10px] font-bold uppercase tracking-wider mb-3">
-                                        {selectedProduct.category}
-                                    </span>
-                                    <h3 className="text-2xl font-bold text-slate-900 mb-3">
+                                    <h3 className="text-2xl font-bold text-primary mb-3">
                                         {selectedProduct.name}
                                     </h3>
-                                    <p className="text-sm text-slate-600 leading-relaxed mb-6">
-                                        {selectedProduct.description}
-                                    </p>
                                 </div>
 
-                                <div className="space-y-3 mb-8">
+                                <div className="space-y-3 mb-6">
                                     {selectedProduct.features?.slice(0, 3).map((feature, idx) => (
                                         <div key={idx} className="flex items-center gap-3">
-                                            <div className="w-6 h-6 rounded-full bg-green-50 flex items-center justify-center shrink-0">
-                                                <CheckCircle2 className="w-3.5 h-3.5 text-green-600" />
+                                            <div className="w-6 h-6 rounded-full bg-secondary/10 flex items-center justify-center shrink-0">
+                                                <CheckCircle2 className="w-3.5 h-3.5 text-secondary" />
                                             </div>
-                                            <span className="text-xs font-medium text-slate-700">{feature}</span>
+                                            <span className="text-xs font-medium text-foreground">{feature}</span>
                                         </div>
                                     ))}
                                 </div>
 
-                                <Button className="w-full bg-slate-900 text-white hover:bg-slate-800 shadow-xl shadow-slate-200/50 h-12 rounded-xl font-semibold text-sm tracking-wide">
-                                    VER DETALHES
-                                    <ChevronRight className="w-4 h-4 ml-2" />
+                                {/* Distance Optimization Bars */}
+                                {selectedProduct.distances && (
+                                    <div className="space-y-3 mb-6 pt-4 border-t border-border">
+                                        <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider">Campo de Visão</span>
+                                        {[
+                                            { label: "Longe", value: selectedProduct.distances.longe },
+                                            { label: "Meia Dist.", value: selectedProduct.distances.meiaDistancia },
+                                            { label: "Perto", value: selectedProduct.distances.perto },
+                                        ].map((d) => (
+                                            <div key={d.label} className="flex items-center gap-3">
+                                                <span className="text-[10px] font-semibold text-primary w-16 shrink-0">{d.label}</span>
+                                                <div className="flex-1 h-1.5 bg-muted rounded-full relative overflow-hidden">
+                                                    <motion.div
+                                                        className="absolute inset-y-0 left-0 bg-secondary rounded-full"
+                                                        initial={{ width: 0 }}
+                                                        animate={{ width: `${d.value}%` }}
+                                                        transition={{ duration: 0.6, ease: "easeOut" }}
+                                                    />
+                                                </div>
+                                                <div
+                                                    className="w-2 h-2 rounded-full bg-secondary shrink-0 shadow-sm"
+                                                />
+                                            </div>
+                                        ))}
+                                    </div>
+                                )}
+
+                                <Button asChild className="w-full bg-secondary text-primary hover:bg-secondary/90 shadow-xl shadow-secondary/10 h-12 rounded-xl font-semibold text-sm tracking-wide">
+                                    <a href={`https://wa.me/551123628799?text=Olá,%20gostaria%20de%20um%20orçamento%20para%20a%20lente%20${encodeURIComponent(selectedProduct.name)}.`} target="_blank" rel="noopener noreferrer">
+                                        Solicitar Orçamento
+                                        <ChevronRight className="w-4 h-4 ml-2" />
+                                    </a>
                                 </Button>
                             </motion.div>
                         </AnimatePresence>

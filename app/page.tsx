@@ -7,6 +7,7 @@ import { TreatmentsGrid } from "@/components/educational/TreatmentsGrid";
 import { RefractionIndex } from "@/components/educational/RefractionIndex";
 import { ContactSection } from "@/components/ContactSection";
 import { Footer } from "@/components/Footer";
+import { WhatsAppFloat } from "@/components/WhatsAppFloat";
 
 export default function Home() {
   return (
@@ -32,6 +33,7 @@ export default function Home() {
       </div>
 
       <Footer />
+      <WhatsAppFloat />
     </main>
   );
 }

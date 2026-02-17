@@ -7,13 +7,13 @@ const LensComparator = () => {
     const [refractiveIndex, setRefractiveIndex] = useState(1.50);
 
     return (
-        <section className="bg-linear-to-b from-slate-50 to-slate-100 py-16 px-4 sm:px-6 lg:px-8">
+        <section className="bg-linear-to-b from-muted to-muted py-16 px-4 sm:px-6 lg:px-8">
             <div className="max-w-6xl mx-auto">
                 <div className="text-center mb-12">
-                    <h2 className="text-3xl font-extrabold text-slate-900 sm:text-4xl">
+                    <h2 className="text-3xl font-extrabold text-primary sm:text-4xl">
                         Simulador de Espessura de Lentes
                     </h2>
-                    <p className="mt-4 text-lg text-slate-600 max-w-2xl mx-auto">
+                    <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
                         Veja a diferença real de espessura e estética entre os índices de refração.
                     </p>
                 </div>
