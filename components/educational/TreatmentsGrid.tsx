@@ -153,7 +153,7 @@ export function TreatmentsGrid() {
                         </div>
 
                         {/* Glasses Image with lens labels and text below lenses */}
-                        <div className="relative w-full max-w-4xl mx-auto aspect-[2/1]">
+                        <div className="relative w-[calc(100%+2rem)] -mx-4 sm:w-full sm:mx-auto max-w-4xl aspect-[16/10] sm:aspect-[2/1]">
                             <Image
                                 src={selected.image}
                                 alt={selected.name}
@@ -162,28 +162,28 @@ export function TreatmentsGrid() {
                                 sizes="(max-width: 1024px) 100vw, 60vw"
                             />
                             {/* Label: Com Tratamento */}
-                            <div className="absolute top-[15%] left-[15%] z-20 flex flex-col items-center">
+                            <div className="absolute top-[10%] left-[10%] sm:top-[15%] sm:left-[15%] z-20 flex flex-col items-center">
                                 <span className="px-3 py-1 text-[10px] sm:text-xs font-semibold text-amber-700 bg-amber-50 border border-amber-300 rounded-full shadow-sm whitespace-nowrap">
                                     Com Tratamento
                                 </span>
                                 <div className="w-px h-4 bg-amber-300" />
                             </div>
                             {/* Label: Sem Tratamento */}
-                            <div className="absolute top-[15%] right-[15%] z-20 flex flex-col items-center">
+                            <div className="absolute top-[10%] right-[10%] sm:top-[15%] sm:right-[15%] z-20 flex flex-col items-center">
                                 <span className="px-3 py-1 text-[10px] sm:text-xs font-semibold text-gray-500 bg-gray-50 border border-gray-300 rounded-full shadow-sm whitespace-nowrap">
                                     Sem Tratamento
                                 </span>
                                 <div className="w-px h-4 bg-gray-300" />
                             </div>
                             {/* Benefits text below left lens */}
-                            <div className="absolute bottom-[2%] left-[5%] z-20 w-[40%] flex flex-col items-center gap-1">
+                            <div className="absolute bottom-[0%] left-[2%] sm:bottom-[2%] sm:left-[5%] z-20 w-[45%] flex flex-col items-center gap-1">
                                 <span className="text-[10px] sm:text-xs font-bold text-amber-700 uppercase tracking-wider">Benefícios</span>
                                 {selected.benefits.map((b, i) => (
                                     <span key={i} className="text-[10px] sm:text-xs text-foreground/80 text-center leading-tight">• {b}</span>
                                 ))}
                             </div>
                             {/* Drawbacks text below right lens */}
-                            <div className="absolute bottom-[2%] right-[5%] z-20 w-[40%] flex flex-col items-center gap-1">
+                            <div className="absolute bottom-[0%] right-[2%] sm:bottom-[2%] sm:right-[5%] z-20 w-[45%] flex flex-col items-center gap-1">
                                 <span className="text-[10px] sm:text-xs font-bold text-gray-500 uppercase tracking-wider">Malefícios</span>
                                 {selected.drawbacks.map((d, i) => (
                                     <span key={i} className="text-[10px] sm:text-xs text-muted-foreground text-center leading-tight">• {d}</span>

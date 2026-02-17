@@ -54,13 +54,11 @@ export function ContactSection() {
                                     <h3 className="font-heading font-semibold text-lg text-primary mb-1">Contato</h3>
                                     <div className="space-y-1">
                                         <p className="flex items-center gap-2 text-muted-foreground">
-                                            <Phone className="w-4 h-4" /> (11) 2345-6789
+                                            <Phone className="w-4 h-4" /> (11) 2362-8799
                                         </p>
+
                                         <p className="flex items-center gap-2 text-muted-foreground">
-                                            <Smartphone className="w-4 h-4" /> (11) 98765-4321
-                                        </p>
-                                        <p className="flex items-center gap-2 text-muted-foreground">
-                                            <Mail className="w-4 h-4" /> contato@oticasvizz.com.br
+                                            <Mail className="w-4 h-4" /> oticasvizz@gmail.com
                                         </p>
                                     </div>
                                 </div>
