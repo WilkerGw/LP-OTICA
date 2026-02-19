@@ -155,25 +155,26 @@ export function ProductLines() {
     const selectedProduct = allProducts.find(p => p.id === selectedProductId) || allProducts[0];
 
     return (
-        <section className="bg-white py-8 relative overflow-hidden flex flex-col">
+        <section className="bg-white section-padding relative overflow-hidden flex flex-col" id="produtos">
             <Container className="flex-1 flex flex-col">
-                <div className="mb-2 text-center">
-                    <h2 className="text-2xl font-bold tracking-tight text-primary mb-4">
-                        Lentes Multifocais
+                <div className="mb-8 text-center">
+                    <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-primary mb-2 italic">
+                        Lentes <span className="text-secondary">Multifocais</span>
                     </h2>
+                    <p className="text-muted-foreground text-sm font-medium">Conforto para todas as necessidades</p>
                 </div>
 
                 {/* Top Navigation - Horizontal Buttons */}
-                <div className="flex flex-wrap justify-center gap-4 mb-4 z-20 relative">
+                <div className="flex flex-wrap justify-center gap-8 mb-10 z-20 relative">
                     {mainProducts.map((product) => (
                         <button
                             key={product.id}
                             onClick={() => setSelectedProductId(product.id)}
                             className={cn(
-                                "relative flex items-center gap-2 px-6 py-3 rounded-xl transition-all duration-300 border font-medium text-sm shadow-sm overflow-visible",
+                                "relative flex items-center gap-2 px-6 py-3 rounded-full transition-all duration-300 border font-bold text-xs uppercase tracking-widest overflow-visible",
                                 selectedProductId === product.id
-                                    ? "bg-secondary/15 border-secondary/30 text-primary shadow-md transform scale-105"
-                                    : "bg-muted border-transparent text-muted-foreground hover:bg-secondary/10 hover:border-secondary/20"
+                                    ? "bg-primary text-white border-primary shadow-xl shadow-primary/20 transform scale-105"
+                                    : "bg-muted/50 border-transparent text-muted-foreground hover:bg-secondary/10 hover:text-primary"
                             )}
                         >
                             {product.badge && (
@@ -236,7 +237,7 @@ export function ProductLines() {
                                 animate={{ opacity: 1, y: 0 }}
                                 exit={{ opacity: 0, y: 10 }}
                                 transition={{ duration: 0.3, delay: 0.2 }}
-                                className="pointer-events-auto bg-white rounded-3xl p-8 shadow-[0_8px_30px_rgb(0,0,0,0.08)] border border-border backdrop-blur-sm"
+                                className="pointer-events-auto bg-white rounded-3xl px-8 md:p-8"
                             >
                                 <div className="mb-4">
                                     <h3 className="text-2xl font-bold text-primary mb-3">
@@ -282,7 +283,7 @@ export function ProductLines() {
                                     </div>
                                 )}
 
-                                <Button asChild className="w-full bg-secondary text-primary hover:bg-secondary/90 shadow-xl shadow-secondary/10 h-12 rounded-xl font-semibold text-sm tracking-wide">
+                                <Button asChild size="lg" className="w-full shadow-lg shadow-secondary/20 rounded-2xl">
                                     <a href={`https://wa.me/551123628799?text=Olá,%20gostaria%20de%20um%20orçamento%20para%20a%20lente%20${encodeURIComponent(selectedProduct.name)}.`} target="_blank" rel="noopener noreferrer">
                                         Solicitar Orçamento
                                         <ChevronRight className="w-4 h-4 ml-2" />

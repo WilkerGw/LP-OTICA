@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Container } from "@/components/ui/container";
+import { Button } from "@/components/ui/button";
 import { CheckCircle2, XCircle } from "lucide-react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
@@ -107,25 +108,33 @@ export function TreatmentsGrid() {
     const selected = treatments.find(t => t.id === selectedId) || treatments[0];
 
     return (
-        <section className="bg-white py-8 relative overflow-hidden flex flex-col">
+        <section className="section-padding bg-[#FAFAF9] relative overflow-hidden" id="tratamentos">
+            {/* Background enhancement - localized to prevent overall tone shift on mobile */}
+            <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-secondary/10 rounded-full blur-3xl opacity-30 sm:opacity-50" />
+
             <Container className="flex-1 flex flex-col">
-                <div className="mb-2 text-center">
-                    <h2 className="text-2xl font-bold tracking-tight text-primary mb-4">
-                        Tratamentos Disponíveis
+                <div className="mb-12 text-center max-w-2xl mx-auto space-y-4">
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-[10px] font-bold uppercase tracking-widest">
+                        <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+                        Performance Ocular
+                    </div>
+                    <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-primary leading-tight">
+                        Tratamentos de <br />
+                        <span className="text-secondary">Alta Performance</span>
                     </h2>
                 </div>
 
                 {/* Horizontal Navigation Buttons */}
-                <div className="flex flex-wrap justify-center gap-3 mb-4 z-20 relative">
+                <div className="flex flex-wrap justify-center gap-3 z-20 relative">
                     {treatments.map((item) => (
                         <button
                             key={item.id}
                             onClick={() => setSelectedId(item.id)}
                             className={cn(
-                                "relative flex items-center gap-2 px-5 py-2.5 rounded-xl transition-all duration-300 border font-medium text-sm shadow-sm cursor-pointer",
+                                "relative flex items-center gap-2 px-5 py-2.5 rounded-full transition-all duration-300 font-bold text-xs uppercase tracking-wider",
                                 selectedId === item.id
-                                    ? "bg-secondary/15 border-secondary/30 text-primary shadow-md transform scale-105"
-                                    : "bg-muted border-transparent text-muted-foreground hover:bg-secondary/10 hover:border-secondary/20"
+                                    ? "bg-secondary text-primary shadow-lg shadow-secondary/20 scale-105"
+                                    : "glass-card text-muted-foreground hover:bg-secondary/10 hover:text-primary"
                             )}
                         >
                             {item.shortLabel}
@@ -137,73 +146,90 @@ export function TreatmentsGrid() {
                 <AnimatePresence mode="wait">
                     <motion.div
                         key={selected.id}
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
+                        initial={{ opacity: 0, scale: 0.98 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 1.02 }}
                         transition={{ duration: 0.4 }}
+                        className="space-y-8"
                     >
-                        {/* Treatment Name + Description - above image */}
-                        <div className="text-center mb-2">
-                            <h3 className="text-xl font-bold text-secondary uppercase tracking-wide mb-1">
-                                {selected.name}
-                            </h3>
-                            <p className="text-sm text-muted-foreground max-w-xl mx-auto leading-relaxed">
-                                {selected.description}
-                            </p>
-                        </div>
 
-                        {/* Glasses Image with lens labels and text below lenses */}
-                        <div className="relative w-[calc(100%+2rem)] -mx-4 sm:w-full sm:mx-auto max-w-4xl aspect-[16/10] sm:aspect-[2/1]">
-                            <Image
-                                src={selected.image}
-                                alt={selected.name}
-                                fill
-                                className="object-contain z-10"
-                                sizes="(max-width: 1024px) 100vw, 60vw"
-                            />
-                            {/* Label: Com Tratamento */}
-                            <div className="absolute top-[10%] left-[10%] sm:top-[15%] sm:left-[15%] z-20 flex flex-col items-center">
-                                <span className="px-3 py-1 text-[10px] sm:text-xs font-semibold text-amber-700 bg-amber-50 border border-amber-300 rounded-full shadow-sm whitespace-nowrap">
-                                    Com Tratamento
-                                </span>
-                                <div className="w-px h-4 bg-amber-300" />
+
+                        {/* Glasses Image Content Container */}
+                        <div className="relative flex flex-col -mx-6 sm:mx-0">
+                            <div className="relative w-full max-w-7xl mx-auto aspect-4/3 sm:aspect-video lg:aspect-16/7 sm:overflow-visible">
+                                <Image
+                                    src={selected.image}
+                                    alt={selected.name}
+                                    fill
+                                    className="object-contain z-10 scale-125 md:scale-70 origin-center"
+                                    sizes="100vw"
+                                    priority
+                                />
+                                {/* Label: Com Tratamento */}
+                                <div className="absolute top-[20%] left-[5%] lg:left-[20%] z-20 flex flex-col items-center group">
+                                    <span className="px-4 py-1.5 text-[10px] sm:text-xs font-bold text-amber-700 bg-amber-50/80 backdrop-blur-sm border border-amber-200 rounded-full shadow-lg shadow-amber-200/20 whitespace-nowrap uppercase tracking-widest transition-transform group-hover:scale-110">
+                                        Com Tratamento
+                                    </span>
+                                    <div className="w-px h-10 bg-linear-to-b from-amber-300 to-transparent" />
+                                </div>
+                                {/* Label: Sem Tratamento */}
+                                <div className="absolute top-[20%] right-[5%] lg:right-[20%] z-20 flex flex-col items-center group">
+                                    <span className="px-4 py-1.5 text-[10px] sm:text-xs font-bold text-gray-500 bg-gray-50/80 backdrop-blur-sm border border-gray-200 rounded-full shadow-lg shadow-gray-200/20 whitespace-nowrap uppercase tracking-widest transition-transform group-hover:scale-110">
+                                        Sem Tratamento
+                                    </span>
+                                    <div className="w-px h-10 bg-linear-to-b from-gray-300 to-transparent" />
+                                </div>
                             </div>
-                            {/* Label: Sem Tratamento */}
-                            <div className="absolute top-[10%] right-[10%] sm:top-[15%] sm:right-[15%] z-20 flex flex-col items-center">
-                                <span className="px-3 py-1 text-[10px] sm:text-xs font-semibold text-gray-500 bg-gray-50 border border-gray-300 rounded-full shadow-sm whitespace-nowrap">
-                                    Sem Tratamento
-                                </span>
-                                <div className="w-px h-4 bg-gray-300" />
-                            </div>
-                            {/* Benefits text below left lens */}
-                            <div className="absolute bottom-[0%] left-[2%] sm:bottom-[2%] sm:left-[5%] z-20 w-[45%] flex flex-col items-center gap-1">
-                                <span className="text-[10px] sm:text-xs font-bold text-amber-700 uppercase tracking-wider">Benefícios</span>
-                                {selected.benefits.map((b, i) => (
-                                    <span key={i} className="text-[10px] sm:text-xs text-foreground/80 text-center leading-tight">• {b}</span>
-                                ))}
-                            </div>
-                            {/* Drawbacks text below right lens */}
-                            <div className="absolute bottom-[0%] right-[2%] sm:bottom-[2%] sm:right-[5%] z-20 w-[45%] flex flex-col items-center gap-1">
-                                <span className="text-[10px] sm:text-xs font-bold text-gray-500 uppercase tracking-wider">Malefícios</span>
-                                {selected.drawbacks.map((d, i) => (
-                                    <span key={i} className="text-[10px] sm:text-xs text-muted-foreground text-center leading-tight">• {d}</span>
-                                ))}
+
+                            {/* Information Panels - Relative on mobile, Overlay on Desktop */}
+                            <div className="-mt-20 sm:mt-0 sm:absolute sm:bottom-[-5%] inset-x-0 grid grid-cols-2 gap-3 sm:gap-12 z-30 px-2 sm:px-0 pointer-events-auto sm:pointer-events-none">
+                                {/* Benefits */}
+                                <motion.div
+                                    initial={{ opacity: 0, y: 10 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    className="flex flex-col items-center gap-2  p-4 sm:p-6 rounded-3xl  hover:bg-white/80 transition-colors"
+                                >
+                                    <span className="text-[10px] sm:text-xs font-black text-amber-600 uppercase tracking-[0.2em] mb-1">Benefícios</span>
+                                    {selected.benefits.map((b, i) => (
+                                        <div key={i} className="flex items-center gap-2 text-[10px] sm:text-sm text-primary/80 font-bold text-center">
+                                            <div className="w-1 h-1 rounded-full bg-amber-400 shrink-0" />
+                                            {b}
+                                        </div>
+                                    ))}
+                                </motion.div>
+                                {/* Drawbacks */}
+                                <motion.div
+                                    initial={{ opacity: 0, y: 10 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: 0.1 }}
+                                    className="flex flex-col items-center gap-2 p-4 sm:p-6 rounded-3xl hover:bg-white/80 transition-colors"
+                                >
+                                    <span className="text-[10px] sm:text-xs font-black text-gray-400 uppercase tracking-[0.2em] mb-1">Malefícios</span>
+                                    {selected.drawbacks.map((d, i) => (
+                                        <div key={i} className="flex items-center gap-2 text-[10px] sm:text-sm text-muted-foreground font-medium text-center">
+                                            <div className="w-1 h-1 rounded-full bg-gray-300 shrink-0" />
+                                            {d}
+                                        </div>
+                                    ))}
+                                </motion.div>
                             </div>
                         </div>
                     </motion.div>
                 </AnimatePresence>
 
                 {/* CTA */}
-                <div className="text-center pt-8">
-                    <p className="text-sm text-muted-foreground mb-4">Quer saber qual tratamento é ideal para você?</p>
-                    <a
-                        href={`https://wa.me/551123628799?text=Olá,%20gostaria%20de%20saber%20mais%20sobre%20o%20tratamento%20${encodeURIComponent(selected.name)}.`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 px-6 py-3 bg-secondary text-primary font-semibold rounded-2xl transition-all duration-300 ease-out shadow-sm shadow-secondary/20 hover:shadow-md hover:shadow-secondary/30 hover:brightness-105 hover:scale-[1.03] active:scale-[0.97] cursor-pointer"
-                    >
-                        Consultar Tratamento
-                    </a>
+                <div className="text-center pt-24">
+                    <Button asChild size="lg" className="rounded-2xl w-full md:w-auto shadow-xl shadow-secondary/20">
+                        <a
+                            href={`https://wa.me/551123628799?text=Olá,%20gostaria%20de%20saber%20mais%20sobre%20o%20tratamento%20${encodeURIComponent(selected.name)}.`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            Consultar Tratamento Premium
+                        </a>
+                    </Button>
                 </div>
             </Container>
         </section>

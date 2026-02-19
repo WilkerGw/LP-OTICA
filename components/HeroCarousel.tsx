@@ -3,9 +3,10 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronLeft, ChevronRight, Phone, Clock } from "lucide-react";
+import { ChevronLeft, ChevronRight, Phone, Clock, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
+import Image from "next/image";
 
 interface Slide {
     id: number;
@@ -24,7 +25,7 @@ const slides: Slide[] = [
         image: "/images/dois-oculos.webp",
         mobileImage: "/images/dois-oculos-mobile.webp",
         title: "Dois óculos de grau",
-        price: "10x de R$ 39,90",
+        price: "10x R$ 39,90",
         subtitle: "Aproveite esta oferta imperdível. Válido para dioptrias de até 2 graus.",
         ctaText: "Aproveite",
         ctaLink: "https://wa.me/551123628799?text=Olá,%20gostaria%20de%20saber%20mais%20sobre%20a%20promoção%20de%20dois%20óculos.",
@@ -85,8 +86,8 @@ export function HeroCarousel() {
                             <span className="font-medium tracking-wide">(11) 2345-6789</span>
                         </div>
                         <div className="flex items-center gap-1.5 md:gap-2">
-                            <Clock className="w-3.5 h-3.5 md:w-4 md:h-4 text-secondary" />
-                            <span className="font-medium tracking-wide">Seg-Sáb: 09:30 às 18:00</span>
+                            <MapPin className="w-3.5 h-3.5 md:w-4 md:h-4 text-secondary" />
+                            <span className="font-medium tracking-wide">Av Do Oratório 4869</span>
                         </div>
                     </div>
                 </Container>
@@ -101,31 +102,49 @@ export function HeroCarousel() {
                     transition={{ duration: 0.7 }}
                 >
                     {/* Background Images - Mobile & Desktop */}
-                    <div
-                        className="absolute inset-0 bg-cover bg-top bg-no-repeat md:hidden"
-                        style={{ backgroundImage: `url(${slides[current].mobileImage || slides[current].image})` }}
-                    />
-                    <div
-                        className="absolute inset-0 bg-cover bg-center bg-no-repeat hidden md:block"
-                        style={{ backgroundImage: `url(${slides[current].image})` }}
-                    />
+                    <div className="absolute inset-0 z-0">
+                        {/* Mobile Image */}
+                        <div className="relative h-full w-full md:hidden">
+                            <Image
+                                src={slides[current].mobileImage || slides[current].image}
+                                alt={slides[current].title}
+                                fill
+                                priority
+                                quality={95}
+                                className="object-cover object-top"
+                                sizes="100vw"
+                            />
+                        </div>
+                        {/* Desktop Image */}
+                        <div className="relative h-full w-full hidden md:block">
+                            <Image
+                                src={slides[current].image}
+                                alt={slides[current].title}
+                                fill
+                                priority
+                                quality={95}
+                                className="object-cover object-center"
+                                sizes="100vw"
+                            />
+                        </div>
+                    </div>
 
                     {/* Overlay Gradient */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-primary/95 via-primary/60 to-transparent md:bg-gradient-to-r" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-primary/95 via-primary/30 to-transparent md:bg-gradient-to-r" />
 
                     {/* Content */}
-                    <Container className="relative flex h-full items-end justify-start pb-24 md:pb-48">
-                        <div className="max-w-3xl space-y-6 px-4 md:px-0">
+                    <Container className="relative flex h-full items-end justify-center md:justify-start pb-15 md:pb-48">
+                        <div className="max-w-3xl space-y-6 px-4 md:px-0 text-center md:text-left flex flex-col items-center md:items-start">
                             <motion.h1
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.3, duration: 0.5 }}
                                 className="text-white"
                             >
-                                <span className="block text-2xl sm:text-2xl md:text-4xl lg:text-5xl font-bold leading-tight">
+                                <span className="block text-3xl md:text-5xl font-bold leading-tight uppercase tracking-tight">
                                     {slides[current].title}
                                 </span>
-                                <span className="block text-secondary font-extrabold text-4xl md:text-6xl lg:text-8xl mt-2">
+                                <span className="block text-secondary font-extrabold text-4xl md:text-7xl mt-2 tracking-tighter">
                                     {slides[current].price}
                                 </span>
                             </motion.h1>
@@ -133,7 +152,7 @@ export function HeroCarousel() {
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.5, duration: 0.5 }}
-                                className="text-lg text-white/80 md:text-xl"
+                                className="text-lg text-white/80 md:text-xl w-full"
                             >
                                 {slides[current].subtitle}
                             </motion.p>
@@ -141,8 +160,9 @@ export function HeroCarousel() {
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.7, duration: 0.5 }}
+                                className="flex flex-row items-center justify-center md:justify-start w-full sm:w-auto"
                             >
-                                <Button asChild size="lg" className="bg-secondary text-primary hover:bg-secondary/90 font-bold text-lg px-8">
+                                <Button asChild size="lg" variant="secondary" className="px-12 rounded-2xl w-full md:w-auto shadow-lg shadow-secondary/20">
                                     <a href={slides[current].ctaLink} target="_blank" rel="noopener noreferrer">
                                         {slides[current].ctaText}
                                     </a>

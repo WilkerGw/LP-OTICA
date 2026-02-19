@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Container } from "@/components/ui/container";
+import { Button } from "@/components/ui/button";
 import {
     ChevronLeft,
     ChevronRight,
@@ -122,8 +123,8 @@ function AnimatedPrice({ value }: { value: number }) {
     }, [value]);
 
     return (
-        <span className="text-4xl md:text-5xl font-bold text-white tracking-tight">
-            R$ {display.toFixed(2).replace(".", ",")}
+        <span className="text-4xl md:text-5xl font-extrabold text-primary tracking-tighter">
+            {display.toFixed(2).replace(".", ",")}
         </span>
     );
 }
@@ -131,7 +132,8 @@ function AnimatedPrice({ value }: { value: number }) {
 // ─── Component ───
 
 export function LensSurvey() {
-    const [step, setStep] = useState(-1); // -1 = intro/CTA
+    const [isOpen, setIsOpen] = useState(false);
+    const [step, setStep] = useState(0);
     const [selections, setSelections] = useState<Selections>(INITIAL_SELECTIONS);
     const [direction, setDirection] = useState(1); // 1 = forward, -1 = back
 
@@ -141,6 +143,18 @@ export function LensSurvey() {
     const totalSteps = steps.length;
     const currentStepIndex = steps.indexOf(step);
     const isLastStep = currentStepIndex === totalSteps - 1;
+
+    // Control body scroll when modal is open
+    useEffect(() => {
+        if (isOpen) {
+            document.body.style.overflow = "hidden";
+        } else {
+            document.body.style.overflow = "unset";
+        }
+        return () => {
+            document.body.style.overflow = "unset";
+        };
+    }, [isOpen]);
 
     // Auto-select Antirreflexo for Multifocal
     useEffect(() => {
@@ -183,7 +197,12 @@ export function LensSurvey() {
     const restart = useCallback(() => {
         setDirection(-1);
         setSelections(INITIAL_SELECTIONS);
-        setStep(-1);
+        setStep(0);
+    }, []);
+
+    const closeSurvey = useCallback(() => {
+        setIsOpen(false);
+        // Reset after animation if needed, or keep for "resume"
     }, []);
 
     const selectOption = useCallback(
@@ -227,6 +246,7 @@ export function LensSurvey() {
             fieldLabel ? `🔹 Campo: ${fieldLabel}` : "",
             `🔹 Índice: ${indexLabel}`,
             treatmentLabels ? `🔹 Tratamentos: ${treatmentLabels}` : "",
+            `🎁 Brinde: Armação de Brinde Inclusa`,
             ``,
             `💰 Valor Original: R$ ${budget.total.toLocaleString("pt-BR", { minimumFractionDigits: 2 })}`,
             `🏷️ Desconto: - R$ 200,00`,
@@ -242,298 +262,314 @@ export function LensSurvey() {
     const progress =
         step === 99
             ? 100
-            : step === -1
-                ? 0
-                : ((currentStepIndex + 1) / totalSteps) * 100;
+            : ((currentStepIndex + 1) / totalSteps) * 100;
 
     return (
-        <section
-            id="orcamento"
-            className="relative bg-primary py-16 md:py-24 overflow-hidden"
-        >
-            {/* Subtle decorative elements */}
-            <div className="absolute inset-0 pointer-events-none">
-                <div className="absolute top-0 left-1/4 w-64 h-64 bg-secondary/5 rounded-full blur-3xl" />
-                <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-secondary/3 rounded-full blur-3xl" />
-            </div>
+        <>
+            {/* ─── HOME PAGE INTRO CARD ─── */}
+            <section
+                id="orcamento"
+                className="relative bg-secondary py-20 px-4 overflow-hidden"
+            >
+                {/* Subtle decorative elements */}
+                <div className="absolute inset-0 pointer-events-none">
+                    <div className="absolute top-0 left-1/4 w-64 h-64 bg-primary/5 rounded-full blur-3xl" />
+                    <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-primary/3 rounded-full blur-3xl" />
+                </div>
 
-            <Container className="relative z-10">
-                <AnimatePresence mode="wait" custom={direction}>
-                    {/* ─── INTRO STATE ─── */}
-                    {step === -1 && (
-                        <motion.div
-                            key="intro"
-                            variants={questionVariants}
-                            initial="initial"
-                            animate="animate"
-                            exit="exit"
-                            className="flex flex-col items-center text-center max-w-2xl mx-auto"
+                <Container className="relative z-10">
+                    <div className="flex flex-col items-center max-w-2xl mx-auto text-center">
+                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-[10px] font-bold uppercase tracking-widest mb-6">
+                            <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+                            Orçamento Instantâneo
+                        </div>
+                        <h2 className="text-3xl md:text-5xl font-extrabold text-primary mb-6 leading-tight tracking-tight">
+                            Monte seu orçamento em segundos
+                        </h2>
+                        <p className="text-primary/70 text-lg mb-10 max-w-lg font-medium">
+                            Responda algumas perguntas rápidas e descubra o valor estimado
+                            das suas lentes, de forma simples e intuitiva.
+                        </p>
+                        <Button
+                            onClick={() => setIsOpen(true)}
+                            variant="default"
+                            size="lg"
+                            className="w-full sm:w-auto px-12 py-8 rounded-2xl text-lg font-black shadow-2xl shadow-primary/20 hover:scale-[1.02] transition-all group bg-primary text-secondary hover:text-white"
                         >
-                            <div className="w-16 h-16 rounded-2xl bg-secondary/15 flex items-center justify-center mb-6">
-                                <Eye className="w-8 h-8 text-secondary" />
-                            </div>
-                            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 leading-tight">
-                                Monte seu orçamento
-                                <span className="text-secondary"> em segundos</span>
-                            </h2>
-                            <p className="text-white/60 text-lg mb-10 max-w-lg">
-                                Responda algumas perguntas rápidas e descubra o valor estimado
-                                das suas lentes, sem compromisso.
-                            </p>
-                            <button
-                                onClick={() => {
-                                    setDirection(1);
-                                    setStep(0);
-                                }}
-                                className="group inline-flex items-center gap-3 px-8 py-4 bg-secondary text-primary font-bold text-lg rounded-2xl transition-all duration-300 shadow-lg shadow-secondary/20 hover:shadow-xl hover:shadow-secondary/30 hover:brightness-105 hover:scale-[1.03] active:scale-[0.97] cursor-pointer"
-                            >
-                                Começar
-                                <ChevronRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
-                            </button>
-                        </motion.div>
-                    )}
+                            <span>Começar</span>
+                            <ChevronRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+                        </Button>
+                    </div>
+                </Container>
+            </section>
 
-                    {/* ─── QUESTION STEPS ─── */}
-                    {step >= 0 && step <= 3 && (
-                        <motion.div
-                            key={`step-${step}`}
-                            variants={questionVariants}
-                            initial="initial"
-                            animate="animate"
-                            exit="exit"
-                            className="max-w-3xl mx-auto"
-                        >
-                            {/* Progress bar */}
-                            <div className="mb-10">
-                                <div className="flex items-center justify-between mb-3">
-                                    <span className="text-xs font-semibold text-white/40 uppercase tracking-widest">
-                                        Passo {currentStepIndex + 1} de {totalSteps}
-                                    </span>
-                                    <span className="text-xs font-medium text-secondary">
-                                        {Math.round(progress)}%
-                                    </span>
+            {/* ─── FULL SCREEN SURVEY MODAL ─── */}
+            <AnimatePresence>
+                {isOpen && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="fixed inset-0 z-[100] bg-white flex flex-col overflow-y-auto overflow-x-hidden safe-area-inset"
+                    >
+                        {/* Modal Header */}
+                        <div className="sticky top-0 z-30 bg-white/80 backdrop-blur-md border-b border-primary/5 py-4 px-4 sm:px-6">
+                            <div className="max-w-5xl mx-auto flex items-center justify-between">
+                                <div className="flex items-center gap-3">
+                                    <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center">
+                                        <Sparkles className="w-5 h-5 text-secondary" />
+                                    </div>
+                                    <div>
+                                        <h3 className="text-sm font-bold text-primary uppercase tracking-wider">Orcamento</h3>
+                                        <p className="text-[10px] text-primary/40 font-black uppercase">Lifestyle Premium</p>
+                                    </div>
                                 </div>
-                                <div className="h-1 bg-white/10 rounded-full overflow-hidden">
-                                    <motion.div
-                                        className="h-full bg-secondary rounded-full"
-                                        initial={{ width: 0 }}
-                                        animate={{ width: `${progress}%` }}
-                                        transition={{ duration: 0.5, ease: "easeOut" }}
-                                    />
-                                </div>
-                            </div>
-
-                            {/* Question */}
-                            <div className="text-center mb-10">
-                                <div className="w-12 h-12 rounded-xl bg-secondary/15 flex items-center justify-center mx-auto mb-5">
-                                    {(() => {
-                                        const Icon = STEP_META[step].icon;
-                                        return <Icon className="w-6 h-6 text-secondary" />;
-                                    })()}
-                                </div>
-                                <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">
-                                    {STEP_META[step].title}
-                                </h3>
-                                <p className="text-white/50 text-sm md:text-base">
-                                    {STEP_META[step].subtitle}
-                                </p>
-                            </div>
-
-                            {/* Options */}
-                            <div
-                                className={`grid gap-4 ${step === 0
-                                    ? "grid-cols-1 sm:grid-cols-2"
-                                    : step === 3
-                                        ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
-                                        : "grid-cols-1 sm:grid-cols-3"
-                                    }`}
-                            >
-                                {step === 0 &&
-                                    LENS_TYPES.map((opt, i) => (
-                                        <OptionCard
-                                            key={opt.id}
-                                            index={i}
-                                            label={opt.label}
-                                            description={opt.description}
-                                            selected={selections.lensType === opt.id}
-                                            onClick={() => selectOption("lensType", opt.id)}
-                                        />
-                                    ))}
-
-                                {step === 1 &&
-                                    VISION_FIELDS.map((opt, i) => (
-                                        <OptionCard
-                                            key={opt.id}
-                                            index={i}
-                                            label={opt.label}
-                                            description={opt.description}
-                                            image={opt.image}
-                                            selected={selections.visionField === opt.id}
-                                            onClick={() => selectOption("visionField", opt.id)}
-                                        />
-                                    ))}
-
-                                {step === 2 &&
-                                    REFRACTIVE_INDICES.map((opt, i) => {
-                                        return (
-                                            <OptionCard
-                                                key={opt.id}
-                                                index={i}
-                                                label={opt.label}
-                                                description={opt.description}
-                                                recommended={opt.recommendedRange}
-                                                selected={selections.refractiveIndex === opt.id}
-                                                onClick={() => setSelections({ ...selections, refractiveIndex: opt.id })}
-                                            />
-                                        );
-                                    })}
-
-                                {step === 3 &&
-                                    TREATMENTS.map((opt, i) => {
-                                        const isIncluded = isMultifocal && opt.id === "antirreflexo";
-                                        return (
-                                            <OptionCard
-                                                key={opt.id}
-                                                index={i}
-                                                label={isIncluded ? `${opt.label} (Incluso)` : opt.label}
-                                                description={opt.description}
-                                                selected={selections.treatments.includes(opt.id) || (isIncluded)}
-                                                onClick={() => toggleTreatment(opt.id)}
-                                                multi
-                                            />
-                                        );
-                                    })}
-                            </div>
-
-                            {/* Navigation */}
-                            <div className="flex items-center justify-between mt-10">
-                                <button
-                                    onClick={goBack}
-                                    className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 cursor-pointer ${currentStepIndex === 0
-                                        ? "text-white/20 pointer-events-none"
-                                        : "text-white/60 hover:text-white hover:bg-white/10"
-                                        }`}
-                                    disabled={currentStepIndex === 0}
+                                <Button
+                                    onClick={closeSurvey}
+                                    variant="ghost"
+                                    className="rounded-full w-10 h-10 p-0 text-primary/40 hover:text-primary hover:bg-primary/5"
                                 >
-                                    <ChevronLeft className="w-4 h-4" />
-                                    Voltar
-                                </button>
-                                <button
-                                    onClick={goNext}
-                                    disabled={!canAdvance()}
-                                    className={`inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-bold transition-all duration-300 cursor-pointer ${canAdvance()
-                                        ? "bg-secondary text-primary shadow-md shadow-secondary/20 hover:shadow-lg hover:brightness-105 hover:scale-[1.02] active:scale-[0.97]"
-                                        : "bg-white/10 text-white/30 pointer-events-none"
-                                        }`}
-                                >
-                                    {isLastStep ? "Ver orçamento" : "Próximo"}
-                                    <ChevronRight className="w-4 h-4" />
-                                </button>
+                                    <Check className="w-6 h-6 rotate-45" />
+                                </Button>
                             </div>
-                        </motion.div>
-                    )}
+                        </div>
 
-                    {/* ─── RESULT STEP ─── */}
-                    {step === 99 && (
-                        <motion.div
-                            key="result"
-                            variants={questionVariants}
-                            initial="initial"
-                            animate="animate"
-                            exit="exit"
-                            className="max-w-lg mx-auto"
-                        >
-                            {/* Result Card */}
-                            <div className="bg-white/6 border border-white/10 rounded-3xl p-8 md:p-10 backdrop-blur-sm">
-                                <div className="text-center mb-8">
-                                    <div className="w-14 h-14 rounded-2xl bg-secondary/15 flex items-center justify-center mx-auto mb-4">
-                                        <Sparkles className="w-7 h-7 text-secondary" />
-                                    </div>
-                                    <h3 className="text-xl font-bold text-white mb-1">
-                                        Seu orçamento estimado
-                                    </h3>
-                                    <p className="text-white/40 text-sm">
-                                        Valores por par de lentes
-                                    </p>
-                                </div>
+                        <div className="flex-1 py-12 px-4 sm:px-6">
+                            <Container className="relative">
+                                <AnimatePresence mode="wait" custom={direction}>
+                                    {/* ─── QUESTION STEPS ─── */}
+                                    {step >= 0 && step <= 3 && (
+                                        <motion.div
+                                            key={`step-${step}`}
+                                            variants={questionVariants}
+                                            initial="initial"
+                                            animate="animate"
+                                            exit="exit"
+                                            className="max-w-4xl mx-auto"
+                                        >
+                                            {/* Progress bar */}
+                                            <div className="mb-12">
+                                                <div className="flex items-center justify-between mb-4">
+                                                    <span className="text-xs font-bold text-primary/40 uppercase tracking-widest">
+                                                        Passo {currentStepIndex + 1} de {totalSteps}
+                                                    </span>
+                                                    <span className="text-xs font-black text-primary bg-primary/5 px-2 py-1 rounded-md">
+                                                        {Math.round(progress)}%
+                                                    </span>
+                                                </div>
+                                                <div className="h-2 bg-primary/5 rounded-full overflow-hidden">
+                                                    <motion.div
+                                                        className="h-full bg-primary rounded-full shadow-[0_0_10px_rgba(var(--primary),0.3)]"
+                                                        initial={{ width: 0 }}
+                                                        animate={{ width: `${progress}%` }}
+                                                        transition={{ duration: 0.5, ease: "easeOut" }}
+                                                    />
+                                                </div>
+                                            </div>
 
-                                {/* Price */}
-                                <div className="text-center mb-8">
-                                    <div className="flex flex-col items-center justify-center">
-                                        <span className="text-lg text-white/40 line-through mb-1">
-                                            R$ {budget.total.toLocaleString("pt-BR", { minimumFractionDigits: 2 })}
-                                        </span>
-                                        <div className="text-4xl md:text-5xl font-extrabold text-secondary leading-none">
-                                            <AnimatedPrice value={Math.max(0, budget.total - 200)} />
-                                        </div>
-                                    </div>
-                                    <p className="text-white/40 text-xs mt-2">
-                                        ou até 10x de R${" "}
-                                        {(Math.max(0, budget.total - 200) / 10).toLocaleString("pt-BR", {
-                                            minimumFractionDigits: 2,
-                                        })}
-                                    </p>
-                                </div>
+                                            {/* Question Header */}
+                                            <div className="text-center mb-12">
+                                                <div className="w-16 h-16 rounded-2xl bg-primary/5 flex items-center justify-center mx-auto mb-6 shadow-inner">
+                                                    {(() => {
+                                                        const Icon = STEP_META[step].icon;
+                                                        return <Icon className="w-8 h-8 text-primary" />;
+                                                    })()}
+                                                </div>
+                                                <h3 className="text-3xl md:text-5xl font-black text-primary mb-4 tracking-tighter leading-tight">
+                                                    {STEP_META[step].title}
+                                                </h3>
+                                                <p className="text-primary/60 text-base md:text-lg font-medium max-w-xl mx-auto">
+                                                    {STEP_META[step].subtitle}
+                                                </p>
+                                            </div>
 
-                                {/* Breakdown */}
-                                <div className="space-y-3 mb-8 border-t border-white/10 pt-6">
-                                    {budget.breakdown.map((item, i) => (
-                                        <div className="flex justify-between text-sm text-white/50 mb-2 border-b border-white/5 pb-2 last:border-0" key={i}>
-                                            <span>{item.label}</span>
-                                            <span className="font-medium text-white">
-                                                {item.value === 0 ? "Incluso" : `R$ ${item.value.toFixed(2).replace('.', ',')}`}
-                                            </span>
-                                        </div>
-                                    ))}
-                                    <div className="flex justify-between text-sm text-secondary/80 mb-2 border-b border-white/5 pb-2 last:border-0 font-medium">
-                                        <span>Desconto Especial</span>
-                                        <span>- R$ 200,00</span>
-                                    </div>
-                                    <div className="flex items-center justify-between text-sm border-t border-white/10 pt-3 mt-3">
-                                        <span className="text-white font-bold">Total</span>
-                                        <span className="text-secondary font-bold tabular-nums">
-                                            R$ {(Math.max(0, budget.total - 200)).toLocaleString("pt-BR", { minimumFractionDigits: 2 })}
-                                        </span>
-                                    </div>
-                                </div>
+                                            {/* Options Grid */}
+                                            <div
+                                                className={`grid gap-5 mb-12 ${step === 0
+                                                    ? "grid-cols-1 sm:grid-cols-2"
+                                                    : step === 3
+                                                        ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
+                                                        : "grid-cols-1 sm:grid-cols-3"
+                                                    }`}
+                                            >
+                                                {step === 0 &&
+                                                    LENS_TYPES.map((opt, i) => (
+                                                        <OptionCard
+                                                            key={opt.id}
+                                                            index={i}
+                                                            label={opt.label}
+                                                            description={opt.description}
+                                                            selected={selections.lensType === opt.id}
+                                                            onClick={() => selectOption("lensType", opt.id)}
+                                                        />
+                                                    ))}
 
-                                {/* CTAs */}
-                                <a
-                                    href={buildWhatsAppLink()}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="w-full inline-flex items-center justify-center gap-2 px-6 py-4 bg-secondary text-primary font-bold rounded-2xl transition-all duration-300 shadow-lg shadow-secondary/20 hover:shadow-xl hover:shadow-secondary/30 hover:brightness-105 hover:scale-[1.02] active:scale-[0.97] cursor-pointer text-base"
-                                >
-                                    <Send className="w-5 h-5" />
-                                    Confirmar pelo WhatsApp
-                                </a>
+                                                {step === 1 &&
+                                                    VISION_FIELDS.map((opt, i) => (
+                                                        <OptionCard
+                                                            key={opt.id}
+                                                            index={i}
+                                                            label={opt.label}
+                                                            description={opt.description}
+                                                            image={opt.image}
+                                                            selected={selections.visionField === opt.id}
+                                                            onClick={() => selectOption("visionField", opt.id)}
+                                                        />
+                                                    ))}
 
-                                <div className="flex gap-3 mt-4">
-                                    <button
-                                        onClick={goBack}
-                                        className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl border border-white/10 text-white/50 text-sm font-medium transition-all duration-200 hover:bg-white/5 hover:text-white/80 cursor-pointer"
-                                    >
-                                        <ChevronLeft className="w-4 h-4" />
-                                        Voltar
-                                    </button>
-                                    <button
-                                        onClick={restart}
-                                        className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl border border-white/10 text-white/50 text-sm font-medium transition-all duration-200 hover:bg-white/5 hover:text-white/80 cursor-pointer"
-                                    >
-                                        Refazer
-                                    </button>
-                                </div>
-                            </div>
+                                                {step === 2 &&
+                                                    REFRACTIVE_INDICES.map((opt, i) => {
+                                                        return (
+                                                            <OptionCard
+                                                                key={opt.id}
+                                                                index={i}
+                                                                label={opt.label}
+                                                                description={opt.description}
+                                                                recommended={opt.recommendedRange}
+                                                                selected={selections.refractiveIndex === opt.id}
+                                                                onClick={() => setSelections({ ...selections, refractiveIndex: opt.id })}
+                                                            />
+                                                        );
+                                                    })}
 
-                            <p className="text-center text-white/30 text-xs mt-6">
-                                * Valores estimados. O orçamento final pode variar de acordo com
-                                a receita e tipo de armação.
-                            </p>
-                        </motion.div>
-                    )}
-                </AnimatePresence>
-            </Container>
-        </section>
+                                                {step === 3 &&
+                                                    TREATMENTS.map((opt, i) => {
+                                                        const isIncluded = isMultifocal && opt.id === "antirreflexo";
+                                                        return (
+                                                            <OptionCard
+                                                                key={opt.id}
+                                                                index={i}
+                                                                label={isIncluded ? `${opt.label} (Incluso)` : opt.label}
+                                                                description={opt.description}
+                                                                selected={selections.treatments.includes(opt.id) || (isIncluded)}
+                                                                onClick={() => toggleTreatment(opt.id)}
+                                                                multi
+                                                            />
+                                                        );
+                                                    })}
+                                            </div>
+
+                                            {/* Modal Navigation Footer */}
+                                            <div className="flex items-center gap-4 py-8 border-t border-primary/5 sticky bottom-0 bg-white/95 backdrop-blur-sm z-20">
+                                                <Button
+                                                    onClick={goBack}
+                                                    variant="ghost"
+                                                    className={`h-16 px-8 rounded-2xl text-sm font-black transition-all ${currentStepIndex === 0
+                                                        ? "opacity-0 pointer-events-none"
+                                                        : "text-primary hover:bg-primary/5 active:scale-95 border-2 border-primary/10"
+                                                        }`}
+                                                    disabled={currentStepIndex === 0}
+                                                >
+                                                    <ChevronLeft className="w-5 h-5 mr-1" />
+                                                    <span>Voltar</span>
+                                                </Button>
+
+                                                <Button
+                                                    onClick={goNext}
+                                                    disabled={!canAdvance()}
+                                                    variant={canAdvance() ? "default" : "outline"}
+                                                    className={`flex-1 h-16 rounded-2xl text-base font-black transition-all ${canAdvance()
+                                                        ? "bg-primary text-secondary shadow-2xl shadow-primary/20 hover:text-white"
+                                                        : "bg-primary/5 text-primary/20 cursor-not-allowed border-none"
+                                                        }`}
+                                                >
+                                                    <span>{isLastStep ? "Ver Resultado" : "Próxima Etapa"}</span>
+                                                    <ChevronRight className="w-5 h-5 ml-1 transition-transform group-hover:translate-x-1" />
+                                                </Button>
+                                            </div>
+                                        </motion.div>
+                                    )}
+
+                                    {/* ─── RESULT STEP ─── */}
+                                    {step === 99 && (
+                                        <motion.div
+                                            key="result"
+                                            variants={questionVariants}
+                                            initial="initial"
+                                            animate="animate"
+                                            exit="exit"
+                                            className="max-w-2xl mx-auto"
+                                        >
+                                            {/* Result Card */}
+                                            <div className="bg-[#FAFAF9] border border-primary/5 rounded-[40px] p-8 md:p-12 relative overflow-hidden shadow-2xl">
+                                                {/* Decorative */}
+                                                <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full -mr-16 -mt-16 blur-3xl" />
+
+                                                <div className="text-center mb-10">
+                                                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary text-white text-[10px] font-black uppercase tracking-widest mb-6 shadow-lg shadow-primary/20">
+                                                        <Check className="w-3 h-3" />
+                                                        Orçamento Concluído
+                                                    </div>
+                                                    <h3 className="text-3xl md:text-5xl font-black text-primary mb-2 tracking-tighter">
+                                                        Resultado Estimado
+                                                    </h3>
+                                                    <p className="text-primary/40 text-xs font-black uppercase tracking-widest">
+                                                        Cálculo baseado nas suas escolhas
+                                                    </p>
+                                                </div>
+
+                                                {/* Price Container */}
+                                                <div className="bg-white rounded-3xl p-8 mb-10 text-center shadow-lg border border-primary/5">
+                                                    <div className="flex flex-col items-center">
+                                                        <span className="text-xl text-primary/20 line-through mb-1 font-bold">
+                                                            R$ {budget.total.toLocaleString("pt-BR", { minimumFractionDigits: 2 })}
+                                                        </span>
+                                                        <div className="leading-tight flex items-baseline gap-2">
+                                                            <span className="text-2xl font-black text-primary/40">R$</span>
+                                                            <AnimatedPrice value={Math.max(0, budget.total - 200)} />
+                                                        </div>
+                                                        <div className="bg-secondary/20 text-secondary text-[10px] font-black px-3 py-1 rounded-full mt-4 uppercase tracking-tighter">
+                                                            Armação de Brinde Inclusa 🎁
+                                                        </div>
+                                                    </div>
+                                                    <p className="text-primary/50 text-sm mt-6 font-medium">
+                                                        Ou em até <span className="text-primary font-black">10x de R$ {(Math.max(0, budget.total - 200) / 10).toLocaleString("pt-BR", { minimumFractionDigits: 2 })}</span>
+                                                    </p>
+                                                </div>
+
+                                                {/* WhatsApp CTA */}
+                                                <a
+                                                    href={buildWhatsAppLink()}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="w-full flex items-center justify-center gap-4 h-20 bg-primary text-white font-black rounded-3xl transition-all shadow-[0_20px_40px_-10px_rgba(var(--primary),0.3)] hover:brightness-110 hover:scale-[1.02] active:scale-[0.98] cursor-pointer text-lg uppercase tracking-tight"
+                                                >
+                                                    <Send className="w-6 h-6 text-secondary" />
+                                                    <span className="text-secondary">Garantir este Desconto</span>
+                                                </a>
+
+                                                {/* Actions */}
+                                                <div className="grid grid-cols-2 gap-4 mt-8">
+                                                    <Button
+                                                        onClick={goBack}
+                                                        variant="ghost"
+                                                        className="h-14 rounded-2xl bg-primary/5 text-primary font-black hover:bg-primary/10 transition-all"
+                                                    >
+                                                        <ChevronLeft className="w-5 h-5 mr-2" />
+                                                        <span>Ajustar Escolhas</span>
+                                                    </Button>
+                                                    <Button
+                                                        onClick={restart}
+                                                        variant="ghost"
+                                                        className="h-14 rounded-2xl bg-primary/5 text-primary font-black hover:bg-primary/10 transition-all"
+                                                    >
+                                                        <span>Refazer Tudo</span>
+                                                    </Button>
+                                                </div>
+                                            </div>
+
+                                            <p className="text-center text-primary/30 text-[10px] font-bold mt-8 max-w-sm mx-auto uppercase leading-relaxed">
+                                                * Valores sujeitos a alteração após análise da receita completa em nossa loja física.
+                                            </p>
+                                        </motion.div>
+                                    )}
+                                </AnimatePresence>
+                            </Container>
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+        </>
     );
 }
 
@@ -570,60 +606,58 @@ function OptionCard({
             animate="animate"
             exit="exit"
             onClick={onClick}
-            className={`group relative text-left p-5 rounded-2xl border transition-all duration-300 cursor-pointer ${selected
-                ? "border-secondary bg-secondary/10 shadow-md shadow-secondary/10"
-                : "border-white/10 bg-white/3 hover:border-white/20 hover:bg-white/6"
+            className={`group relative text-left p-6 md:p-8 rounded-[32px] border-2 transition-all duration-300 cursor-pointer ${selected
+                ? "border-primary bg-primary/5 shadow-2xl shadow-primary/10"
+                : "border-primary/5 bg-primary/2 hover:border-primary/10 hover:bg-white hover:shadow-xl"
                 }`}
         >
             {/* Checkbox / Radio indicator */}
             <div
-                className={`absolute top-4 right-4 w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all duration-200 ${selected
-                    ? "border-secondary bg-secondary"
-                    : "border-white/20 bg-transparent"
+                className={`absolute top-6 right-6 w-8 h-8 rounded-2xl border-2 flex items-center justify-center transition-all duration-300 ${selected
+                    ? "border-primary bg-primary rotate-0 scale-100"
+                    : "border-primary/10 bg-transparent -rotate-12 scale-90"
                     }`}
             >
-                {selected && <Check className="w-3.5 h-3.5 text-primary" strokeWidth={3} />}
+                {selected && <Check className="w-5 h-5 text-secondary" strokeWidth={4} />}
             </div>
 
-            <div className="pr-8">
-                <h4 className="text-base font-bold text-white mb-1">{label}</h4>
-                <p className="text-xs text-white/40 leading-relaxed mb-3">
+            <div className="pr-12">
+                <h4 className="text-xl md:text-2xl font-black text-primary mb-2 tracking-tighter leading-none">{label}</h4>
+                <p className="text-sm text-primary/50 font-medium leading-relaxed mb-6">
                     {description}
                 </p>
 
                 {image && (
-                    <div className="mb-4 rounded-lg overflow-hidden border border-white/10 relative w-full aspect-video bg-black/40">
+                    <div className="mb-6 rounded-3xl overflow-hidden border-2 border-primary/5 relative w-full aspect-[4/3] bg-white shadow-inner">
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
                             src={image}
                             alt={label}
-                            className="w-full h-full object-contain transition-opacity"
+                            className="w-full h-full object-contain p-4 transition-transform duration-700 group-hover:scale-110"
                         />
                     </div>
                 )}
 
                 {recommended && (
-                    <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-white/5 border border-white/10 mb-3">
-                        <span className="text-[10px] sm:text-xs font-medium text-white/70">
-                            Recomendado: <span className="text-secondary/90">{recommended}</span>
+                    <div className="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-primary shadow-lg shadow-primary/20 mb-6">
+                        <span className="text-[10px] md:text-xs font-black text-white/90 uppercase tracking-widest flex items-center gap-1.5">
+                            <Sparkles className="w-3 h-3 text-secondary" />
+                            Ideal: <span className="text-secondary">{recommended}</span>
                         </span>
                     </div>
                 )}
 
                 {(priceLabel || (price !== undefined && price > 0)) && (
                     <span
-                        className={`inline-block text-xs font-semibold px-2.5 py-1 rounded-lg ${selected
-                            ? "bg-secondary/20 text-secondary"
-                            : "bg-white/5 text-white/50"
+                        className={`inline-block text-xs font-black px-4 py-2 rounded-xl uppercase tracking-wider ${selected
+                            ? "bg-primary text-white"
+                            : "bg-primary/5 text-primary/40"
                             }`}
                     >
                         {priceLabel ?? `R$ ${price}`}
                     </span>
                 )}
             </div>
-            {price === undefined && !priceLabel && multi && (
-                <span className="inline-block text-xs text-white/30">&nbsp;</span>
-            )}
         </motion.div>
     );
 }

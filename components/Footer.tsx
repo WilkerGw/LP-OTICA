@@ -1,62 +1,77 @@
 import { Container } from "@/components/ui/container";
 import { Facebook, Instagram, Twitter } from "lucide-react";
+import Image from "next/image";
 
 export function Footer() {
     return (
         <footer className="bg-primary text-white/70 py-12 border-t border-white/10">
             <Container>
-                <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+                <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
                     {/* Column 1: Brand */}
-                    <div className="space-y-4">
-                        <h3 className="text-2xl font-bold text-white font-heading">Óticas Vizz</h3>
-                        <p className="text-sm leading-relaxed text-white/60">
-                            Sua visão merece o melhor. Tecnologia de ponta e estilo para você enxergar o mundo com clareza.
+                    <div className="space-y-6">
+                        <div className="relative inline-block">
+                            <div className="absolute inset-0 bg-secondary/20 blur-2xl rounded-full" />
+                            <div className="relative h-16 w-40">
+                                <Image
+                                    src="/images/logo.webp"
+                                    alt="Óticas Vizz"
+                                    fill
+                                    className="object-contain"
+                                />
+                            </div>
+                        </div>
+                        <p className="text-sm leading-relaxed text-white/50 font-medium max-w-xs">
+                            Curadoria premium de eyewear e tecnologia alemã em lentes. Enxergue o mundo com clareza, estilo e a elegância que você merece.
                         </p>
                         <div className="flex gap-4 pt-2">
-                            <a href="#" className="hover:text-secondary transition-colors"><Instagram className="w-5 h-5" /></a>
-                            <a href="#" className="hover:text-secondary transition-colors"><Facebook className="w-5 h-5" /></a>
-                            <a href="#" className="hover:text-secondary transition-colors"><Twitter className="w-5 h-5" /></a>
+                            {[
+                                { icon: Instagram, href: "https://instagram.com/oticasvizz" },
+                                { icon: Facebook, href: "#" },
+                                { icon: Twitter, href: "#" }
+                            ].map((social, i) => (
+                                <a
+                                    key={i}
+                                    href={social.href}
+                                    className="w-10 h-10 rounded-full glass-panel flex items-center justify-center hover:bg-secondary hover:text-primary transition-all duration-300 group"
+                                >
+                                    <social.icon className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                                </a>
+                            ))}
                         </div>
                     </div>
 
                     {/* Column 2: Links */}
-                    <div className="space-y-4">
-                        <h4 className="text-lg font-semibold text-white">Navegação</h4>
-                        <ul className="space-y-2 text-sm text-white/60">
-                            <li><a href="#" className="hover:text-secondary transition-colors">Início</a></li>
-                            <li><a href="#multifocais" className="hover:text-secondary transition-colors">Lentes Multifocais</a></li>
-                            <li><a href="#tratamentos" className="hover:text-secondary transition-colors">Tratamentos</a></li>
-                            <li><a href="#contato" className="hover:text-secondary transition-colors">Contato</a></li>
+                    <div className="space-y-6">
+                        <h4 className="text-xs font-bold text-secondary uppercase tracking-[0.2em]">Navegação</h4>
+                        <ul className="space-y-3 text-sm font-medium">
+                            {['Início', 'Lentes Multifocais', 'Tratamentos', 'Contato'].map((item) => (
+                                <li key={item}>
+                                    <a href={`#${item.toLowerCase().replace(' ', '-')}`} className="text-white/40 hover:text-white transition-colors flex items-center gap-2 group">
+                                        <span className="w-0 h-px bg-secondary group-hover:w-3 transition-all duration-300" />
+                                        {item}
+                                    </a>
+                                </li>
+                            ))}
                         </ul>
                     </div>
 
-                    {/* Column 3: Legal */}
-                    <div className="space-y-4">
-                        <h4 className="text-lg font-semibold text-white">Institucional</h4>
-                        <ul className="space-y-2 text-sm text-white/60">
-                            <li><a href="#" className="hover:text-secondary transition-colors">Sobre Nós</a></li>
-                            <li><a href="#" className="hover:text-secondary transition-colors">Política de Privacidade</a></li>
-                            <li><a href="#" className="hover:text-secondary transition-colors">Termos de Uso</a></li>
-                            <li><a href="#" className="hover:text-secondary transition-colors">Trabalhe Conosco</a></li>
-                        </ul>
-                    </div>
-
-                    {/* Column 4: Payment */}
-                    <div className="space-y-4">
-                        <h4 className="text-lg font-semibold text-white">Pagamento</h4>
-                        <p className="text-sm text-white/60">Aceitamos as principais bandeiras de cartão de crédito e PIX.</p>
-                        <div className="flex gap-2">
-                            {/* Placeholders for payment icons */}
-                            <div className="w-10 h-6 bg-white/10 rounded"></div>
-                            <div className="w-10 h-6 bg-white/10 rounded"></div>
-                            <div className="w-10 h-6 bg-white/10 rounded"></div>
-                            <div className="w-10 h-6 bg-white/10 rounded"></div>
+                    {/* Column 3: Payment */}
+                    <div className="space-y-6">
+                        <h4 className="text-xs font-bold text-secondary uppercase tracking-[0.2em]">Pagamento</h4>
+                        <p className="text-sm text-white/50 font-medium">Parcele sua visão em até 10x sem juros nos cartões ou aproveite desconto no PIX.</p>
+                        <div className="flex flex-wrap gap-2 pt-2">
+                            {/* Visual Payment Badges */}
+                            <div className="px-3 py-1.5 glass-panel rounded-md text-[10px] font-bold text-white/60">VISA</div>
+                            <div className="px-3 py-1.5 glass-panel rounded-md text-[10px] font-bold text-white/60">MASTERCARD</div>
+                            <div className="px-3 py-1.5 glass-panel rounded-md text-[10px] font-bold text-white/60">PIX</div>
                         </div>
                     </div>
                 </div>
 
-                <div className="mt-12 pt-8 border-t border-white/10 text-center text-sm text-white/50">
-                    <p>&copy; {new Date().getFullYear()} Óticas Vizz. Todos os direitos reservados.</p>
+                <div className="mt-20 pt-8 border-t border-white/5 text-center">
+                    <p className="text-[10px] font-bold text-white/20 uppercase tracking-[0.3em]">
+                        &copy; {new Date().getFullYear()} Óticas Vizz &bull; Crafted for Visionary People
+                    </p>
                 </div>
             </Container>
         </footer>

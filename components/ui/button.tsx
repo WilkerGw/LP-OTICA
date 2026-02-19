@@ -4,12 +4,12 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
 const buttonVariants = cva(
-    "inline-flex items-center justify-center whitespace-nowrap rounded-2xl text-sm font-semibold ring-offset-background transition-all duration-300 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 active:scale-[0.97]",
+    "inline-flex items-center justify-center whitespace-nowrap rounded-full text-sm font-semibold ring-offset-background transition-all duration-300 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 active:scale-[0.97]",
     {
         variants: {
             variant: {
                 default:
-                    "bg-primary text-primary-foreground shadow-sm hover:shadow-md hover:brightness-110",
+                    "bg-primary text-primary-foreground shadow-sm shadow-primary/10 hover:shadow-md hover:brightness-110",
                 destructive:
                     "bg-destructive text-destructive-foreground shadow-sm hover:shadow-md hover:brightness-110",
                 outline:
@@ -21,14 +21,14 @@ const buttonVariants = cva(
                 link:
                     "text-primary underline-offset-4 hover:underline",
                 glass:
-                    "bg-white/10 backdrop-blur-xl border border-white/15 text-white shadow-lg shadow-black/5 hover:bg-white/20 hover:border-white/30 hover:shadow-xl hover:scale-[1.03]",
+                    "bg-white/10 backdrop-blur-xl border border-white/20 text-white shadow-lg shadow-black/5 hover:bg-white/20 hover:border-white/30 hover:shadow-xl hover:scale-[1.02]",
                 "glass-dark":
-                    "bg-primary/5 backdrop-blur-xl border border-primary/10 text-primary shadow-sm hover:bg-primary/10 hover:border-primary/15 hover:shadow-md hover:scale-[1.03]",
+                    "bg-primary/5 backdrop-blur-xl border border-primary/15 text-primary shadow-sm hover:bg-primary/10 hover:border-primary/20 hover:shadow-md hover:scale-[1.02]",
             },
             size: {
-                default: "h-10 px-5 py-2 gap-2",
+                default: "h-11 px-6 py-2 gap-2",
                 sm: "h-9 px-4 text-xs gap-1.5",
-                lg: "h-12 px-8 text-base gap-2.5",
+                lg: "h-14 px-10 text-lg gap-2.5",
                 icon: "h-10 w-10",
             },
         },
