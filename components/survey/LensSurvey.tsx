@@ -13,6 +13,7 @@ import {
     Shield,
     Sparkles,
     Send,
+    X,
 } from "lucide-react";
 import {
     LENS_TYPES,
@@ -327,9 +328,9 @@ export function LensSurvey() {
                                 <Button
                                     onClick={closeSurvey}
                                     variant="ghost"
-                                    className="rounded-full w-10 h-10 p-0 text-primary/40 hover:text-primary hover:bg-primary/5"
+                                    className="rounded-full w-10 h-10 p-0 text-primary/40 hover:text-primary hover:bg-primary/5 flex items-center justify-center transition-all"
                                 >
-                                    <Check className="w-6 h-6 rotate-45" />
+                                    <X className="w-6 h-6" />
                                 </Button>
                             </div>
                         </div>
@@ -606,29 +607,29 @@ function OptionCard({
             animate="animate"
             exit="exit"
             onClick={onClick}
-            className={`group relative text-left p-6 md:p-8 rounded-[32px] border-2 transition-all duration-300 cursor-pointer ${selected
+            className={`group relative text-left p-4 md:p-5 rounded-[32px] border-2 transition-all duration-300 cursor-pointer ${selected
                 ? "border-primary bg-primary/5 shadow-2xl shadow-primary/10"
                 : "border-primary/5 bg-primary/2 hover:border-primary/10 hover:bg-white hover:shadow-xl"
                 }`}
         >
             {/* Checkbox / Radio indicator */}
             <div
-                className={`absolute top-6 right-6 w-8 h-8 rounded-2xl border-2 flex items-center justify-center transition-all duration-300 ${selected
+                className={`absolute top-4 right-4 w-7 h-7 rounded-xl border-2 flex items-center justify-center transition-all duration-300 ${selected
                     ? "border-primary bg-primary rotate-0 scale-100"
                     : "border-primary/10 bg-transparent -rotate-12 scale-90"
                     }`}
             >
-                {selected && <Check className="w-5 h-5 text-secondary" strokeWidth={4} />}
+                {selected && <Check className="w-4 h-4 text-secondary" strokeWidth={4} />}
             </div>
 
-            <div className="pr-12">
-                <h4 className="text-xl md:text-2xl font-black text-primary mb-2 tracking-tighter leading-none">{label}</h4>
-                <p className="text-sm text-primary/50 font-medium leading-relaxed mb-6">
+            <div className="pr-10">
+                <h4 className="text-xl md:text-2xl font-black text-primary mb-1 tracking-tighter leading-none">{label}</h4>
+                <p className="text-sm text-primary/50 font-medium leading-relaxed mb-3">
                     {description}
                 </p>
 
                 {image && (
-                    <div className="mb-6 rounded-3xl overflow-hidden border-2 border-primary/5 relative w-full aspect-[4/3] bg-white shadow-inner">
+                    <div className="mb-4 rounded-3xl overflow-hidden border-2 border-primary/5 relative w-full aspect-[4/3] bg-white shadow-inner">
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
                             src={image}
@@ -639,9 +640,8 @@ function OptionCard({
                 )}
 
                 {recommended && (
-                    <div className="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-primary shadow-lg shadow-primary/20 mb-6">
-                        <span className="text-[10px] md:text-xs font-black text-white/90 uppercase tracking-widest flex items-center gap-1.5">
-                            <Sparkles className="w-3 h-3 text-secondary" />
+                    <div className="inline-flex items-center px-3 py-2 rounded-xl bg-primary shadow-lg shadow-primary/20 mb-4">
+                        <span className="text-[10px] md:text-xs font-black text-white/90 uppercase tracking-widest">
                             Ideal: <span className="text-secondary">{recommended}</span>
                         </span>
                     </div>

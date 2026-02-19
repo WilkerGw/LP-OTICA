@@ -17,6 +17,13 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Óticas Vizz | Estilo e Visão",
   description: "Enxergue o mundo com clareza e estilo. Lentes multifocais de alta tecnologia e armações exclusivas.",
+  icons: {
+    icon: [
+      { url: "/images/logo.webp", type: "image/webp" },
+    ],
+    shortcut: "/images/logo.webp",
+    apple: "/images/logo.webp",
+  }
 };
 
 export const viewport: Viewport = {
