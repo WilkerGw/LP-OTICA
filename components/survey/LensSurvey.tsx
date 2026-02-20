@@ -295,7 +295,7 @@ export function LensSurvey() {
                             onClick={() => setIsOpen(true)}
                             variant="default"
                             size="lg"
-                            className="w-full sm:w-auto px-12 py-8 rounded-2xl text-lg font-black shadow-2xl shadow-primary/20 hover:scale-[1.02] transition-all group bg-primary text-secondary hover:text-white"
+                            className="w-full sm:w-auto px-8 py-2 rounded-2xl text-lg font-black shadow-2xl shadow-primary/20 hover:scale-[1.02] transition-all group bg-primary text-secondary hover:text-white"
                         >
                             <span>Começar</span>
                             <ChevronRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
