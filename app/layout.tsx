@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Poppins, Inter } from "next/font/google";
 import "./globals.css";
+import ChatWidget from "@/components/chat/ChatWidget";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -41,6 +42,7 @@ export default function RootLayout({
         className={`${poppins.variable} ${inter.variable} antialiased font-sans`}
       >
         {children}
+        <ChatWidget />
       </body>
     </html>
   );
