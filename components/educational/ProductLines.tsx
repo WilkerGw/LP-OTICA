@@ -159,9 +159,9 @@ export function ProductLines() {
             <Container className="flex-1 flex flex-col">
                 <div className="mb-8 text-center">
                     <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-primary mb-2 italic">
-                        Lentes <span className="text-secondary">Multifocais</span>
+                        Lentes <span className="text-secondary">Multifocais</span> Vizz
                     </h2>
-                    <p className="text-muted-foreground text-sm font-medium">Conforto para todas as necessidades</p>
+                    <p className="text-muted-foreground text-sm font-medium">Descubra qual o campo de visão ideal para você</p>
                 </div>
 
                 {/* Top Navigation - Horizontal Buttons */}

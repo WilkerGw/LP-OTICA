@@ -25,7 +25,7 @@ const zones: Zone[] = [
         shortLabel: "Longe",
         description: "Ideal para dirigir, assistir TV e apreciar paisagens.",
         icon: Eye,
-        color: "bg-primary",
+        color: "bg-secondary",
         position: "top-0 h-1/3",
     },
     {
@@ -34,7 +34,7 @@ const zones: Zone[] = [
         shortLabel: "Intermediária",
         description: "Perfeita para computador, conversas e painel do carro.",
         icon: Monitor,
-        color: "bg-gray-400",
+        color: "bg-secondary",
         position: "top-1/3 h-1/3",
     },
     {
@@ -81,23 +81,40 @@ export function LensDiagram() {
                         transition={{ duration: 0.8 }}
                         className="relative"
                     >
-                        {/* Selector Buttons Overlay (Desktop only) or integrated (Mobile) */}
-                        <div className="flex flex-wrap justify-center gap-3 mb-8 lg:absolute lg:-top-4 lg:left-1/2 lg:-translate-x-1/2 lg:z-30 w-full lg:w-max">
-                            {zones.map((zone) => (
-                                <button
-                                    key={zone.id}
-                                    onClick={() => setActiveZone(zone.id)}
-                                    className={cn(
-                                        "relative flex items-center gap-2 px-5 py-2.5 rounded-full transition-all duration-300 font-bold text-xs uppercase tracking-wider",
-                                        activeZone === zone.id
-                                            ? "bg-secondary text-primary shadow-lg shadow-secondary/20 scale-105"
-                                            : "glass-card text-muted-foreground hover:bg-secondary/10 hover:text-primary"
-                                    )}
-                                >
-                                    <zone.icon className="w-3.5 h-3.5" />
-                                    {zone.shortLabel}
-                                </button>
-                            ))}
+                        {/* Unified Segmented Control */}
+                        <div className="flex justify-center mb-8 lg:absolute lg:-top-6 lg:left-1/2 lg:-translate-x-1/2 lg:z-30 w-full lg:w-max px-4 lg:px-0">
+                            <div className="relative flex items-center p-1.5 bg-white/50 backdrop-blur-md rounded-full border border-primary/5 shadow-2xl shadow-primary/5">
+                                {/* Sliding Background Highlight */}
+                                <div className="absolute inset-y-1.5 left-1.5 right-1.5 flex pointer-events-none">
+                                    <motion.div
+                                        className="h-full bg-secondary rounded-full shadow-lg shadow-secondary/20"
+                                        animate={{
+                                            width: `${100 / zones.length}%`,
+                                            x: `${(zones.indexOf(selectedZone)) * 100}%`
+                                        }}
+                                        transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                                    />
+                                </div>
+
+                                {zones.map((zone) => (
+                                    <button
+                                        key={zone.id}
+                                        onClick={() => setActiveZone(zone.id)}
+                                        className={cn(
+                                            "relative z-10 flex items-center justify-center gap-2.5 px-6 py-2 rounded-full transition-colors duration-200 font-bold text-[11px] uppercase tracking-wider min-w-[120px]",
+                                            activeZone === zone.id
+                                                ? "text-primary"
+                                                : "text-muted-foreground hover:text-primary"
+                                        )}
+                                    >
+                                        <zone.icon className={cn(
+                                            "w-3.5 h-3.5 transition-transform duration-300",
+                                            activeZone === zone.id && "scale-110"
+                                        )} />
+                                        {zone.shortLabel}
+                                    </button>
+                                ))}
+                            </div>
                         </div>
 
                         <div className="relative w-full max-w-md mx-auto aspect-square flex items-center justify-center p-8 rounded-3xl overflow-hidden ">

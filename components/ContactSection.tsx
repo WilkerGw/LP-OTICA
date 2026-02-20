@@ -18,7 +18,7 @@ export function ContactSection() {
                             </p>
                         </div>
 
-                        <div className="md:flex items-center justify-center space-y-8 gap-20">
+                        <div className="md:flex md:items-start justify-center space-y-8 md:space-y-0 gap-12 lg:gap-24">
                             {/* Address */}
                             <div className="flex gap-4">
                                 <div className="w-12 h-12 rounded-lg bg-muted flex items-center justify-center text-primary shrink-0 group-hover:bg-secondary transition-colors">

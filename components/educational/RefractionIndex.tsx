@@ -63,7 +63,7 @@ export function RefractionIndex() {
                 <div className="relative flex flex-col items-center">
 
                     {/* Top: Lens Preview Container */}
-                    <div className="relative w-full max-w-4xl aspect-video md:aspect-[21/9] overflow-hidden glass-panel group">
+                    <div className="relative w-full max-w-4xl aspect-video overflow-hidden glass-panel group">
                         <AnimatePresence mode="wait">
                             <motion.div
                                 key={selected.value}
@@ -71,7 +71,7 @@ export function RefractionIndex() {
                                 animate={{ opacity: 1, scale: 1, filter: "blur(0)" }}
                                 exit={{ opacity: 0, scale: 1.05, filter: "blur(20px)" }}
                                 transition={{ duration: 0.5, ease: "circOut" }}
-                                className="relative w-full h-full bg-transparent"
+                                className="relative w-full h-full"
                             >
                                 <Image
                                     src={selected.image}
@@ -114,7 +114,7 @@ export function RefractionIndex() {
 
                                     <div className="flex flex-wrap justify-center gap-1">
                                         {selected.features.map((feature, idx) => (
-                                            <div key={idx} className="flex items-center gap-2 bg-white/50 backdrop-blur-sm px-4 py-2 rounded-full border border-primary/5 shadow-sm">
+                                            <div key={idx} className="flex items-center gap-2 px-4 py-2">
                                                 <CheckCircle2 className="w-3.5 h-3.5 text-secondary shrink-0" />
                                                 <span className="text-[9px] sm:text-[10px] font-black text-primary/80 uppercase tracking-widest leading-none pt-0.5">{feature}</span>
                                             </div>
