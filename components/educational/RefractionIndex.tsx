@@ -23,7 +23,7 @@ export function RefractionIndex() {
             </div>
 
             <Container>
-                <div className="mb-12 text-center max-w-2xl mx-auto space-y-4">
+                <div className="mb-8 text-center max-w-2xl mx-auto space-y-4">
                     <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-[10px] font-bold uppercase tracking-widest">
                         <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
                         Simulador de Espessura
@@ -35,7 +35,7 @@ export function RefractionIndex() {
                 </div>
 
                 {/* Premium Segmented Control Selector - Scrollable on mobile */}
-                <div className="relative mb-12 z-20">
+                <div className="relative mb-8 lg:mb-6 z-20">
                     <div className="flex justify-center">
                         <div className="inline-flex p-1.5 glass-panel rounded-full shadow-inner max-w-full overflow-x-auto no-scrollbar scroll-smooth">
                             <div className="flex gap-1 shrink-0 px-2">
@@ -63,7 +63,7 @@ export function RefractionIndex() {
                 <div className="relative flex flex-col items-center">
 
                     {/* Top: Lens Preview Container */}
-                    <div className="relative w-full max-w-4xl aspect-video overflow-hidden glass-panel group">
+                    <div className="relative w-full max-w-4xl lg:max-w-2xl aspect-video rounded-[32px] overflow-hidden glass-panel group">
                         <AnimatePresence mode="wait">
                             <motion.div
                                 key={selected.value}
@@ -71,13 +71,13 @@ export function RefractionIndex() {
                                 animate={{ opacity: 1, scale: 1, filter: "blur(0)" }}
                                 exit={{ opacity: 0, scale: 1.05, filter: "blur(20px)" }}
                                 transition={{ duration: 0.5, ease: "circOut" }}
-                                className="relative w-full h-full"
+                                className="absolute inset-0 w-full h-full"
                             >
                                 <Image
                                     src={selected.image}
                                     alt={`Lente índice ${selected.value} - ${selected.material}`}
                                     fill
-                                    className="object-contain group-hover:scale-105 transition-transform duration-700"
+                                    className="object-cover group-hover:scale-105 transition-transform duration-700"
                                     priority
                                     quality={100}
                                 />
@@ -93,7 +93,7 @@ export function RefractionIndex() {
                     </div>
 
                     {/* Bottom: Info Panel */}
-                    <div className="w-full max-w-4xl space-y-8 sm:space-y-12">
+                    <div className="w-full max-w-4xl space-y-6 lg:space-y-4">
                         <AnimatePresence mode="wait">
                             <motion.div
                                 key={selected.value}
@@ -180,7 +180,7 @@ export function RefractionIndex() {
 
                                 {/* CTA */}
                                 <div className="flex justify-center">
-                                    <Button asChild size="lg" className="rounded-2xl shadow-2xl shadow-secondary/30 transition-transform w-full px-10 py-7 text-lg uppercase font-black">
+                                    <Button asChild size="lg" className="rounded-2xl shadow-2xl shadow-secondary/30 transition-transform w-full px-8 py-5 text-base uppercase font-black">
                                         <a
                                             href={`https://wa.me/551123628799?text=Olá,%20gostaria%20de%20um%20orçamento%20para%20lente%20índice%20${selected.value.toFixed(2)}%20(${encodeURIComponent(selected.material)}).`}
                                             target="_blank"

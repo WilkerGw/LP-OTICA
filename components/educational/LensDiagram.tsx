@@ -59,7 +59,7 @@ export function LensDiagram() {
             <div className="absolute top-1/2 left-0 w-72 h-72 bg-secondary/5 rounded-full blur-3xl -translate-y-1/2 -ml-36 opacity-50" />
 
             <Container>
-                <div className="mb-12 text-center max-w-2xl mx-auto space-y-4">
+                <div className="mb-8 lg:mb-10 text-center max-w-2xl mx-auto space-y-4">
                     <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-[10px] font-bold uppercase tracking-widest">
                         <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
                         Guia de Tecnologia
@@ -71,7 +71,7 @@ export function LensDiagram() {
                 </div>
 
                 {/* Main Content Area - Layout matches AboutSection style */}
-                <div className="relative grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+                <div className="relative grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
 
                     {/* Left Side: Lens Image with zone overlay */}
                     <motion.div
@@ -168,7 +168,7 @@ export function LensDiagram() {
                     </motion.div>
 
                     {/* Right Side: Info Panel */}
-                    <div className="space-y-8">
+                    <div className="space-y-6">
                         <AnimatePresence mode="wait">
                             <motion.div
                                 key={selectedZone.id}
@@ -223,7 +223,7 @@ export function LensDiagram() {
                             </motion.div>
                         </AnimatePresence>
 
-                        <div className="pt-8">
+                        <div className="pt-4">
                             <Button asChild size="lg" className="rounded-2xl w-full shadow-xl shadow-secondary/20">
                                 <a href="https://wa.me/551123628799?text=Olá,%20gostaria%20de%20saber%20mais%20sobre%20as%20lentes%20multifocais." target="_blank" rel="noopener noreferrer">
                                     Conhecer Tecnologias

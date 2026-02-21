@@ -6,11 +6,11 @@ export function ContactSection() {
     return (
         <section className="section-padding bg-white" id="contato">
             <Container>
-                <div className="flex flex-col gap-12 lg:gap-24">
+                <div className="flex flex-col gap-8 lg:gap-12">
                     {/* Left Column: Info */}
-                    <div className="space-y-10">
+                    <div className="space-y-6">
                         <div className="text-center">
-                            <h2 className="text-3xl font-bold tracking-tight text-primary md:text-4xl mb-6">
+                            <h2 className="text-3xl font-bold tracking-tight text-primary md:text-4xl mb-4">
                                 Visite Nossa Loja
                             </h2>
                             <p className="text-lg text-muted-foreground">
@@ -18,7 +18,7 @@ export function ContactSection() {
                             </p>
                         </div>
 
-                        <div className="md:flex md:items-start justify-center space-y-8 md:space-y-0 gap-12 lg:gap-24">
+                        <div className="md:flex md:items-start justify-center space-y-8 md:space-y-0 gap-8 lg:gap-16">
                             {/* Address */}
                             <div className="flex gap-4">
                                 <div className="w-12 h-12 rounded-lg bg-muted flex items-center justify-center text-primary shrink-0 group-hover:bg-secondary transition-colors">
@@ -81,7 +81,7 @@ export function ContactSection() {
                         </div>
 
                         {/* Map moved here */}
-                        <div className="h-[450px] rounded-2xl overflow-hidden shadow-lg border border-border bg-muted relative mt-12">
+                        <div className="h-[350px] rounded-2xl overflow-hidden shadow-lg border border-border bg-muted relative mt-8">
                             <iframe
                                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3656.088657476657!2d-46.52952872374661!3d-23.595995563045437!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce5d8001d67069%3A0x6b1e6047a0641151!2sAv.%20do%20Orat%C3%B3rio%2C%204869%20-%20Jardim%20Guaiaca%2C%20S%C3%A3o%20Paulo%20-%20SP%2C%2003221-200!5e0!3m2!1spt-BR!2sbr!4v1707570000000!5m2!1spt-BR!2sbr"
                                 width="100%"

@@ -157,7 +157,7 @@ export function ProductLines() {
     return (
         <section className="bg-white section-padding relative overflow-hidden flex flex-col" id="produtos">
             <Container className="flex-1 flex flex-col">
-                <div className="mb-8 text-center">
+                <div className="mb-6 text-center">
                     <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-primary mb-2 italic">
                         Lentes <span className="text-secondary">Multifocais</span> Vizz
                     </h2>
@@ -165,7 +165,7 @@ export function ProductLines() {
                 </div>
 
                 {/* Top Navigation - Horizontal Buttons */}
-                <div className="flex flex-wrap justify-center gap-8 mb-10 z-20 relative">
+                <div className="flex flex-wrap justify-center gap-8 mb-6 z-20 relative">
                     {mainProducts.map((product) => (
                         <button
                             key={product.id}
@@ -194,10 +194,10 @@ export function ProductLines() {
                 </div>
 
                 {/* Main Content Area */}
-                <div className="flex-1 relative grid grid-cols-1 lg:grid-cols-12 gap-8">
+                <div className="flex-1 relative grid grid-cols-1 lg:grid-cols-12 gap-6">
 
                     {/* Lens Image - Large, Uncropped, Left/Center */}
-                    <div className="lg:col-span-8 relative min-h-[200px] lg:min-h-[350px] flex items-center justify-center">
+                    <div className="lg:col-span-7 relative min-h-[200px] lg:min-h-[350px] flex items-center justify-center">
                         <AnimatePresence mode="wait">
                             <motion.div
                                 key={selectedProduct.id}
@@ -208,7 +208,7 @@ export function ProductLines() {
                                 className="relative w-full h-full flex items-center justify-center p-4"
                             >
                                 {/* We use object-contain to ensure the "lente não seja cortada" */}
-                                <div className="relative w-full aspect-[4/3] max-w-lg">
+                                <div className="relative w-full aspect-[4/3] max-w-lg lg:max-w-md rounded-3xl overflow-hidden">
                                     {selectedProduct.image ? (
                                         <Image
                                             src={selectedProduct.image}
@@ -229,7 +229,7 @@ export function ProductLines() {
                     </div>
 
                     {/* Info Panel - Bottom Right */}
-                    <div className="lg:col-span-4 flex flex-col justify-end pb-8 lg:pb-12 z-20 pointer-events-none">
+                    <div className="lg:col-span-5 flex flex-col justify-end pb-4 lg:pb-6 z-20 pointer-events-none">
                         <AnimatePresence mode="wait">
                             <motion.div
                                 key={selectedProduct.id}

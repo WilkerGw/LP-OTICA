@@ -270,7 +270,7 @@ export function LensSurvey() {
             {/* ─── HOME PAGE INTRO CARD ─── */}
             <section
                 id="orcamento"
-                className="relative bg-secondary py-20 px-4 overflow-hidden"
+                className="relative bg-secondary py-12 lg:py-16 px-4 overflow-hidden"
             >
                 {/* Subtle decorative elements */}
                 <div className="absolute inset-0 pointer-events-none">
@@ -284,10 +284,10 @@ export function LensSurvey() {
                             <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
                             Orçamento Instantâneo
                         </div>
-                        <h2 className="text-3xl md:text-5xl font-extrabold text-primary mb-6 leading-tight tracking-tight">
+                        <h2 className="text-3xl md:text-5xl font-extrabold text-primary mb-4 leading-tight tracking-tight">
                             Monte seu orçamento em segundos
                         </h2>
-                        <p className="text-primary/70 text-lg mb-10 max-w-lg font-medium">
+                        <p className="text-primary/70 text-lg mb-6 max-w-lg font-medium">
                             Responda algumas perguntas rápidas e descubra o valor estimado
                             das suas lentes, de forma simples e intuitiva.
                         </p>

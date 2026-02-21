@@ -113,7 +113,7 @@ export function TreatmentsGrid() {
             <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-secondary/10 rounded-full blur-3xl opacity-30 sm:opacity-50" />
 
             <Container className="flex-1 flex flex-col">
-                <div className="mb-12 text-center max-w-2xl mx-auto space-y-4">
+                <div className="mb-8 text-center max-w-2xl mx-auto space-y-4">
                     <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-[10px] font-bold uppercase tracking-widest">
                         <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
                         Performance Ocular
@@ -150,7 +150,7 @@ export function TreatmentsGrid() {
                         animate={{ opacity: 1, scale: 1 }}
                         exit={{ opacity: 0, scale: 1.02 }}
                         transition={{ duration: 0.4 }}
-                        className="space-y-8"
+                        className="space-y-6"
                     >
 
 
@@ -161,19 +161,19 @@ export function TreatmentsGrid() {
                                     src={selected.image}
                                     alt={selected.name}
                                     fill
-                                    className="object-contain z-10 scale-125 md:scale-70 origin-center"
+                                    className="object-contain z-10 scale-100 md:scale-50 origin-center"
                                     sizes="100vw"
                                     priority
                                 />
                                 {/* Label: Com Tratamento */}
-                                <div className="absolute top-[20%] left-[5%] lg:left-[20%] z-20 flex flex-col items-center group">
+                                <div className="absolute top-[20%] left-[5%] lg:left-[30%] z-20 flex flex-col items-center group">
                                     <span className="px-4 py-1.5 text-[10px] sm:text-xs font-bold text-amber-700 bg-amber-50/80 backdrop-blur-sm border border-amber-200 rounded-full shadow-lg shadow-amber-200/20 whitespace-nowrap uppercase tracking-widest transition-transform group-hover:scale-110">
                                         Com Tratamento
                                     </span>
                                     <div className="w-px h-10 bg-linear-to-b from-amber-300 to-transparent" />
                                 </div>
                                 {/* Label: Sem Tratamento */}
-                                <div className="absolute top-[20%] right-[5%] lg:right-[20%] z-20 flex flex-col items-center group">
+                                <div className="absolute top-[20%] right-[5%] lg:right-[30%] z-20 flex flex-col items-center group">
                                     <span className="px-4 py-1.5 text-[10px] sm:text-xs font-bold text-gray-500 bg-gray-50/80 backdrop-blur-sm border border-gray-200 rounded-full shadow-lg shadow-gray-200/20 whitespace-nowrap uppercase tracking-widest transition-transform group-hover:scale-110">
                                         Sem Tratamento
                                     </span>
@@ -220,7 +220,7 @@ export function TreatmentsGrid() {
                 </AnimatePresence>
 
                 {/* CTA */}
-                <div className="text-center pt-24">
+                <div className="text-center pt-8">
                     <Button asChild size="lg" className="rounded-2xl w-full md:w-auto shadow-xl shadow-secondary/20">
                         <a
                             href={`https://wa.me/551123628799?text=Olá,%20gostaria%20de%20saber%20mais%20sobre%20o%20tratamento%20${encodeURIComponent(selected.name)}.`}

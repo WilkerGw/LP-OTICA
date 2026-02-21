@@ -3,7 +3,7 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronLeft, ChevronRight, Phone, Clock, MapPin } from "lucide-react";
+import { Phone, Clock, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import Image from "next/image";
@@ -130,7 +130,7 @@ export function HeroCarousel() {
                     </div>
 
                     {/* Overlay Gradient */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-primary/95 via-primary/30 to-transparent md:bg-gradient-to-r" />
+                    <div className="absolute inset-0 bg-linear-to-t from-primary/95 via-primary/30 to-transparent md:bg-linear-to-r" />
 
                     {/* Content */}
                     <Container className="relative flex h-full items-end justify-center md:justify-start pb-15 md:pb-48">
@@ -185,20 +185,6 @@ export function HeroCarousel() {
                 ))}
             </div>
 
-            <button
-                onClick={prevSlide}
-                className="absolute left-4 top-1/2 z-20 -translate-y-1/2 rounded-full border border-white/10 bg-white/5 p-2 text-white/70 backdrop-blur-[2px] transition-all hover:bg-white/20 hover:text-white hover:border-white/30 md:left-8"
-                aria-label="Previous slide"
-            >
-                <ChevronLeft className="h-6 w-6" strokeWidth={1.5} />
-            </button>
-            <button
-                onClick={nextSlide}
-                className="absolute right-4 top-1/2 z-20 -translate-y-1/2 rounded-full border border-white/10 bg-white/5 p-2 text-white/70 backdrop-blur-[2px] transition-all hover:bg-white/20 hover:text-white hover:border-white/30 md:right-8"
-                aria-label="Next slide"
-            >
-                <ChevronRight className="h-6 w-6" strokeWidth={1.5} />
-            </button>
         </section>
     );
 }
