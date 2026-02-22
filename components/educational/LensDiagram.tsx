@@ -64,10 +64,8 @@ export function LensDiagram() {
                         <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
                         Guia de Tecnologia
                     </div>
-                    <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-primary leading-tight">
-                        Entenda o Poder das <br />
-                        <span className="text-secondary">Lentes Multifocais</span>
-                    </h2>
+                    <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-primary leading-tight">
+                        Entenda o Poder das Lentes Multifocais</h2>
                 </div>
 
                 {/* Main Content Area - Layout matches AboutSection style */}
@@ -82,8 +80,8 @@ export function LensDiagram() {
                         className="relative"
                     >
                         {/* Unified Segmented Control */}
-                        <div className="flex justify-center mb-8 lg:absolute lg:-top-6 lg:left-1/2 lg:-translate-x-1/2 lg:z-30 w-full lg:w-max px-4 lg:px-0">
-                            <div className="relative flex items-center p-1.5 bg-white/50 backdrop-blur-md rounded-full border border-primary/5 shadow-2xl shadow-primary/5">
+                        <div className="flex justify-center mb-8 lg:absolute lg:-top-6 lg:left-1/2 lg:-translate-x-1/2 lg:z-30 w-full lg:w-max px-2 lg:px-0">
+                            <div className="relative flex items-center p-1.5 bg-white/50 backdrop-blur-md rounded-full border border-primary/5 shadow-2xl shadow-primary/5 w-full lg:w-max">
                                 {/* Sliding Background Highlight */}
                                 <div className="absolute inset-y-1.5 left-1.5 right-1.5 flex pointer-events-none">
                                     <motion.div
@@ -101,14 +99,14 @@ export function LensDiagram() {
                                         key={zone.id}
                                         onClick={() => setActiveZone(zone.id)}
                                         className={cn(
-                                            "relative z-10 flex items-center justify-center gap-2.5 px-6 py-2 rounded-full transition-colors duration-200 font-bold text-[11px] uppercase tracking-wider min-w-[120px]",
+                                            "relative z-10 flex-1 lg:flex-initial flex items-center justify-center gap-1.5 sm:gap-2.5 px-3 sm:px-6 py-2 rounded-full transition-colors duration-200 font-bold text-[10px] sm:text-[11px] uppercase tracking-wider lg:min-w-[120px]",
                                             activeZone === zone.id
                                                 ? "text-primary"
                                                 : "text-muted-foreground hover:text-primary"
                                         )}
                                     >
                                         <zone.icon className={cn(
-                                            "w-3.5 h-3.5 transition-transform duration-300",
+                                            "w-3 h-3 sm:w-3.5 sm:h-3.5 transition-transform duration-300",
                                             activeZone === zone.id && "scale-110"
                                         )} />
                                         {zone.shortLabel}

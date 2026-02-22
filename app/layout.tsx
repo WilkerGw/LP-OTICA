@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Poppins, Inter } from "next/font/google";
 import "./globals.css";
 import ChatWidget from "@/components/chat/ChatWidget";
+import { SchemaOrg } from "@/components/SchemaOrg";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -16,15 +17,43 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Óticas Vizz | Estilo e Visão",
-  description: "Enxergue o mundo com clareza e estilo. Lentes multifocais de alta tecnologia e armações exclusivas.",
-  icons: {
-    icon: [
-      { url: "/images/logo.webp", type: "image/webp" },
+  title: "Óticas Vizz | Óculos de Grau e Lentes na Zona Leste de São Paulo",
+  description:
+    "Óticas Vizz na Av. do Oratório, 4869 – Zona Leste SP. Armações, lentes multifocais, tratamentos premium e exame de vista. Parcele em 12x sem juros ou 10% no PIX.",
+  keywords: [
+    "ótica zona leste sp",
+    "óculos de grau são paulo",
+    "lentes multifocais zona leste",
+    "ótica jardim guaiaca",
+    "ótica perto do oratório",
+    "armações de óculos sp",
+    "exame de vista zona leste",
+    "ótica são paulo parcela",
+  ],
+  openGraph: {
+    title: "Óticas Vizz | Estilo e Visão na Zona Leste",
+    description:
+      "Curadoria premium de eyewear e tecnologia alemã em lentes. Visite-nos na Av. do Oratório, 4869.",
+    url: "https://www.oticasvizz.com.br",
+    siteName: "Óticas Vizz",
+    locale: "pt_BR",
+    type: "website",
+    images: [
+      {
+        url: "/images/og-image.webp",
+        width: 1200,
+        height: 630,
+        alt: "Óticas Vizz – Zona Leste SP",
+      },
     ],
+  },
+  robots: { index: true, follow: true },
+  alternates: { canonical: "https://www.oticasvizz.com.br" },
+  icons: {
+    icon: [{ url: "/images/logo.webp", type: "image/webp" }],
     shortcut: "/images/logo.webp",
     apple: "/images/logo.webp",
-  }
+  },
 };
 
 export const viewport: Viewport = {
@@ -41,6 +70,7 @@ export default function RootLayout({
       <body
         className={`${poppins.variable} ${inter.variable} antialiased font-sans`}
       >
+        <SchemaOrg />
         {children}
         <ChatWidget />
       </body>

@@ -9,6 +9,10 @@ import { RefractionIndex } from "@/components/educational/RefractionIndex";
 import { ContactSection } from "@/components/ContactSection";
 import { Footer } from "@/components/Footer";
 import { WhatsAppFloat } from "@/components/WhatsAppFloat";
+import { FramesSection } from "@/components/FramesSection";
+import { WhyVizz } from "@/components/WhyVizz";
+import { Testimonials } from "@/components/Testimonials";
+import { FAQ } from "@/components/FAQ";
 
 export default function Home() {
   return (
@@ -29,6 +33,12 @@ export default function Home() {
         <TreatmentsGrid />
         <RefractionIndex />
       </div>
+
+      <FramesSection />
+      <WhyVizz />
+
+      <Testimonials />
+      <FAQ />
 
       <div id="contato">
         <ContactSection />

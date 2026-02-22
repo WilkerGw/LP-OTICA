@@ -118,9 +118,8 @@ export function TreatmentsGrid() {
                         <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
                         Performance Ocular
                     </div>
-                    <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-primary leading-tight">
-                        Tratamentos de <br />
-                        <span className="text-secondary">Alta Performance</span>
+                    <h2 className="text-4xl md:text-4xl font-extrabold tracking-tight text-primary leading-tight">
+                        Tratamentos de Alta Performance
                     </h2>
                 </div>
 
@@ -167,7 +166,7 @@ export function TreatmentsGrid() {
                                 />
                                 {/* Label: Com Tratamento */}
                                 <div className="absolute top-[20%] left-[5%] lg:left-[30%] z-20 flex flex-col items-center group">
-                                    <span className="px-4 py-1.5 text-[10px] sm:text-xs font-bold text-amber-700 bg-amber-50/80 backdrop-blur-sm border border-amber-200 rounded-full shadow-lg shadow-amber-200/20 whitespace-nowrap uppercase tracking-widest transition-transform group-hover:scale-110">
+                                    <span className="px-4 py-1.5 text-[10px] sm:text-xs font-bold text-secondary bg-amber-50/80 backdrop-blur-sm border border-amber-200 rounded-full shadow-lg shadow-amber-200/20 whitespace-nowrap uppercase tracking-widest transition-transform group-hover:scale-110">
                                         Com Tratamento
                                     </span>
                                     <div className="w-px h-10 bg-linear-to-b from-amber-300 to-transparent" />
@@ -182,7 +181,7 @@ export function TreatmentsGrid() {
                             </div>
 
                             {/* Information Panels - Relative on mobile, Overlay on Desktop */}
-                            <div className="-mt-20 sm:mt-0 sm:absolute sm:bottom-[-5%] inset-x-0 grid grid-cols-2 gap-3 sm:gap-12 z-30 px-2 sm:px-0 pointer-events-auto sm:pointer-events-none">
+                            <div className=" -mt-20 sm:mt-0 sm:absolute sm:bottom-[0%] inset-x-0 max-w-4xl mx-auto grid grid-cols-2 gap-4 sm:gap-12 z-30 px-2 sm:px-0 pointer-events-auto sm:pointer-events-none">
                                 {/* Benefits */}
                                 <motion.div
                                     initial={{ opacity: 0, y: 10 }}
@@ -190,10 +189,10 @@ export function TreatmentsGrid() {
                                     viewport={{ once: true }}
                                     className="flex flex-col items-center gap-2  p-4 sm:p-6 rounded-3xl  hover:bg-white/80 transition-colors"
                                 >
-                                    <span className="text-[10px] sm:text-xs font-black text-amber-600 uppercase tracking-[0.2em] mb-1">Benefícios</span>
+                                    <span className="text-[10px] sm:text-xs font-black text-secondary uppercase tracking-[0.2em] mb-1">Benefícios</span>
                                     {selected.benefits.map((b, i) => (
                                         <div key={i} className="flex items-center gap-2 text-[10px] sm:text-sm text-primary/80 font-bold text-center">
-                                            <div className="w-1 h-1 rounded-full bg-amber-400 shrink-0" />
+                                            <div className="w-1 h-1 rounded-full bg-secondary shrink-0" />
                                             {b}
                                         </div>
                                     ))}

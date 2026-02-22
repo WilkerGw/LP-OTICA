@@ -145,12 +145,14 @@ export function LensSurvey() {
     const currentStepIndex = steps.indexOf(step);
     const isLastStep = currentStepIndex === totalSteps - 1;
 
-    // Control body scroll when modal is open
+    // Control body scroll and notify other components when modal is open
     useEffect(() => {
         if (isOpen) {
             document.body.style.overflow = "hidden";
+            window.dispatchEvent(new CustomEvent("vizz_survey_state", { detail: { isOpen: true } }));
         } else {
             document.body.style.overflow = "unset";
+            window.dispatchEvent(new CustomEvent("vizz_survey_state", { detail: { isOpen: false } }));
         }
         return () => {
             document.body.style.overflow = "unset";
@@ -311,7 +313,7 @@ export function LensSurvey() {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        className="fixed inset-0 z-[100] bg-white flex flex-col overflow-y-auto overflow-x-hidden safe-area-inset"
+                        className="fixed inset-0 z-100 bg-white flex flex-col overflow-y-auto overflow-x-hidden safe-area-inset"
                     >
                         {/* Modal Header */}
                         <div className="sticky top-0 z-30 bg-white/80 backdrop-blur-md border-b border-primary/5 py-4 px-4 sm:px-6">
@@ -536,7 +538,7 @@ export function LensSurvey() {
                                                     className="w-full flex items-center justify-center gap-4 h-20 bg-primary text-white font-black rounded-3xl transition-all shadow-[0_20px_40px_-10px_rgba(var(--primary),0.3)] hover:brightness-110 hover:scale-[1.02] active:scale-[0.98] cursor-pointer text-lg uppercase tracking-tight"
                                                 >
                                                     <Send className="w-6 h-6 text-secondary" />
-                                                    <span className="text-secondary">Garantir este Desconto</span>
+                                                    <span className="text-secondary">Garantir Desconto</span>
                                                 </a>
 
                                                 {/* Actions */}
@@ -629,7 +631,7 @@ function OptionCard({
                 </p>
 
                 {image && (
-                    <div className="mb-4 rounded-3xl overflow-hidden border-2 border-primary/5 relative w-full aspect-[4/3] bg-white shadow-inner">
+                    <div className="mb-4 rounded-3xl overflow-hidden border-2 border-primary/5 relative w-full aspect-4/3 bg-white shadow-inner">
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
                             src={image}

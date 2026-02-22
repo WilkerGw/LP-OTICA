@@ -28,9 +28,8 @@ export function RefractionIndex() {
                         <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
                         Simulador de Espessura
                     </div>
-                    <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-primary leading-tight">
-                        O Equilíbrio entre <br />
-                        <span className="text-secondary">Estética e Precisão</span>
+                    <h2 className="text-4xl md:text-4xl font-extrabold tracking-tight text-primary leading-tight">
+                        O Equilíbrio entre Estética e Precisão
                     </h2>
                 </div>
 
@@ -106,8 +105,8 @@ export function RefractionIndex() {
                                 {/* Material & Features Wrapper */}
                                 <div className="space-y-6 flex flex-col items-center">
                                     <div className="space-y-1">
-                                        <span className="text-[10px] font-black text-secondary uppercase tracking-[0.4em]">Material Premium</span>
-                                        <h3 className="text-4xl sm:text-6xl font-black text-primary tracking-tight">
+                                        <span className="text-[10px] font-black text-primary uppercase tracking-[0.4em]">Material Premium</span>
+                                        <h3 className="text-4xl  font-black text-primary tracking-tight">
                                             {selected.material}
                                         </h3>
                                     </div>
@@ -132,7 +131,7 @@ export function RefractionIndex() {
                                                     <span className="block text-[10px] font-black text-muted-foreground uppercase tracking-widest">Estética</span>
                                                     <span className="block text-sm font-bold text-primary">Nível de Espessura</span>
                                                 </div>
-                                                <span className="text-[10px] font-black text-secondary bg-secondary/10 px-2 py-0.5 rounded-md">
+                                                <span className="text-[10px] font-black text-primary bg-primary/10 px-2 py-0.5 rounded-md">
                                                     {selected.value >= 1.67 ? "ULTRA FINA" : "ESTRUTURADA"}
                                                 </span>
                                             </div>
@@ -153,7 +152,7 @@ export function RefractionIndex() {
                                                     <span className="block text-[10px] font-black text-muted-foreground uppercase tracking-widest">Conforto</span>
                                                     <span className="block text-sm font-bold text-primary">Leveza da Lente</span>
                                                 </div>
-                                                <span className="text-[10px] font-black text-secondary bg-secondary/10 px-2 py-0.5 rounded-md">
+                                                <span className="text-[10px] font-black text-primary bg-primary/10 px-2 py-0.5 rounded-md">
                                                     {selected.value >= 1.59 ? "ALTA LEVEZA" : "PADRÃO"}
                                                 </span>
                                             </div>
@@ -180,7 +179,7 @@ export function RefractionIndex() {
 
                                 {/* CTA */}
                                 <div className="flex justify-center">
-                                    <Button asChild size="lg" className="rounded-2xl shadow-2xl shadow-secondary/30 transition-transform w-full px-8 py-5 text-base uppercase font-black">
+                                    <Button asChild size="lg" className="rounded-2xl shadow-2xl shadow-secondary/30 transition-transform w-full px-8 py-5 text-base font-black">
                                         <a
                                             href={`https://wa.me/551123628799?text=Olá,%20gostaria%20de%20um%20orçamento%20para%20lente%20índice%20${selected.value.toFixed(2)}%20(${encodeURIComponent(selected.material)}).`}
                                             target="_blank"

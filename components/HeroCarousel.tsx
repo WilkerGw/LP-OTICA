@@ -14,7 +14,6 @@ interface Slide {
     mobileImage?: string;
     title: string;
     price: string;
-    subtitle: string;
     ctaText: string;
     ctaLink: string;
 }
@@ -26,17 +25,15 @@ const slides: Slide[] = [
         mobileImage: "/images/dois-oculos-mobile.webp",
         title: "Dois óculos de grau",
         price: "10x R$ 39,90",
-        subtitle: "Aproveite esta oferta imperdível. Válido para dioptrias de até 2 graus.",
         ctaText: "Aproveite",
         ctaLink: "https://wa.me/551123628799?text=Olá,%20gostaria%20de%20saber%20mais%20sobre%20a%20promoção%20de%20dois%20óculos.",
     },
     {
         id: 2,
-        image: "/images/multifocal.png",
+        image: "/images/multifocal.webp",
         mobileImage: "/images/multifocal-mobile.webp",
         title: "Óculos multifocal digital",
         price: "10x R$ 79,90",
-        subtitle: "Tecnologia digital para uma visão perfeita em todas as distâncias.",
         ctaText: "Aproveite",
         ctaLink: "https://wa.me/551123628799?text=Olá,%20gostaria%20de%20saber%20mais%20sobre%20a%20promoção%20de%20multifocal.",
     },
@@ -46,7 +43,6 @@ const slides: Slide[] = [
         mobileImage: "/images/filtro-azul-mobile.webp",
         title: "Monofocal com Filtro Azul",
         price: "10x R$ 24,90",
-        subtitle: "Proteção contra telas digitais. Válido para dioptrias de até 2 graus.",
         ctaText: "Aproveite",
         ctaLink: "https://wa.me/551123628799?text=Olá,%20gostaria%20de%20saber%20mais%20sobre%20a%20promoção%20de%20filtro%20azul.",
     },
@@ -56,7 +52,6 @@ const slides: Slide[] = [
         mobileImage: "/images/antirreflexo-mobile.webp",
         title: "Monofocal com Antirreflexo",
         price: "10x R$ 17,90",
-        subtitle: "Elimine reflexos indesejados. Válido para dioptrias de até 2 graus.",
         ctaText: "Aproveite",
         ctaLink: "https://wa.me/551123628799?text=Olá,%20gostaria%20de%20saber%20mais%20sobre%20a%20promoção%20de%20antirreflexo.",
     },
@@ -83,7 +78,7 @@ export function HeroCarousel() {
                     <div className="flex flex-row justify-between items-center text-white/90 px-2 md:px-0">
                         <div className="flex items-center gap-1.5 md:gap-2">
                             <Phone className="w-3.5 h-3.5 md:w-4 md:h-4 text-secondary" />
-                            <span className="font-medium tracking-wide">(11) 2345-6789</span>
+                            <span className="font-medium tracking-wide">(11) 2362-8799</span>
                         </div>
                         <div className="flex items-center gap-1.5 md:gap-2">
                             <MapPin className="w-3.5 h-3.5 md:w-4 md:h-4 text-secondary" />
@@ -110,7 +105,7 @@ export function HeroCarousel() {
                                 alt={slides[current].title}
                                 fill
                                 priority
-                                quality={95}
+                                quality={100}
                                 className="object-cover object-top"
                                 sizes="100vw"
                             />
@@ -122,7 +117,7 @@ export function HeroCarousel() {
                                 alt={slides[current].title}
                                 fill
                                 priority
-                                quality={95}
+                                quality={100}
                                 className="object-cover object-center"
                                 sizes="100vw"
                             />
@@ -130,10 +125,10 @@ export function HeroCarousel() {
                     </div>
 
                     {/* Overlay Gradient */}
-                    <div className="absolute inset-0 bg-linear-to-t from-primary/95 via-primary/30 to-transparent md:bg-linear-to-r" />
+                    <div className="absolute inset-0 bg-linear-to-b from-primary/95 via-primary/30 to-transparent md:bg-linear-to-r" />
 
                     {/* Content */}
-                    <Container className="relative flex h-full items-end justify-center md:justify-start pb-15 md:pb-48">
+                    <Container className="relative pt-30 flex h-full items-start lg:items-end justify-center md:justify-start pb-15 md:pb-48">
                         <div className="max-w-3xl space-y-6 px-4 md:px-0 text-center md:text-left flex flex-col items-center md:items-start">
                             <motion.h1
                                 initial={{ opacity: 0, y: 20 }}
@@ -148,14 +143,7 @@ export function HeroCarousel() {
                                     {slides[current].price}
                                 </span>
                             </motion.h1>
-                            <motion.p
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: 0.5, duration: 0.5 }}
-                                className="text-lg text-white/80 md:text-xl w-full"
-                            >
-                                {slides[current].subtitle}
-                            </motion.p>
+
                             <motion.div
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}

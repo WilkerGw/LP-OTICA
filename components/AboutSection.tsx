@@ -31,7 +31,7 @@ export function AboutSection() {
 
                         <div className="relative w-fit mx-auto">
                             {/* Desktop/Tablet Badge (Overlay) */}
-                            <div className="absolute -top-7 -left-7 z-20 hidden md:inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 backdrop-blur-md text-primary text-[10px] font-bold uppercase tracking-widest">
+                            <div className="absolute -top-7 -left-17 z-20 hidden md:inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 backdrop-blur-md text-primary text-[10px] font-bold uppercase tracking-widest">
                                 <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
                                 Lifestyle Premium
                             </div>
@@ -45,7 +45,7 @@ export function AboutSection() {
                                 />
                             </div>
                             {/* Floating Badge */}
-                            <div className="absolute -bottom-4 -right-15 md:-bottom-6 md:-right-6 glass-card p-1 md:p-2 rounded-2xl shadow-premium flex">
+                            <div className="absolute -bottom-4 -right-15 md:-bottom-12 md:-right-20 glass-card p-1 md:p-2 rounded-2xl shadow-premium flex">
                                 <div className="flex items-center gap-2 md:gap-3">
                                     <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-secondary flex items-center justify-center text-primary font-bold text-sm md:text-base">
                                         3+

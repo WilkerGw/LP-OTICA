@@ -44,11 +44,18 @@ export function Footer() {
                     <div className="space-y-6">
                         <h4 className="text-xs font-bold text-secondary uppercase tracking-[0.2em]">Navegação</h4>
                         <ul className="space-y-3 text-sm font-medium">
-                            {['Início', 'Lentes Multifocais', 'Tratamentos', 'Contato'].map((item) => (
-                                <li key={item}>
-                                    <a href={`#${item.toLowerCase().replace(' ', '-')}`} className="text-white/40 hover:text-white transition-colors flex items-center gap-2 group">
+                            {[
+                                { label: 'Início', href: '#inicio' },
+                                { label: 'Armações', href: '#armacoes' },
+                                { label: 'Lentes Multifocais', href: '#lentes-multifocais' },
+                                { label: 'Tratamentos', href: '#tratamentos' },
+                                { label: 'Dúvidas', href: '#faq' },
+                                { label: 'Contato', href: '#contato' }
+                            ].map((item) => (
+                                <li key={item.label}>
+                                    <a href={item.href} className="text-white/40 hover:text-white transition-colors flex items-center gap-2 group">
                                         <span className="w-0 h-px bg-secondary group-hover:w-3 transition-all duration-300" />
-                                        {item}
+                                        {item.label}
                                     </a>
                                 </li>
                             ))}

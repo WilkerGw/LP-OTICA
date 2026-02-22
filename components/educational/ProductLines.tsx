@@ -24,6 +24,7 @@ interface Product {
     features?: string[];
     badge?: string;
     distances?: DistanceLevel;
+    visionField?: string;
 }
 
 interface ProductLine {
@@ -50,7 +51,8 @@ const lines: ProductLine[] = [
                 image: "/images/evolution.webp",
                 features: ["Visão para perto com foco imediato e preciso", "Excelente e amplo campo para longe", "Adaptação natural, imediata e garantida"],
                 badge: "Premium",
-                distances: { longe: 95, meiaDistancia: 90, perto: 95 }
+                distances: { longe: 95, meiaDistancia: 90, perto: 95 },
+                visionField: "98%"
             },
             {
                 id: "luminous",
@@ -60,7 +62,8 @@ const lines: ProductLine[] = [
                 icon: Smartphone,
                 image: "/images/luminous.webp",
                 features: ["Visão para perto com foco preciso e confortável", "Amplo campo de visão para longe", "Adaptação rápida e natural"],
-                distances: { longe: 85, meiaDistancia: 80, perto: 85 }
+                distances: { longe: 85, meiaDistancia: 80, perto: 85 },
+                visionField: "87%"
             },
         ],
     },
@@ -79,7 +82,8 @@ const lines: ProductLine[] = [
                 image: "/images/elite.webp",
                 features: ["Corredor de progressão suave", "Campo para longe preservado e amplo", "Adaptação espontânea"],
                 badge: "Custo-Benefício",
-                distances: { longe: 70, meiaDistancia: 65, perto: 60 }
+                distances: { longe: 70, meiaDistancia: 65, perto: 60 },
+                visionField: "78%"
             },
             {
                 id: "harmony",
@@ -89,7 +93,8 @@ const lines: ProductLine[] = [
                 icon: Zap,
                 image: "/images/harmony.webp",
                 features: ["Suave corredor de progressão", "Campo para longe preservado", "Excelente relação custo e benefício"],
-                distances: { longe: 60, meiaDistancia: 55, perto: 50 }
+                distances: { longe: 60, meiaDistancia: 55, perto: 50 },
+                visionField: "68%"
             },
         ],
     },
@@ -108,7 +113,8 @@ const lines: ProductLine[] = [
                 image: "/images/multi.webp",
                 features: ["Corredor adequado para meia distância", "Adaptação espontânea", "Qualidade com investimento acessível"],
                 badge: "Básica",
-                distances: { longe: 40, meiaDistancia: 40, perto: 35 }
+                distances: { longe: 40, meiaDistancia: 40, perto: 35 },
+                visionField: "55%"
             },
         ],
     },
@@ -126,17 +132,19 @@ const lines: ProductLine[] = [
                 icon: Monitor,
                 image: "/images/evolution.webp", // Fallback image as none was specified
                 features: ["Campo de perto ampliado", "Postura ergonômica", "Visão relaxada no PC"],
-                distances: { longe: 20, meiaDistancia: 85, perto: 95 }
+                distances: { longe: 20, meiaDistancia: 85, perto: 95 },
+                visionField: "Intermediária+"
             },
             {
                 id: "sport",
                 name: "Vizz Sport",
                 category: "Performance Esportiva",
-                description: "Projetada para armações esportivas com curvaturas acentuadas, garantindo visão periférica sem distorções.",
+                description: "Projetada para armações esportivas com curvaturas acentuadas, garantindo vision periférica sem distorções.",
                 icon: Activity,
                 image: "/images/elite.webp", // Fallback image
                 features: ["Compensação de curvatura", "Visão periférica total", "Ideal para óculos curvados"],
-                distances: { longe: 90, meiaDistancia: 60, perto: 40 }
+                distances: { longe: 90, meiaDistancia: 60, perto: 40 },
+                visionField: "Total"
             }
         ]
     }
@@ -159,7 +167,7 @@ export function ProductLines() {
             <Container className="flex-1 flex flex-col">
                 <div className="mb-6 text-center">
                     <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-primary mb-2 italic">
-                        Lentes <span className="text-secondary">Multifocais</span> Vizz
+                        Lentes Multifocais Vizz
                     </h2>
                     <p className="text-muted-foreground text-sm font-medium">Descubra qual o campo de visão ideal para você</p>
                 </div>
@@ -210,14 +218,25 @@ export function ProductLines() {
                                 {/* We use object-contain to ensure the "lente não seja cortada" */}
                                 <div className="relative w-full aspect-[4/3] max-w-lg lg:max-w-md rounded-3xl overflow-hidden">
                                     {selectedProduct.image ? (
-                                        <Image
-                                            src={selectedProduct.image}
-                                            alt={selectedProduct.name}
-                                            fill
-                                            className="object-contain drop-shadow-2xl z-10"
-                                            priority
-                                            sizes="(max-width: 1024px) 100vw, 70vw"
-                                        />
+                                        <>
+                                            <Image
+                                                src={selectedProduct.image}
+                                                alt={selectedProduct.name}
+                                                fill
+                                                className="object-contain drop-shadow-lg z-10"
+                                                priority
+                                                sizes="(max-width: 1024px) 100vw, 70vw"
+                                            />
+                                            {/* Vision Field Badge */}
+                                            {selectedProduct.visionField && (
+                                                <div className="absolute -top-[.5] right-4 md:top-1 md:right-8 z-20">
+                                                    <div className="bg-primary/80 backdrop-blur-sm text-white px-3 py-1.5 md:px-5 md:py-2.5 rounded-lg md:rounded-xl shadow-xl border border-white/10 flex flex-col items-center">
+                                                        <span className="text-[10px] md:text-[12px] font-bold uppercase tracking-tighter opacity-70 leading-none mb-0.5">Visão</span>
+                                                        <span className="text-xl md:text-3xl font-black italic leading-none">{selectedProduct.visionField}</span>
+                                                    </div>
+                                                </div>
+                                            )}
+                                        </>
                                     ) : (
                                         <div className="w-full h-full bg-muted rounded-full flex items-center justify-center text-muted-foreground">
                                             Imagem indisponível
