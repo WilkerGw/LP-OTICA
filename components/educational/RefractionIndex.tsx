@@ -59,7 +59,7 @@ export function RefractionIndex() {
 
                 {/* Main Content Area - Layout matches AboutSection style */}
                 {/* Main Content Area - Centered Vertical Stack */}
-                <div className="relative flex flex-col items-center">
+                <div className="relative flex flex-col lg:flex-row-reverse items-center">
 
                     {/* Top: Lens Preview Container */}
                     <div className="relative w-full max-w-4xl lg:max-w-2xl aspect-video rounded-[32px] overflow-hidden glass-panel group">
@@ -100,7 +100,7 @@ export function RefractionIndex() {
                                 animate={{ opacity: 1, y: 0 }}
                                 exit={{ opacity: 0, y: -20 }}
                                 transition={{ duration: 0.4 }}
-                                className="space-y-8 sm:space-y-12 flex flex-col items-center text-center"
+                                className="space-y-8 flex flex-col items-center text-center"
                             >
                                 {/* Material & Features Wrapper */}
                                 <div className="space-y-6 flex flex-col items-center">

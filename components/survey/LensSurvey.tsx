@@ -337,7 +337,7 @@ export function LensSurvey() {
                             </div>
                         </div>
 
-                        <div className="flex-1 py-12 px-4 sm:px-6">
+                        <div className="flex-1 py-4 sm:py-6 px-4 sm:px-6">
                             <Container className="relative">
                                 <AnimatePresence mode="wait" custom={direction}>
                                     {/* ─── QUESTION STEPS ─── */}
@@ -351,18 +351,18 @@ export function LensSurvey() {
                                             className="max-w-4xl mx-auto"
                                         >
                                             {/* Progress bar */}
-                                            <div className="mb-12">
-                                                <div className="flex items-center justify-between mb-4">
-                                                    <span className="text-xs font-bold text-primary/40 uppercase tracking-widest">
+                                            <div className="mb-4 sm:mb-6">
+                                                <div className="flex items-center justify-between mb-2">
+                                                    <span className="text-[10px] font-bold text-primary/40 uppercase tracking-widest">
                                                         Passo {currentStepIndex + 1} de {totalSteps}
                                                     </span>
-                                                    <span className="text-xs font-black text-primary bg-primary/5 px-2 py-1 rounded-md">
+                                                    <span className="text-[10px] font-black text-primary bg-primary/5 px-2 py-0.5 rounded-md">
                                                         {Math.round(progress)}%
                                                     </span>
                                                 </div>
-                                                <div className="h-2 bg-primary/5 rounded-full overflow-hidden">
+                                                <div className="h-1.5 bg-primary/5 rounded-full overflow-hidden">
                                                     <motion.div
-                                                        className="h-full bg-primary rounded-full shadow-[0_0_10px_rgba(var(--primary),0.3)]"
+                                                        className="h-full bg-primary rounded-full"
                                                         initial={{ width: 0 }}
                                                         animate={{ width: `${progress}%` }}
                                                         transition={{ duration: 0.5, ease: "easeOut" }}
@@ -371,28 +371,28 @@ export function LensSurvey() {
                                             </div>
 
                                             {/* Question Header */}
-                                            <div className="text-center mb-12">
-                                                <div className="w-16 h-16 rounded-2xl bg-primary/5 flex items-center justify-center mx-auto mb-6 shadow-inner">
+                                            <div className="text-center mb-6">
+                                                <div className="w-12 h-12 rounded-xl bg-primary/5 flex items-center justify-center mx-auto mb-3 shadow-inner">
                                                     {(() => {
                                                         const Icon = STEP_META[step].icon;
-                                                        return <Icon className="w-8 h-8 text-primary" />;
+                                                        return <Icon className="w-6 h-6 text-primary" />;
                                                     })()}
                                                 </div>
-                                                <h3 className="text-3xl md:text-5xl font-black text-primary mb-4 tracking-tighter leading-tight">
+                                                <h3 className="text-xl md:text-3xl font-black text-primary mb-1 tracking-tighter leading-tight">
                                                     {STEP_META[step].title}
                                                 </h3>
-                                                <p className="text-primary/60 text-base md:text-lg font-medium max-w-xl mx-auto">
+                                                <p className="text-primary/60 text-xs md:text-sm font-medium max-w-xl mx-auto">
                                                     {STEP_META[step].subtitle}
                                                 </p>
                                             </div>
 
                                             {/* Options Grid */}
                                             <div
-                                                className={`grid gap-5 mb-12 ${step === 0
+                                                className={`grid gap-3 mb-6 ${step === 0
                                                     ? "grid-cols-1 sm:grid-cols-2"
                                                     : step === 3
-                                                        ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
-                                                        : "grid-cols-1 sm:grid-cols-3"
+                                                        ? "grid-cols-2 sm:grid-cols-2 lg:grid-cols-3"
+                                                        : "grid-cols-2 sm:grid-cols-3"
                                                     }`}
                                             >
                                                 {step === 0 &&
@@ -453,17 +453,17 @@ export function LensSurvey() {
                                             </div>
 
                                             {/* Modal Navigation Footer */}
-                                            <div className="flex items-center gap-4 py-8 border-t border-primary/5 sticky bottom-0 bg-white/95 backdrop-blur-sm z-20">
+                                            <div className="flex items-center justify-center gap-4 py-4 border-t border-primary/5 sticky bottom-0 bg-white/95 backdrop-blur-sm z-20">
                                                 <Button
                                                     onClick={goBack}
                                                     variant="ghost"
-                                                    className={`h-16 px-8 rounded-2xl text-sm font-black transition-all ${currentStepIndex === 0
-                                                        ? "opacity-0 pointer-events-none"
+                                                    className={`h-12 px-6 rounded-xl text-xs font-black transition-all ${currentStepIndex === 0
+                                                        ? "hidden"
                                                         : "text-primary hover:bg-primary/5 active:scale-95 border-2 border-primary/10"
                                                         }`}
                                                     disabled={currentStepIndex === 0}
                                                 >
-                                                    <ChevronLeft className="w-5 h-5 mr-1" />
+                                                    <ChevronLeft className="w-4 h-4 mr-1" />
                                                     <span>Voltar</span>
                                                 </Button>
 
@@ -471,13 +471,13 @@ export function LensSurvey() {
                                                     onClick={goNext}
                                                     disabled={!canAdvance()}
                                                     variant={canAdvance() ? "default" : "outline"}
-                                                    className={`flex-1 h-16 rounded-2xl text-base font-black transition-all ${canAdvance()
+                                                    className={`h-12 px-10 rounded-xl text-sm font-black transition-all min-w-[200px] ${canAdvance()
                                                         ? "bg-primary text-secondary shadow-2xl shadow-primary/20 hover:text-white"
                                                         : "bg-primary/5 text-primary/20 cursor-not-allowed border-none"
                                                         }`}
                                                 >
                                                     <span>{isLastStep ? "Ver Resultado" : "Próxima Etapa"}</span>
-                                                    <ChevronRight className="w-5 h-5 ml-1 transition-transform group-hover:translate-x-1" />
+                                                    <ChevronRight className="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1" />
                                                 </Button>
                                             </div>
                                         </motion.div>
@@ -494,38 +494,38 @@ export function LensSurvey() {
                                             className="max-w-2xl mx-auto"
                                         >
                                             {/* Result Card */}
-                                            <div className="bg-[#FAFAF9] border border-primary/5 rounded-[40px] p-8 md:p-12 relative overflow-hidden shadow-2xl">
+                                            <div className="bg-[#FAFAF9] border border-primary/5 rounded-[32px] p-6 md:p-8 relative overflow-hidden shadow-2xl">
                                                 {/* Decorative */}
-                                                <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full -mr-16 -mt-16 blur-3xl" />
+                                                <div className="absolute top-0 right-0 w-24 h-24 bg-primary/5 rounded-full -mr-12 -mt-12 blur-3xl" />
 
-                                                <div className="text-center mb-10">
-                                                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary text-white text-[10px] font-black uppercase tracking-widest mb-6 shadow-lg shadow-primary/20">
-                                                        <Check className="w-3 h-3" />
+                                                <div className="text-center mb-6">
+                                                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary text-white text-[9px] font-black uppercase tracking-widest mb-4 shadow-lg shadow-primary/20">
+                                                        <Check className="w-2.5 h-2.5" />
                                                         Orçamento Concluído
                                                     </div>
-                                                    <h3 className="text-3xl md:text-5xl font-black text-primary mb-2 tracking-tighter">
+                                                    <h3 className="text-2xl md:text-3xl font-black text-primary mb-1 tracking-tighter">
                                                         Resultado Estimado
                                                     </h3>
-                                                    <p className="text-primary/40 text-xs font-black uppercase tracking-widest">
+                                                    <p className="text-primary/40 text-[9px] font-black uppercase tracking-widest">
                                                         Cálculo baseado nas suas escolhas
                                                     </p>
                                                 </div>
 
                                                 {/* Price Container */}
-                                                <div className="bg-white rounded-3xl p-8 mb-10 text-center shadow-lg border border-primary/5">
+                                                <div className="bg-white rounded-2xl p-4 mb-6 text-center shadow-lg border border-primary/5">
                                                     <div className="flex flex-col items-center">
-                                                        <span className="text-xl text-primary/20 line-through mb-1 font-bold">
+                                                        <span className="text-sm text-primary/20 line-through mb-0 text-center font-bold">
                                                             R$ {budget.total.toLocaleString("pt-BR", { minimumFractionDigits: 2 })}
                                                         </span>
-                                                        <div className="leading-tight flex items-baseline gap-2">
-                                                            <span className="text-2xl font-black text-primary/40">R$</span>
+                                                        <div className="leading-tight flex items-baseline gap-1">
+                                                            <span className="text-xl font-black text-primary/40">R$</span>
                                                             <AnimatedPrice value={Math.max(0, budget.total - 200)} />
                                                         </div>
-                                                        <div className="bg-secondary/20 text-secondary text-[10px] font-black px-3 py-1 rounded-full mt-4 uppercase tracking-tighter">
+                                                        <div className="bg-secondary/20 text-secondary text-[8px] font-black px-2 py-0.5 rounded-full mt-2 uppercase tracking-tighter">
                                                             Armação de Brinde Inclusa 🎁
                                                         </div>
                                                     </div>
-                                                    <p className="text-primary/50 text-sm mt-6 font-medium">
+                                                    <p className="text-primary/50 text-xs mt-3 font-medium">
                                                         Ou em até <span className="text-primary font-black">10x de R$ {(Math.max(0, budget.total - 200) / 10).toLocaleString("pt-BR", { minimumFractionDigits: 2 })}</span>
                                                     </p>
                                                 </div>
@@ -535,33 +535,33 @@ export function LensSurvey() {
                                                     href={buildWhatsAppLink()}
                                                     target="_blank"
                                                     rel="noopener noreferrer"
-                                                    className="w-full flex items-center justify-center gap-4 h-20 bg-primary text-white font-black rounded-3xl transition-all shadow-[0_20px_40px_-10px_rgba(var(--primary),0.3)] hover:brightness-110 hover:scale-[1.02] active:scale-[0.98] cursor-pointer text-lg uppercase tracking-tight"
+                                                    className="w-full flex items-center justify-center gap-3 h-14 bg-primary text-white font-black rounded-2xl transition-all shadow-xl shadow-primary/20 hover:brightness-110 hover:scale-[1.02] active:scale-[0.98] cursor-pointer text-base uppercase tracking-tight"
                                                 >
-                                                    <Send className="w-6 h-6 text-secondary" />
+                                                    <Send className="w-5 h-5 text-secondary" />
                                                     <span className="text-secondary">Garantir Desconto</span>
                                                 </a>
 
                                                 {/* Actions */}
-                                                <div className="grid grid-cols-2 gap-4 mt-8">
+                                                <div className="grid grid-cols-2 gap-3 mt-6">
                                                     <Button
                                                         onClick={goBack}
                                                         variant="ghost"
-                                                        className="h-14 rounded-2xl bg-primary/5 text-primary font-black hover:bg-primary/10 transition-all"
+                                                        className="h-10 rounded-xl bg-primary/5 text-primary text-xs font-black hover:bg-primary/10 transition-all"
                                                     >
-                                                        <ChevronLeft className="w-5 h-5 mr-2" />
-                                                        <span>Ajustar Escolhas</span>
+                                                        <ChevronLeft className="w-4 h-4 mr-1" />
+                                                        <span>Ajustar</span>
                                                     </Button>
                                                     <Button
                                                         onClick={restart}
                                                         variant="ghost"
-                                                        className="h-14 rounded-2xl bg-primary/5 text-primary font-black hover:bg-primary/10 transition-all"
+                                                        className="h-10 rounded-xl bg-primary/5 text-primary text-xs font-black hover:bg-primary/10 transition-all"
                                                     >
                                                         <span>Refazer Tudo</span>
                                                     </Button>
                                                 </div>
                                             </div>
 
-                                            <p className="text-center text-primary/30 text-[10px] font-bold mt-8 max-w-sm mx-auto uppercase leading-relaxed">
+                                            <p className="text-center text-primary/30 text-[9px] font-bold mt-6 max-w-sm mx-auto uppercase leading-relaxed">
                                                 * Valores sujeitos a alteração após análise da receita completa em nossa loja física.
                                             </p>
                                         </motion.div>
@@ -609,41 +609,41 @@ function OptionCard({
             animate="animate"
             exit="exit"
             onClick={onClick}
-            className={`group relative text-left p-4 md:p-5 rounded-[32px] border-2 transition-all duration-300 cursor-pointer ${selected
+            className={`group relative text-left p-3 md:p-4 rounded-[24px] border-2 transition-all duration-300 cursor-pointer ${selected
                 ? "border-primary bg-primary/5 shadow-2xl shadow-primary/10"
                 : "border-primary/5 bg-primary/2 hover:border-primary/10 hover:bg-white hover:shadow-xl"
                 }`}
         >
             {/* Checkbox / Radio indicator */}
             <div
-                className={`absolute top-4 right-4 w-7 h-7 rounded-xl border-2 flex items-center justify-center transition-all duration-300 ${selected
+                className={`absolute top-3 right-3 w-5 h-5 rounded-lg border-2 flex items-center justify-center transition-all duration-300 ${selected
                     ? "border-primary bg-primary rotate-0 scale-100"
                     : "border-primary/10 bg-transparent -rotate-12 scale-90"
                     }`}
             >
-                {selected && <Check className="w-4 h-4 text-secondary" strokeWidth={4} />}
+                {selected && <Check className="w-3 h-3 text-secondary" strokeWidth={4} />}
             </div>
 
-            <div className="pr-10">
-                <h4 className="text-xl md:text-2xl font-black text-primary mb-1 tracking-tighter leading-none">{label}</h4>
-                <p className="text-sm text-primary/50 font-medium leading-relaxed mb-3">
+            <div className="pr-6">
+                <h4 className="text-lg md:text-xl font-black text-primary mb-0.5 tracking-tighter leading-none">{label}</h4>
+                <p className="text-[10px] md:text-xs text-primary/50 font-medium leading-tight mb-2">
                     {description}
                 </p>
 
                 {image && (
-                    <div className="mb-4 rounded-3xl overflow-hidden border-2 border-primary/5 relative w-full aspect-4/3 bg-white shadow-inner">
+                    <div className="mb-2 rounded-2xl overflow-hidden border-2 border-primary/5 relative w-full aspect-video bg-white shadow-inner">
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
                             src={image}
                             alt={label}
-                            className="w-full h-full object-contain p-4 transition-transform duration-700 group-hover:scale-110"
+                            className="w-full h-full object-contain p-2 transition-transform duration-700 group-hover:scale-110"
                         />
                     </div>
                 )}
 
                 {recommended && (
-                    <div className="inline-flex items-center px-3 py-2 rounded-xl bg-primary shadow-lg shadow-primary/20 mb-4">
-                        <span className="text-[10px] md:text-xs font-black text-white/90 uppercase tracking-widest">
+                    <div className="inline-flex items-center px-2 py-1 rounded-lg bg-primary shadow-lg shadow-primary/20 mb-2">
+                        <span className="text-[9px] font-black text-white/90 uppercase tracking-widest">
                             Ideal: <span className="text-secondary">{recommended}</span>
                         </span>
                     </div>
@@ -651,7 +651,7 @@ function OptionCard({
 
                 {(priceLabel || (price !== undefined && price > 0)) && (
                     <span
-                        className={`inline-block text-xs font-black px-4 py-2 rounded-xl uppercase tracking-wider ${selected
+                        className={`inline-block text-[9px] font-black px-3 py-1 rounded-lg uppercase tracking-wider ${selected
                             ? "bg-primary text-white"
                             : "bg-primary/5 text-primary/40"
                             }`}

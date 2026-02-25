@@ -13,11 +13,13 @@ import { FramesSection } from "@/components/FramesSection";
 import { WhyVizz } from "@/components/WhyVizz";
 import { Testimonials } from "@/components/Testimonials";
 import { FAQ } from "@/components/FAQ";
+import { SectionNavigator } from "@/components/SectionNavigator";
 
 export default function Home() {
   return (
     <main className="min-h-screen">
-      <div className="relative">
+      <SectionNavigator />
+      <div id="hero" className="relative h-dvh">
         <HeroCarousel />
         <BenefitCards />
       </div>

@@ -7,19 +7,14 @@ import { ChevronDown, HelpCircle } from "lucide-react";
 
 const perguntas = [
     {
-        pergunta: "A Óticas Vizz realiza exame de vista?",
+        pergunta: "As Óticas Vizz realizam exames de vista?",
         resposta:
-            "Sim! Contamos com equipamentos modernos para exame de vista completo. Agende pelo WhatsApp ou venha diretamente à nossa loja na Av. do Oratório, 4869, Zona Leste de SP.",
+            "Sim! Oferecemos exames de vista gratuitos. No momento, estamos em um breve intervalo nos atendimentos e retornaremos com a agenda aberta a partir de Maio. Você já pode falar conosco para garantir sua vaga!",
     },
     {
-        pergunta: "Qual o prazo para ficar pronto meu óculos?",
+        pergunta: "Qual o prazo para meus óculos ficarem prontos?",
         resposta:
-            "O prazo varia conforme o tipo de lente. Lentes monofocais simples ficam prontas em até 3 dias úteis. Lentes multifocais premium podem levar até 7 dias úteis.",
-    },
-    {
-        pergunta: "Vocês aceitam convênio?",
-        resposta:
-            "Trabalhamos com os principais convênios ópticos. Entre em contato pelo WhatsApp para verificar se o seu plano é aceito.",
+            "Trabalhamos para entregar sua visão perfeita o quanto antes. O prazo médio é de 7 dias úteis para lentes monofocais e 10 dias úteis para lentes multifocais.",
     },
     {
         pergunta: "Posso parcelar meus óculos?",
@@ -46,7 +41,7 @@ export function FAQ() {
     };
 
     return (
-        <section className="hidden section-padding bg-white" id="faq">
+        <section className="section-padding bg-white" id="faq">
             <Container>
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}

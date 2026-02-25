@@ -3,7 +3,6 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Phone, Clock, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import Image from "next/image";
@@ -63,30 +62,33 @@ export function HeroCarousel() {
     useEffect(() => {
         const timer = setInterval(() => {
             setCurrent((prev) => (prev + 1) % slides.length);
-        }, 5000); // 5 seconds auto-play
+        }, 5000);
         return () => clearInterval(timer);
     }, []);
 
-    const nextSlide = () => setCurrent((prev) => (prev + 1) % slides.length);
-    const prevSlide = () => setCurrent((prev) => (prev - 1 + slides.length) % slides.length);
-
     return (
-        <section className="relative h-dvh w-full overflow-hidden bg-primary text-white">
-            {/* Top Bar Info */}
-            <div className="absolute top-0 left-0 right-0 z-30 bg-black/30 backdrop-blur-md border-b border-white/10 py-2 pt-[calc(env(safe-area-inset-top)+0.5rem)] text-xs md:text-sm">
-                <Container>
-                    <div className="flex flex-row justify-between items-center text-white/90 px-2 md:px-0">
-                        <div className="flex items-center gap-1.5 md:gap-2">
-                            <Phone className="w-3.5 h-3.5 md:w-4 md:h-4 text-secondary" />
-                            <span className="font-medium tracking-wide">(11) 2362-8799</span>
-                        </div>
-                        <div className="flex items-center gap-1.5 md:gap-2">
-                            <MapPin className="w-3.5 h-3.5 md:w-4 md:h-4 text-secondary" />
-                            <span className="font-medium tracking-wide">Av Do Oratório 4869</span>
-                        </div>
+        <section className="relative h-dvh w-full overflow-hidden bg-[#f0efed]">
+            {/* Header Bar */}
+            <div className="absolute top-0 left-0 right-0 z-30 p-2 md:px-10 lg:px-16">
+                <div className="flex items-center justify-between">
+                    {/* Logo */}
+                    <Image
+                        src="/images/logo.webp"
+                        alt="Ótica Vizz"
+                        width={120}
+                        height={40}
+                        className="h-8 md:h-10 w-auto object-contain"
+                        priority
+                    />
+                    {/* Contact Info */}
+                    <div className="hidden md:flex flex-col items-end text-xs text-foreground/70 font-medium leading-relaxed">
+                        <span>Av Do Oratório 4869</span>
+                        <span>(11) 2362-8799</span>
                     </div>
-                </Container>
+                </div>
             </div>
+
+            {/* Slides */}
             <AnimatePresence mode="wait">
                 <motion.div
                     key={current}
@@ -96,7 +98,7 @@ export function HeroCarousel() {
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.7 }}
                 >
-                    {/* Background Images - Mobile & Desktop */}
+                    {/* Background Images */}
                     <div className="absolute inset-0 z-0">
                         {/* Mobile Image */}
                         <div className="relative h-full w-full md:hidden">
@@ -104,8 +106,8 @@ export function HeroCarousel() {
                                 src={slides[current].mobileImage || slides[current].image}
                                 alt={slides[current].title}
                                 fill
-                                priority
-                                quality={100}
+                                priority={current === 0}
+                                quality={85}
                                 className="object-cover object-top"
                                 sizes="100vw"
                             />
@@ -116,31 +118,36 @@ export function HeroCarousel() {
                                 src={slides[current].image}
                                 alt={slides[current].title}
                                 fill
-                                priority
-                                quality={100}
+                                priority={current === 0}
+                                quality={85}
                                 className="object-cover object-center"
                                 sizes="100vw"
                             />
                         </div>
                     </div>
 
-                    {/* Overlay Gradient */}
-                    <div className="absolute inset-0 bg-linear-to-b from-primary/95 via-primary/30 to-transparent md:bg-linear-to-r" />
+                    {/* Desktop: left-to-right gradient */}
+                    <div className="hidden md:block absolute inset-0 bg-gradient-to-r from-[#f0efed] from-5% via-[#f0efed]/30 via-25% to-transparent to-45%" />
+
+                    {/* Mobile: top-to-bottom gradient */}
+                    <div className="absolute inset-0 bg-gradient-to-b from-[#f0efed] from-0% via-[#f0efed]/10 via-15% to-transparent to-30% md:hidden" />
 
                     {/* Content */}
-                    <Container className="relative pt-30 flex h-full items-start lg:items-end justify-center md:justify-start pb-15 md:pb-48">
-                        <div className="max-w-3xl space-y-6 px-4 md:px-0 text-center md:text-left flex flex-col items-center md:items-start">
+                    <Container className="relative z-10 flex h-full items-start pt-20 md:items-center md:pt-16 justify-start pb-40 md:pb-32">
+                        <div className="max-w-2xl space-y-6 px-2 md:px-0">
                             <motion.h1
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.3, duration: 0.5 }}
-                                className="text-white"
                             >
-                                <span className="block text-3xl md:text-5xl font-bold leading-tight uppercase tracking-tight">
+                                <span className="block text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold leading-[1.05] uppercase tracking-tight text-foreground">
                                     {slides[current].title}
                                 </span>
-                                <span className="block text-secondary font-extrabold text-4xl md:text-7xl mt-2 tracking-tighter">
-                                    {slides[current].price}
+                                <span className="block mt-2">
+                                    <span className="block text-foreground/60 text-sm sm:text-base md:text-lg font-semibold uppercase tracking-widest">a partir de</span>
+                                    <span className="block text-secondary font-extrabold text-4xl sm:text-5xl md:text-7xl lg:text-8xl tracking-tighter">
+                                        {slides[current].price}
+                                    </span>
                                 </span>
                             </motion.h1>
 
@@ -148,9 +155,13 @@ export function HeroCarousel() {
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.7, duration: 0.5 }}
-                                className="flex flex-row items-center justify-center md:justify-start w-full sm:w-auto"
                             >
-                                <Button asChild size="lg" variant="secondary" className="px-12 rounded-2xl w-full md:w-auto shadow-lg shadow-secondary/20">
+                                <Button
+                                    asChild
+                                    size="lg"
+                                    variant="secondary"
+                                    className="px-12 rounded-full shadow-lg shadow-secondary/20 text-base font-bold"
+                                >
                                     <a href={slides[current].ctaLink} target="_blank" rel="noopener noreferrer">
                                         {slides[current].ctaText}
                                     </a>
@@ -162,17 +173,19 @@ export function HeroCarousel() {
             </AnimatePresence>
 
             {/* Navigation Dots */}
-            <div className="absolute bottom-8 md:bottom-32 left-1/2 -translate-x-1/2 flex space-x-3 z-20">
+            <div className="absolute bottom-28 md:bottom-20 left-8 md:left-12 lg:left-20 flex space-x-3 z-20">
                 {slides.map((_, index) => (
                     <button
                         key={index}
                         onClick={() => setCurrent(index)}
-                        className={`h-3 rounded-full transition-all backdrop-blur-sm ${index === current ? "bg-secondary w-8" : "bg-white/30 hover:bg-white/50 w-3 border border-white/10"}`}
-                        aria-label={`Go to slide ${index + 1}`}
+                        className={`h-3 rounded-full transition-all ${index === current
+                            ? "bg-secondary w-8"
+                            : "bg-foreground/20 hover:bg-foreground/40 w-3"
+                            }`}
+                        aria-label={`Ir para slide ${index + 1}`}
                     />
                 ))}
             </div>
-
         </section>
     );
 }

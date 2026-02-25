@@ -52,7 +52,7 @@ const diferenciais = [
 
 export function WhyVizz() {
     return (
-        <section className="hidden section-padding bg-white" id="diferenciais">
+        <section className="section-padding bg-white" id="diferenciais">
             <Container>
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}

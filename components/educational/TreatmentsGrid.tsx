@@ -149,7 +149,7 @@ export function TreatmentsGrid() {
                         animate={{ opacity: 1, scale: 1 }}
                         exit={{ opacity: 0, scale: 1.02 }}
                         transition={{ duration: 0.4 }}
-                        className="space-y-6"
+                        className="-mt-8 sm:-mt-24 space-y-6"
                     >
 
 
@@ -181,55 +181,58 @@ export function TreatmentsGrid() {
                             </div>
 
                             {/* Information Panels - Relative on mobile, Overlay on Desktop */}
-                            <div className=" -mt-20 sm:mt-0 sm:absolute sm:bottom-[0%] inset-x-0 max-w-4xl mx-auto grid grid-cols-2 gap-4 sm:gap-12 z-30 px-2 sm:px-0 pointer-events-auto sm:pointer-events-none">
+                            <div className="-mt-12 sm:mt-0 sm:absolute sm:top-[45%] sm:-translate-y-1/2 inset-x-0 w-full max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center sm:items-start z-30 px-4 sm:px-6 pointer-events-auto sm:pointer-events-none">
                                 {/* Benefits */}
                                 <motion.div
-                                    initial={{ opacity: 0, y: 10 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
+                                    initial={{ opacity: 0, x: -20 }}
+                                    whileInView={{ opacity: 1, x: 0 }}
                                     viewport={{ once: true }}
-                                    className="flex flex-col items-center gap-2  p-4 sm:p-6 rounded-3xl  hover:bg-white/80 transition-colors"
+                                    className="flex flex-col items-center sm:items-start gap-2 p-4 sm:p-6 rounded-3xl hover:bg-white/10 transition-colors sm:w-1/3"
                                 >
                                     <span className="text-[10px] sm:text-xs font-black text-secondary uppercase tracking-[0.2em] mb-1">Benefícios</span>
                                     {selected.benefits.map((b, i) => (
-                                        <div key={i} className="flex items-center gap-2 text-[10px] sm:text-sm text-primary/80 font-bold text-center">
-                                            <div className="w-1 h-1 rounded-full bg-secondary shrink-0" />
+                                        <div key={i} className="flex items-center gap-2 text-[10px] sm:text-sm text-primary/80 font-bold text-center sm:text-left">
+                                            <div className="w-1.5 h-1.5 rounded-full bg-secondary shrink-0" />
                                             {b}
                                         </div>
                                     ))}
                                 </motion.div>
+
+                                {/* Spacer for the glasses in the middle on desktop */}
+                                <div className="hidden sm:block sm:w-1/3" />
+
                                 {/* Drawbacks */}
                                 <motion.div
-                                    initial={{ opacity: 0, y: 10 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
+                                    initial={{ opacity: 0, x: 20 }}
+                                    whileInView={{ opacity: 1, x: 0 }}
                                     viewport={{ once: true }}
                                     transition={{ delay: 0.1 }}
-                                    className="flex flex-col items-center gap-2 p-4 sm:p-6 rounded-3xl hover:bg-white/80 transition-colors"
+                                    className="flex flex-col items-center sm:items-end gap-2 p-4 sm:p-6 rounded-3xl hover:bg-white/10 transition-colors sm:w-1/3"
                                 >
                                     <span className="text-[10px] sm:text-xs font-black text-gray-400 uppercase tracking-[0.2em] mb-1">Malefícios</span>
                                     {selected.drawbacks.map((d, i) => (
-                                        <div key={i} className="flex items-center gap-2 text-[10px] sm:text-sm text-muted-foreground font-medium text-center">
-                                            <div className="w-1 h-1 rounded-full bg-gray-300 shrink-0" />
+                                        <div key={i} className="flex items-center gap-2 text-[10px] sm:text-sm text-muted-foreground font-medium text-center sm:text-right">
                                             {d}
+                                            <div className="w-1.5 h-1.5 rounded-full bg-gray-300 shrink-0" />
                                         </div>
                                     ))}
                                 </motion.div>
                             </div>
+                            {/* CTA */}
+                            <div className="text-center -mt-10 sm:-mt-24 z-40 relative">
+                                <Button asChild size="lg" className="rounded-2xl w-full md:w-auto shadow-xl shadow-secondary/20">
+                                    <a
+                                        href={`https://wa.me/551123628799?text=Olá,%20gostaria%20de%20saber%20mais%20sobre%20o%20tratamento%20${encodeURIComponent(selected.name)}.`}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
+                                        Consultar Tratamento Premium
+                                    </a>
+                                </Button>
+                            </div>
                         </div>
                     </motion.div>
                 </AnimatePresence>
-
-                {/* CTA */}
-                <div className="text-center pt-8">
-                    <Button asChild size="lg" className="rounded-2xl w-full md:w-auto shadow-xl shadow-secondary/20">
-                        <a
-                            href={`https://wa.me/551123628799?text=Olá,%20gostaria%20de%20saber%20mais%20sobre%20o%20tratamento%20${encodeURIComponent(selected.name)}.`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
-                            Consultar Tratamento Premium
-                        </a>
-                    </Button>
-                </div>
             </Container>
         </section>
     );

@@ -1,9 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Container } from "@/components/ui/container";
-import { Glasses, SlidersHorizontal, MessageCircle, X } from "lucide-react";
+import { Glasses, SlidersHorizontal, ShoppingBag, MessageCircle, X } from "lucide-react";
 
 interface Armacao {
     id: number;
@@ -13,17 +13,51 @@ interface Armacao {
     formato: string;
     preco: string;
     cor: string;
+    link: string;
+    imagens?: string[];
 }
 
 const armacoes: Armacao[] = [
-    { id: 1, nome: "Redondo Clássico", marca: "Vizz Collection", genero: "Feminino", formato: "Redondo", preco: "R$ 149,90", cor: "#1a1a2e" },
-    { id: 2, nome: "Aviador Retrô", marca: "Vizz Collection", genero: "Masculino", formato: "Aviador", preco: "R$ 169,90", cor: "#6b7280" },
-    { id: 3, nome: "Cat-Eye Elegance", marca: "Vizz Premium", genero: "Feminino", formato: "Cat-Eye", preco: "R$ 199,90", cor: "#92400e" },
-    { id: 4, nome: "Square Urban", marca: "Vizz Premium", genero: "Masculino", formato: "Quadrado", preco: "R$ 179,90", cor: "#0f172a" },
-    { id: 5, nome: "Oval Kids", marca: "Vizz Kids", genero: "Infantil", formato: "Oval", preco: "R$ 99,90", cor: "#2563eb" },
-    { id: 6, nome: "Redondo Bold", marca: "Vizz Bold", genero: "Masculino", formato: "Redondo", preco: "R$ 189,90", cor: "#44403c" },
-    { id: 7, nome: "Aviador Dourado", marca: "Vizz Premium", genero: "Feminino", formato: "Aviador", preco: "R$ 219,90", cor: "#b8860b" },
-    { id: 8, nome: "Square Kids", marca: "Vizz Kids", genero: "Infantil", formato: "Quadrado", preco: "R$ 109,90", cor: "#dc2626" },
+    {
+        id: 1, nome: "Redondo Clássico", marca: "Vizz Collection", genero: "Feminino", formato: "Redondo", preco: "R$ 149,90", cor: "#1a1a2e",
+        link: "https://oticasvizz.lojavirtualnuvem.com.br/produtos/armacao-geometrica-vizz-cinza-translucido/",
+        imagens: ["/images/frames/1.webp", "/images/frames/3.webp", "/images/frames/2.webp", "/images/frames/4.webp"]
+    },
+    {
+        id: 2, nome: "Aviador Retrô", marca: "Vizz Collection", genero: "Masculino", formato: "Aviador", preco: "R$ 169,90", cor: "#6b7280",
+        link: "https://oticasvizz.lojavirtualnuvem.com.br/armacoes/balgriff/",
+        imagens: ["/images/frames/10.webp", "/images/frames/28.webp", "/images/frames/9.webp", "/images/frames/29.webp"]
+    },
+    {
+        id: 3, nome: "Cat-Eye Elegance", marca: "Vizz Premium", genero: "Feminino", formato: "Cat-Eye", preco: "R$ 199,90", cor: "#92400e",
+        link: "https://oticasvizz.lojavirtualnuvem.com.br/produtos/armacao-esportiva-vizz-meio-aro-preto-azul/",
+        imagens: ["/images/frames/17.webp", "/images/frames/11.webp", "/images/frames/12.webp", "/images/frames/16.webp"]
+    },
+    {
+        id: 4, nome: "Square Urban", marca: "Vizz Premium", genero: "Masculino", formato: "Quadrado", preco: "R$ 179,90", cor: "#0f172a",
+        link: "https://oticasvizz.lojavirtualnuvem.com.br/produtos/armacao-vizz-metal-fino-retangular-grafite-preto/",
+        imagens: ["/images/frames/5.webp", "/images/frames/25.webp", "/images/frames/6.webp", "/images/frames/26.webp"]
+    },
+    {
+        id: 5, nome: "Oval Kids", marca: "Vizz Kids", genero: "Infantil", formato: "Oval", preco: "R$ 99,90", cor: "#2563eb",
+        link: "https://oticasvizz.lojavirtualnuvem.com.br/produtos/armacao-de-grau-vizz-retangular-com-hastes-de-metal-emborrachadas/",
+        imagens: ["/images/frames/7.webp", "/images/frames/22.webp", "/images/frames/8.webp", "/images/frames/23.webp"]
+    },
+    {
+        id: 6, nome: "Redondo Bold", marca: "Vizz Bold", genero: "Masculino", formato: "Redondo", preco: "R$ 189,90", cor: "#44403c",
+        link: "https://oticasvizz.lojavirtualnuvem.com.br/produtos/armacao-estilo-clubmaster-vizz-tartaruga-cinza/",
+        imagens: ["/images/frames/20.webp", "/images/frames/21.webp", "/images/frames/20.webp", "/images/frames/21.webp"]
+    },
+    {
+        id: 7, nome: "Aviador Dourado", marca: "Vizz Premium", genero: "Feminino", formato: "Aviador", preco: "R$ 219,90", cor: "#b8860b",
+        link: "https://oticasvizz.lojavirtualnuvem.com.br/produtos/armacao-meio-aro-vizz-retangular-preto-prata/",
+        imagens: ["/images/frames/25.webp", "/images/frames/26.webp", "/images/frames/27.webp", "/images/frames/28.webp"]
+    },
+    {
+        id: 8, nome: "Square Kids", marca: "Vizz Kids", genero: "Infantil", formato: "Quadrado", preco: "R$ 109,90", cor: "#dc2626",
+        link: "https://oticasvizz.lojavirtualnuvem.com.br/produtos/armacao-vizz-metal-fino-retangular-grafite-preto/",
+        imagens: ["/images/frames/29.webp", "/images/frames/30.webp", "/images/frames/31.webp", "/images/frames/1.webp"]
+    },
 ];
 
 const generos = ["Todos", "Feminino", "Masculino", "Infantil"];
@@ -121,6 +155,105 @@ function FilterPill({
     );
 }
 
+function FrameCard({ produto, index }: { produto: Armacao; index: number }) {
+    const [currentImg, setCurrentImg] = useState(0);
+    const [paused, setPaused] = useState(false);
+    const imageCount = produto.imagens?.length ?? 0;
+    const hasMultipleImages = imageCount > 1;
+
+    const nextImage = useCallback(() => {
+        if (imageCount > 0) {
+            setCurrentImg((prev) => (prev + 1) % imageCount);
+        }
+    }, [imageCount]);
+
+    useEffect(() => {
+        if (!hasMultipleImages || paused) return;
+        const timer = setInterval(nextImage, 3000);
+        return () => clearInterval(timer);
+    }, [hasMultipleImages, paused, nextImage]);
+
+    return (
+        <motion.div
+            layout
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.9 }}
+            transition={{ duration: 0.3, delay: index * 0.05 }}
+            onMouseEnter={() => setPaused(true)}
+            onMouseLeave={() => setPaused(false)}
+            className="group relative bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer"
+        >
+            {/* Image Area */}
+            <div className="relative overflow-hidden aspect-3/2 bg-linear-to-br from-gray-50 to-gray-100">
+                <div className={`absolute inset-0 flex items-center justify-center ${produto.imagens && imageCount > 0 ? '' : 'p-6'}`}>
+                    {produto.imagens && imageCount > 0 ? (
+                        <div className="relative w-full h-full">
+                            <AnimatePresence mode="wait">
+                                <motion.img
+                                    key={currentImg}
+                                    src={produto.imagens[currentImg]}
+                                    alt={`${produto.nome} - foto ${currentImg + 1}`}
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    exit={{ opacity: 0 }}
+                                    transition={{ duration: 0.3 }}
+                                    className="w-full h-full object-cover"
+                                />
+                            </AnimatePresence>
+                        </div>
+                    ) : (
+                        <GlassesIcon cor={produto.cor} formato={produto.formato} />
+                    )}
+                </div>
+                <span className="absolute top-3 left-3 bg-primary text-white text-[10px] px-2 py-0.5 rounded-full font-semibold">
+                    {produto.genero}
+                </span>
+
+                {/* Image Dots */}
+                {hasMultipleImages && (
+                    <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5">
+                        {produto.imagens!.map((_, i) => (
+                            <button
+                                key={i}
+                                onClick={(e) => { e.stopPropagation(); setCurrentImg(i); }}
+                                className={`rounded-full transition-all duration-200 cursor-pointer ${i === currentImg
+                                    ? "bg-primary w-4 h-1.5"
+                                    : "bg-primary/25 hover:bg-primary/50 w-1.5 h-1.5"
+                                    }`}
+                                aria-label={`Ver foto ${i + 1}`}
+                            />
+                        ))}
+                    </div>
+                )}
+            </div>
+
+            {/* Content */}
+            <div className="p-4">
+                <p className="text-[10px] text-muted-foreground uppercase tracking-widest font-bold">
+                    {produto.marca}
+                </p>
+                <h3 className="font-semibold text-primary text-sm mt-1 leading-tight">
+                    {produto.nome}
+                </h3>
+                <p className="text-sm text-muted-foreground mt-1.5">
+                    a partir de{" "}
+                    <span className="font-bold text-primary">{produto.preco}</span>
+                </p>
+                <a
+                    href={produto.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-3 w-full flex items-center justify-center gap-1.5 bg-primary text-white text-sm py-2 rounded-xl hover:bg-primary/90 transition-colors font-medium cursor-pointer"
+                >
+                    <ShoppingBag className="w-3.5 h-3.5" />
+                    Comprar
+                </a>
+            </div>
+        </motion.div>
+    );
+}
+
 export function FramesSection() {
     const [filtroGenero, setFiltroGenero] = useState("Todos");
     const [filtroFormato, setFiltroFormato] = useState("Todos");
@@ -134,7 +267,7 @@ export function FramesSection() {
     const activeFilters = (filtroGenero !== "Todos" ? 1 : 0) + (filtroFormato !== "Todos" ? 1 : 0);
 
     return (
-        <section className="hidden section-padding bg-muted/50" id="armacoes">
+        <section className="section-padding bg-muted/50" id="armacoes">
             <Container>
                 {/* Header */}
                 <motion.div
@@ -205,48 +338,7 @@ export function FramesSection() {
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
                     <AnimatePresence mode="popLayout">
                         {produtosFiltrados.map((produto, i) => (
-                            <motion.div
-                                key={produto.id}
-                                layout
-                                initial={{ opacity: 0, scale: 0.9 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                exit={{ opacity: 0, scale: 0.9 }}
-                                transition={{ duration: 0.3, delay: i * 0.05 }}
-                                className="group relative bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer"
-                            >
-                                {/* Image Area */}
-                                <div className="relative overflow-hidden aspect-4/3 bg-linear-to-br from-gray-50 to-gray-100">
-                                    <div className="absolute inset-0 flex items-center justify-center p-6 group-hover:scale-105 transition-transform duration-500">
-                                        <GlassesIcon cor={produto.cor} formato={produto.formato} />
-                                    </div>
-                                    <span className="absolute top-3 left-3 bg-primary text-white text-[10px] px-2 py-0.5 rounded-full font-semibold">
-                                        {produto.genero}
-                                    </span>
-                                </div>
-
-                                {/* Content */}
-                                <div className="p-4">
-                                    <p className="text-[10px] text-muted-foreground uppercase tracking-widest font-bold">
-                                        {produto.marca}
-                                    </p>
-                                    <h3 className="font-semibold text-primary text-sm mt-1 leading-tight">
-                                        {produto.nome}
-                                    </h3>
-                                    <p className="text-sm text-muted-foreground mt-1.5">
-                                        a partir de{" "}
-                                        <span className="font-bold text-primary">{produto.preco}</span>
-                                    </p>
-                                    <a
-                                        href={`https://wa.me/551123628799?text=Olá, gostaria de saber mais sobre a armação ${produto.nome} (${produto.marca}).`}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="mt-3 w-full flex items-center justify-center gap-1.5 bg-primary text-white text-sm py-2 rounded-xl hover:bg-primary/90 transition-colors font-medium cursor-pointer"
-                                    >
-                                        <MessageCircle className="w-3.5 h-3.5" />
-                                        Experimentar
-                                    </a>
-                                </div>
-                            </motion.div>
+                            <FrameCard key={produto.id} produto={produto} index={i} />
                         ))}
                     </AnimatePresence>
 
@@ -280,13 +372,13 @@ export function FramesSection() {
                         Não encontrou o modelo ideal? Temos muito mais na loja!
                     </p>
                     <a
-                        href="https://wa.me/551123628799?text=Olá, gostaria de conhecer as armações disponíveis."
+                        href="https://oticasvizz.lojavirtualnuvem.com.br/"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-2 bg-primary text-white px-8 py-3 rounded-full font-medium hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20 cursor-pointer"
                     >
-                        <MessageCircle className="w-5 h-5" />
-                        Ver catálogo completo no WhatsApp
+                        <ShoppingBag className="w-5 h-5" />
+                        Ver catálogo completo na loja virtual
                     </a>
                 </motion.div>
             </Container>
