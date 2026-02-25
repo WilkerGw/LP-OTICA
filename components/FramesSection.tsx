@@ -19,42 +19,42 @@ interface Armacao {
 
 const armacoes: Armacao[] = [
     {
-        id: 1, nome: "Redondo Clássico", marca: "Vizz Collection", genero: "Feminino", formato: "Redondo", preco: "R$ 149,90", cor: "#1a1a2e",
+        id: 1, nome: "Veja na loja", marca: "Vizz Collection", genero: "Feminino", formato: "Redondo", preco: "R$ 149,90", cor: "#1a1a2e",
         link: "https://oticasvizz.lojavirtualnuvem.com.br/produtos/armacao-geometrica-vizz-cinza-translucido/",
         imagens: ["/images/frames/1.webp", "/images/frames/3.webp", "/images/frames/2.webp", "/images/frames/4.webp"]
     },
     {
-        id: 2, nome: "Aviador Retrô", marca: "Vizz Collection", genero: "Masculino", formato: "Aviador", preco: "R$ 169,90", cor: "#6b7280",
+        id: 2, nome: "Veja na loja", marca: "Vizz Collection", genero: "Masculino", formato: "Aviador", preco: "R$ 169,90", cor: "#6b7280",
         link: "https://oticasvizz.lojavirtualnuvem.com.br/armacoes/balgriff/",
         imagens: ["/images/frames/10.webp", "/images/frames/28.webp", "/images/frames/9.webp", "/images/frames/29.webp"]
     },
     {
-        id: 3, nome: "Cat-Eye Elegance", marca: "Vizz Premium", genero: "Feminino", formato: "Cat-Eye", preco: "R$ 199,90", cor: "#92400e",
+        id: 3, nome: "Veja na loja", marca: "Vizz Premium", genero: "Feminino", formato: "Cat-Eye", preco: "R$ 199,90", cor: "#92400e",
         link: "https://oticasvizz.lojavirtualnuvem.com.br/produtos/armacao-esportiva-vizz-meio-aro-preto-azul/",
         imagens: ["/images/frames/17.webp", "/images/frames/11.webp", "/images/frames/12.webp", "/images/frames/16.webp"]
     },
     {
-        id: 4, nome: "Square Urban", marca: "Vizz Premium", genero: "Masculino", formato: "Quadrado", preco: "R$ 179,90", cor: "#0f172a",
+        id: 4, nome: "Veja na loja", marca: "Vizz Premium", genero: "Masculino", formato: "Quadrado", preco: "R$ 179,90", cor: "#0f172a",
         link: "https://oticasvizz.lojavirtualnuvem.com.br/produtos/armacao-vizz-metal-fino-retangular-grafite-preto/",
         imagens: ["/images/frames/5.webp", "/images/frames/25.webp", "/images/frames/6.webp", "/images/frames/26.webp"]
     },
     {
-        id: 5, nome: "Oval Kids", marca: "Vizz Kids", genero: "Infantil", formato: "Oval", preco: "R$ 99,90", cor: "#2563eb",
+        id: 5, nome: "Veja na loja", marca: "Vizz Kids", genero: "Infantil", formato: "Oval", preco: "R$ 99,90", cor: "#2563eb",
         link: "https://oticasvizz.lojavirtualnuvem.com.br/produtos/armacao-de-grau-vizz-retangular-com-hastes-de-metal-emborrachadas/",
         imagens: ["/images/frames/7.webp", "/images/frames/22.webp", "/images/frames/8.webp", "/images/frames/23.webp"]
     },
     {
-        id: 6, nome: "Redondo Bold", marca: "Vizz Bold", genero: "Masculino", formato: "Redondo", preco: "R$ 189,90", cor: "#44403c",
+        id: 6, nome: "Veja na loja", marca: "Vizz Bold", genero: "Masculino", formato: "Redondo", preco: "R$ 189,90", cor: "#44403c",
         link: "https://oticasvizz.lojavirtualnuvem.com.br/produtos/armacao-estilo-clubmaster-vizz-tartaruga-cinza/",
         imagens: ["/images/frames/20.webp", "/images/frames/21.webp", "/images/frames/20.webp", "/images/frames/21.webp"]
     },
     {
-        id: 7, nome: "Aviador Dourado", marca: "Vizz Premium", genero: "Feminino", formato: "Aviador", preco: "R$ 219,90", cor: "#b8860b",
+        id: 7, nome: "Veja na loja", marca: "Vizz Premium", genero: "Feminino", formato: "Aviador", preco: "R$ 219,90", cor: "#b8860b",
         link: "https://oticasvizz.lojavirtualnuvem.com.br/produtos/armacao-meio-aro-vizz-retangular-preto-prata/",
         imagens: ["/images/frames/25.webp", "/images/frames/26.webp", "/images/frames/27.webp", "/images/frames/28.webp"]
     },
     {
-        id: 8, nome: "Square Kids", marca: "Vizz Kids", genero: "Infantil", formato: "Quadrado", preco: "R$ 109,90", cor: "#dc2626",
+        id: 8, nome: "Veja na loja", marca: "Vizz Kids", genero: "Infantil", formato: "Quadrado", preco: "R$ 109,90", cor: "#dc2626",
         link: "https://oticasvizz.lojavirtualnuvem.com.br/produtos/armacao-vizz-metal-fino-retangular-grafite-preto/",
         imagens: ["/images/frames/29.webp", "/images/frames/30.webp", "/images/frames/31.webp", "/images/frames/1.webp"]
     },

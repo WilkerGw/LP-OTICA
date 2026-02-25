@@ -521,7 +521,7 @@ export function LensSurvey() {
                                                             <span className="text-xl font-black text-primary/40">R$</span>
                                                             <AnimatedPrice value={Math.max(0, budget.total - 200)} />
                                                         </div>
-                                                        <div className="bg-secondary/20 text-secondary text-[8px] font-black px-2 py-0.5 rounded-full mt-2 uppercase tracking-tighter">
+                                                        <div className="bg-secondary/20 text-primary text-[8px] font-black px-2 py-0.5 rounded-full mt-2 uppercase tracking-tighter">
                                                             Armação de Brinde Inclusa 🎁
                                                         </div>
                                                     </div>
