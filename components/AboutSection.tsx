@@ -61,8 +61,8 @@ export function AboutSection() {
                     {/* Right Column: Text Content */}
                     <div className="space-y-6">
                         <div className="space-y-4 text-center">
-                            <h2 className="text-lg text-muted-foreground leading-relaxed font-medium">
-                                Mais que uma ótica,um estilo de vida.
+                            <h2 className="text-lg text-primary/80 leading-relaxed font-bold">
+                                Mais que uma ótica, um estilo de vida.
                             </h2>
                         </div>
 

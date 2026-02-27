@@ -145,6 +145,14 @@ function FilterPill({
     return (
         <button
             onClick={onClick}
+            onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    onClick();
+                }
+            }}
+            tabIndex={0}
+            role="button"
             className={`rounded-full px-4 py-1.5 text-sm font-medium transition-all duration-200 cursor-pointer ${active
                 ? "bg-primary text-white shadow-md shadow-primary/20"
                 : "border border-border text-muted-foreground hover:border-primary hover:text-primary"
@@ -225,11 +233,21 @@ function FrameCard({ produto, index }: { produto: Armacao; index: number }) {
                             <button
                                 key={i}
                                 onClick={(e) => { e.stopPropagation(); setCurrentImg(i); }}
+                                onKeyDown={(e) => {
+                                    if (e.key === "Enter" || e.key === " ") {
+                                        e.preventDefault();
+                                        e.stopPropagation();
+                                        setCurrentImg(i);
+                                    }
+                                }}
+                                tabIndex={0}
+                                role="button"
+                                aria-label={`Ver imagem ${i + 1} do modelo ${produto.nome}`}
+                                aria-selected={currentImg === i}
                                 className={`rounded-full transition-all duration-200 cursor-pointer ${i === currentImg
                                     ? "bg-primary w-4 h-1.5"
                                     : "bg-primary/25 hover:bg-primary/50 w-1.5 h-1.5"
                                     }`}
-                                aria-label={`Ver foto ${i + 1}`}
                             />
                         ))}
                     </div>
@@ -314,6 +332,13 @@ export function FramesSection() {
                                     setFiltroGenero("Todos");
                                     setFiltroFormato("Todos");
                                 }}
+                                onKeyDown={(e) => {
+                                    if (e.key === "Enter" || e.key === " ") {
+                                        e.preventDefault();
+                                        setFiltroGenero("Todos");
+                                        setFiltroFormato("Todos");
+                                    }
+                                }}
                                 className="ml-2 inline-flex items-center gap-1 text-xs font-medium text-muted-foreground hover:text-primary transition-colors cursor-pointer"
                             >
                                 <X className="w-3 h-3" />
@@ -359,6 +384,13 @@ export function FramesSection() {
                                 onClick={() => {
                                     setFiltroGenero("Todos");
                                     setFiltroFormato("Todos");
+                                }}
+                                onKeyDown={(e) => {
+                                    if (e.key === "Enter" || e.key === " ") {
+                                        e.preventDefault();
+                                        setFiltroGenero("Todos");
+                                        setFiltroFormato("Todos");
+                                    }
                                 }}
                                 className="mt-4 text-primary underline text-sm font-medium cursor-pointer hover:text-primary/80 transition-colors"
                             >

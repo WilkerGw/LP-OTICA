@@ -173,27 +173,35 @@ export function ProductLines() {
                 </div>
 
                 {/* Top Navigation - Horizontal Buttons */}
-                <div className="flex flex-wrap justify-center gap-8 mb-6 z-20 relative">
+                <div role="tablist" aria-label="Navegação de categorias de lentes" className="flex flex-wrap justify-center gap-8 mb-6 z-20 relative">
                     {mainProducts.map((product) => (
                         <button
                             key={product.id}
+                            id={`tab-${product.id}`}
+                            aria-controls={`panel-${product.id}`}
                             onClick={() => setSelectedProductId(product.id)}
                             className={cn(
-                                "relative flex items-center gap-2 px-6 py-3 rounded-full transition-all duration-300 border font-bold text-xs uppercase tracking-widest overflow-visible",
+                                "relative flex items-center gap-2 px-6 py-3 rounded-full transition-all duration-300 border font-bold text-xs uppercase tracking-widest overflow-visible focus-visible:outline-secondary",
                                 selectedProductId === product.id
                                     ? "bg-primary text-white border-primary shadow-xl shadow-primary/20 transform scale-105"
-                                    : "bg-muted/50 border-transparent text-muted-foreground hover:bg-secondary/10 hover:text-primary"
+                                    : "bg-muted/50 border-transparent text-primary/70 hover:bg-secondary/10 hover:text-primary"
                             )}
                             aria-label={`Ver detalhes da lente ${product.name}`}
                             aria-selected={selectedProductId === product.id}
                             role="tab"
+                            onKeyDown={(e) => {
+                                if (e.key === "Enter" || e.key === " ") {
+                                    e.preventDefault();
+                                    setSelectedProductId(product.id);
+                                }
+                            }}
                         >
                             {product.badge && (
                                 <span className={cn(
-                                    "absolute -top-3 left-1/2 -translate-x-1/2 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider rounded-full shadow-sm whitespace-nowrap z-20",
+                                    "absolute -top-3 left-1/2 -translate-x-1/2 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider rounded-full shadow-sm whitespace-nowrap z-20 border border-current",
                                     selectedProductId === product.id
                                         ? "bg-secondary text-primary"
-                                        : "bg-primary/10 text-primary/60"
+                                        : "bg-primary text-white"
                                 )}>
                                     {product.badge}
                                 </span>
@@ -212,14 +220,17 @@ export function ProductLines() {
                         <AnimatePresence mode="wait">
                             <motion.div
                                 key={selectedProduct.id}
+                                role="tabpanel"
+                                id={`panel-${selectedProduct.id}`}
+                                aria-labelledby={`tab-${selectedProduct.id}`}
                                 initial={{ opacity: 0, scale: 0.95 }}
                                 animate={{ opacity: 1, scale: 1 }}
                                 exit={{ opacity: 0, scale: 1.05 }}
-                                transition={{ duration: 0.5 }}
+                                transition={{ duration: 0.4 }}
                                 className="relative w-full h-full flex items-center justify-center p-4"
                             >
                                 {/* We use object-contain to ensure the "lente não seja cortada" */}
-                                <div className="relative w-full aspect-[4/3] max-w-lg lg:max-w-md rounded-3xl overflow-hidden">
+                                <div className="relative w-full aspect-4/3 max-w-lg lg:max-w-md rounded-3xl overflow-hidden">
                                     {selectedProduct.image ? (
                                         <>
                                             <Image
@@ -288,7 +299,7 @@ export function ProductLines() {
                                             { label: "Perto", value: selectedProduct.distances.perto },
                                         ].map((d) => (
                                             <div key={d.label} className="flex items-center gap-3">
-                                                <span className="text-[10px] font-semibold text-primary w-16 shrink-0">{d.label}</span>
+                                                <span className="text-[10px] font-bold text-primary w-16 shrink-0">{d.label}</span>
                                                 <div className="flex-1 h-1.5 bg-muted rounded-full relative overflow-hidden">
                                                     <motion.div
                                                         className="absolute inset-y-0 left-0 bg-secondary rounded-full"

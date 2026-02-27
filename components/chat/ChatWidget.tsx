@@ -113,8 +113,14 @@ export default function ChatWidget() {
                             </div>
                             <button
                                 onClick={() => setIsOpen(false)}
-                                className="hover:bg-white/10 p-2 rounded-xl transition-colors"
-                                aria-label="Fechar chat"
+                                onKeyDown={(e) => {
+                                    if (e.key === "Enter" || e.key === " ") {
+                                        e.preventDefault();
+                                        setIsOpen(false);
+                                    }
+                                }}
+                                className="text-white/60 hover:text-white transition-colors"
+                                aria-label="Fechar conversa"
                             >
                                 <X size={20} />
                             </button>
@@ -192,10 +198,14 @@ export default function ChatWidget() {
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     onClick={() => setIsOpen(!isOpen)}
+                    onKeyDown={(e) => {
+                        if (e.key === "Enter" || e.key === " ") {
+                            e.preventDefault();
+                            setIsOpen(!isOpen);
+                        }
+                    }}
+                    className="w-14 h-14 rounded-full bg-secondary text-primary shadow-2xl flex items-center justify-center hover:scale-110 active:scale-95 transition-all duration-300 group z-50 relative pointer-events-auto"
                     aria-label={isOpen ? "Fechar chat" : "Abrir chat"}
-                    aria-expanded={isOpen}
-                    className={`w-14 h-14 rounded-full shadow-2xl flex items-center justify-center transition-all duration-500 overflow-hidden ${isOpen ? 'bg-primary text-secondary translate-x-12 opacity-0 pointer-events-none' : 'bg-primary text-secondary'
-                        }`}
                 >
                     <div className="relative">
                         <MessageCircle size={28} className="text-secondary" />

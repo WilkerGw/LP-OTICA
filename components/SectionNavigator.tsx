@@ -94,12 +94,18 @@ export function SectionNavigator() {
     const visibleDots = SECTION_IDS.slice(dotStart, dotEnd + 1).map((_, i) => dotStart + i);
 
     return (
-        <div className="fixed right-4 top-1/2 -translate-y-1/2 z-40 hidden md:flex flex-col items-center gap-1.5">
+        <nav className="fixed right-4 top-1/2 -translate-y-1/2 z-40 hidden md:flex flex-col items-center gap-1.5" aria-label="Navegação rápida entre seções">
             {/* Container pill */}
             <div className="flex flex-col items-center gap-1 bg-white/90 backdrop-blur-sm rounded-full px-1.5 py-2 shadow-lg border border-gray-200/60">
                 {/* Up arrow */}
                 <button
                     onClick={goUp}
+                    onKeyDown={(e) => {
+                        if (e.key === "Enter" || e.key === " ") {
+                            e.preventDefault();
+                            goUp();
+                        }
+                    }}
                     disabled={currentIndex === 0}
                     className="w-7 h-7 flex items-center justify-center rounded-full text-primary hover:bg-primary/10 transition-colors cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed"
                     aria-label="Seção anterior"
@@ -113,9 +119,15 @@ export function SectionNavigator() {
                         <button
                             key={idx}
                             onClick={() => scrollToSection(idx)}
+                            onKeyDown={(e) => {
+                                if (e.key === "Enter" || e.key === " ") {
+                                    e.preventDefault();
+                                    scrollToSection(idx);
+                                }
+                            }}
                             className={`rounded-full transition-all duration-300 cursor-pointer ${idx === currentIndex
-                                    ? "w-2 h-4 bg-primary"
-                                    : "w-2 h-2 bg-gray-300 hover:bg-primary/40"
+                                ? "w-2 h-4 bg-primary"
+                                : "w-2 h-2 bg-gray-300 hover:bg-primary/40"
                                 }`}
                             aria-label={`Ir para seção ${SECTION_IDS[idx]}`}
                         />
@@ -126,6 +138,12 @@ export function SectionNavigator() {
                 {isLastSection ? (
                     <button
                         onClick={goToTop}
+                        onKeyDown={(e) => {
+                            if (e.key === "Enter" || e.key === " ") {
+                                e.preventDefault();
+                                goToTop();
+                            }
+                        }}
                         className="w-7 h-7 flex items-center justify-center rounded-full text-primary hover:bg-primary/10 transition-colors cursor-pointer"
                         aria-label="Voltar ao topo"
                     >
@@ -134,6 +152,12 @@ export function SectionNavigator() {
                 ) : (
                     <button
                         onClick={goDown}
+                        onKeyDown={(e) => {
+                            if (e.key === "Enter" || e.key === " ") {
+                                e.preventDefault();
+                                goDown();
+                            }
+                        }}
                         disabled={currentIndex === SECTION_IDS.length - 1}
                         className="w-7 h-7 flex items-center justify-center rounded-full text-primary hover:bg-primary/10 transition-colors cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed"
                         aria-label="Próxima seção"
@@ -142,6 +166,6 @@ export function SectionNavigator() {
                     </button>
                 )}
             </div>
-        </div>
+        </nav>
     );
 }

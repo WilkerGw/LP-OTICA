@@ -59,7 +59,7 @@ export function Testimonials() {
                     <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white mb-3">
                         O que nossos clientes dizem
                     </h2>
-                    <p className="text-white/60 max-w-2xl mx-auto text-lg">
+                    <p className="text-white/80 max-w-2xl mx-auto text-lg font-medium">
                         A satisfação dos nossos clientes é o que nos move todos os dias.
                     </p>
                 </motion.div>
@@ -83,7 +83,7 @@ export function Testimonials() {
                                     <p className="font-semibold text-white text-sm">
                                         {d.nome}
                                     </p>
-                                    <p className="text-white/40 text-xs">{d.bairro}</p>
+                                    <p className="text-white/60 text-xs font-medium">{d.bairro}</p>
                                 </div>
                                 <Stars count={d.estrelas} />
                             </div>

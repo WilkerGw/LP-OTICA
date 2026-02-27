@@ -81,7 +81,7 @@ export function LensDiagram() {
                     >
                         {/* Unified Segmented Control */}
                         <div className="flex justify-center mb-8 lg:absolute lg:-top-6 lg:left-1/2 lg:-translate-x-1/2 lg:z-30 w-full lg:w-max px-2 lg:px-0">
-                            <div className="relative flex items-center p-1.5 bg-white/50 backdrop-blur-md rounded-full border border-primary/5 shadow-2xl shadow-primary/5 w-full lg:w-max">
+                            <div role="tablist" aria-label="Navegação de campos de visão" className="relative flex items-center p-1.5 bg-white/70 backdrop-blur-md rounded-full border border-primary/10 shadow-2xl shadow-primary/5 w-full lg:w-max">
                                 {/* Sliding Background Highlight */}
                                 <div className="absolute inset-y-1.5 left-1.5 right-1.5 flex pointer-events-none">
                                     <motion.div
@@ -97,13 +97,23 @@ export function LensDiagram() {
                                 {zones.map((zone) => (
                                     <button
                                         key={zone.id}
+                                        id={`lens-tab-${zone.id}`}
+                                        aria-controls={`lens-panel-${zone.id}`}
                                         onClick={() => setActiveZone(zone.id)}
                                         className={cn(
-                                            "relative z-10 flex-1 lg:flex-initial flex items-center justify-center gap-1.5 sm:gap-2.5 px-3 sm:px-6 py-2 rounded-full transition-colors duration-200 font-bold text-[10px] sm:text-[11px] uppercase tracking-wider lg:min-w-[120px]",
+                                            "relative z-10 flex-1 lg:flex-initial flex items-center justify-center gap-1.5 sm:gap-2.5 px-3 sm:px-6 py-2 rounded-full transition-colors duration-200 font-bold text-[10px] sm:text-[11px] uppercase tracking-wider lg:min-w-[120px] focus-visible:outline-primary",
                                             activeZone === zone.id
                                                 ? "text-primary"
-                                                : "text-muted-foreground hover:text-primary"
+                                                : "text-primary/60 hover:text-primary"
                                         )}
+                                        role="tab"
+                                        aria-selected={activeZone === zone.id}
+                                        onKeyDown={(e) => {
+                                            if (e.key === "Enter" || e.key === " ") {
+                                                e.preventDefault();
+                                                setActiveZone(zone.id);
+                                            }
+                                        }}
                                     >
                                         <zone.icon className={cn(
                                             "w-3 h-3 sm:w-3.5 sm:h-3.5 transition-transform duration-300",
@@ -159,6 +169,12 @@ export function LensDiagram() {
                                         className="flex-1 w-full cursor-pointer bg-transparent border-none p-0"
                                         onClick={() => setActiveZone(zone.id)}
                                         onMouseEnter={() => setActiveZone(zone.id)}
+                                        onKeyDown={(e) => {
+                                            if (e.key === "Enter" || e.key === " ") {
+                                                e.preventDefault();
+                                                setActiveZone(zone.id);
+                                            }
+                                        }}
                                         aria-label={`Selecionar ${zone.label}`}
                                         aria-pressed={activeZone === zone.id}
                                     />
@@ -172,6 +188,9 @@ export function LensDiagram() {
                         <AnimatePresence mode="wait">
                             <motion.div
                                 key={selectedZone.id}
+                                id={`lens-panel-${selectedZone.id}`}
+                                role="tabpanel"
+                                aria-labelledby={`lens-tab-${selectedZone.id}`}
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 exit={{ opacity: 0, y: 10 }}
@@ -198,7 +217,7 @@ export function LensDiagram() {
                                         <div key={z.id} className="flex items-center gap-4">
                                             <span className={cn(
                                                 "text-[10px] font-bold uppercase tracking-wider w-24 shrink-0 transition-colors",
-                                                z.id === activeZone ? "text-secondary" : "text-muted-foreground"
+                                                z.id === activeZone ? "text-secondary" : "text-primary/70"
                                             )}>{z.shortLabel}</span>
                                             <div className="flex-1 h-2 bg-muted rounded-full relative overflow-hidden">
                                                 <motion.div

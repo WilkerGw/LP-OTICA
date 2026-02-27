@@ -202,6 +202,12 @@ export function HeroCarousel() {
                         aria-label={`Ir para slide ${index + 1}`}
                         role="tab"
                         aria-selected={index === current}
+                        onKeyDown={(e) => {
+                            if (e.key === "Enter" || e.key === " ") {
+                                e.preventDefault();
+                                setCurrent(index);
+                            }
+                        }}
                     />
                 ))}
             </div>

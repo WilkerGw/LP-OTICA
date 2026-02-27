@@ -68,7 +68,7 @@ export function WhyVizz() {
                     <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-primary mb-3">
                         Por que escolher a Vizz?
                     </h2>
-                    <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
+                    <p className="text-primary/70 max-w-2xl mx-auto text-lg font-medium">
                         Combinamos tecnologia de ponta, atendimento humanizado e facilidade de pagamento para cuidar da sua visão.
                     </p>
                 </motion.div>
@@ -91,7 +91,7 @@ export function WhyVizz() {
                                 <h3 className="font-bold text-primary text-base mb-2">
                                     {item.titulo}
                                 </h3>
-                                <p className="text-muted-foreground text-sm leading-relaxed">
+                                <p className="text-primary/80 text-sm leading-relaxed font-medium">
                                     {item.texto}
                                 </p>
                             </motion.div>

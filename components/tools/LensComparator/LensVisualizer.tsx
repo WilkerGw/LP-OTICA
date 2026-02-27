@@ -88,6 +88,15 @@ const LensVisualizer: React.FC<LensVisualizerProps> = ({
                         key={index.value}
                         variant={isSelected ? "default" : "outline"}
                         onClick={() => setSelectedIndex(index.value)}
+                        onKeyDown={(e) => {
+                            if (e.key === "Enter" || e.key === " ") {
+                                e.preventDefault();
+                                setSelectedIndex(index.value);
+                            }
+                        }}
+                        role="radio"
+                        aria-checked={isSelected}
+                        aria-label={`Select refractive index ${index.value.toFixed(2)}`}
                         className={`
                             relative overflow-hidden transition-all duration-300
                             ${isMobile

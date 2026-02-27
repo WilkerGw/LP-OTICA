@@ -42,14 +42,21 @@ export function RefractionIndex() {
                                     <button
                                         key={index.value}
                                         onClick={() => setSelectedIndex(index.value)}
+                                        onKeyDown={(e) => {
+                                            if (e.key === "Enter" || e.key === " ") {
+                                                e.preventDefault();
+                                                setSelectedIndex(index.value);
+                                            }
+                                        }}
                                         className={cn(
                                             "px-5 sm:px-8 py-2.5 rounded-full transition-all duration-500 font-bold text-xs sm:text-sm tracking-tight whitespace-nowrap shrink-0",
                                             selectedIndex === index.value
                                                 ? "bg-secondary text-primary shadow-lg shadow-secondary/20 scale-105"
-                                                : "text-muted-foreground hover:text-primary hover:bg-white/50"
+                                                : "text-primary/70 hover:text-primary hover:bg-white/50"
                                         )}
                                         aria-label={`Índice de refração ${index.value.toFixed(2)}`}
-                                        aria-pressed={selectedIndex === index.value}
+                                        role="radio"
+                                        aria-checked={selectedIndex === index.value}
                                     >
                                         {index.value.toFixed(2)}
                                     </button>
@@ -107,7 +114,7 @@ export function RefractionIndex() {
                                 {/* Material & Features Wrapper */}
                                 <div className="space-y-6 flex flex-col items-center">
                                     <div className="space-y-1">
-                                        <span className="text-[10px] font-black text-primary uppercase tracking-[0.4em]">Material Premium</span>
+                                        <span className="text-[10px] font-black text-primary/80 uppercase tracking-[0.4em]">Material Premium</span>
                                         <h3 className="text-4xl  font-black text-primary tracking-tight">
                                             {selected.material}
                                         </h3>
@@ -130,7 +137,7 @@ export function RefractionIndex() {
                                         <div className="space-y-3">
                                             <div className="flex justify-between items-end">
                                                 <div className="space-y-1">
-                                                    <span className="block text-[10px] font-black text-muted-foreground uppercase tracking-widest">Estética</span>
+                                                    <span className="block text-[10px] font-black text-primary/70 uppercase tracking-widest">Estética</span>
                                                     <span className="block text-sm font-bold text-primary">Nível de Espessura</span>
                                                 </div>
                                                 <span className="text-[10px] font-black text-primary bg-primary/10 px-2 py-0.5 rounded-md">
@@ -151,7 +158,7 @@ export function RefractionIndex() {
                                         <div className="space-y-3">
                                             <div className="flex justify-between items-end">
                                                 <div className="space-y-1">
-                                                    <span className="block text-[10px] font-black text-muted-foreground uppercase tracking-widest">Conforto</span>
+                                                    <span className="block text-[10px] font-black text-primary/70 uppercase tracking-widest">Conforto</span>
                                                     <span className="block text-sm font-bold text-primary">Leveza da Lente</span>
                                                 </div>
                                                 <span className="text-[10px] font-black text-primary bg-primary/10 px-2 py-0.5 rounded-md">
@@ -171,7 +178,7 @@ export function RefractionIndex() {
 
                                     {/* Additional context or visual in second col might go here if needed, but for now sticking to 2-columns for attributes if many, or 1-col for center stack */}
                                     <div className="flex items-center justify-center p-4">
-                                        <p className="text-sm font-medium text-primary/60 italic">
+                                        <p className="text-sm font-bold text-primary/80 italic">
                                             {selected.value >= 1.67
                                                 ? "Recomendado para altos graus (acima de 4.00), reduzindo drasticamente o efeito de 'fundo de garrafa'."
                                                 : "Ideal para graus baixos a moderados, oferecendo resistência e excelente nitidez visual."}

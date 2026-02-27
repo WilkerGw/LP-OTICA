@@ -20,7 +20,7 @@ export function Footer() {
                                 />
                             </div>
                         </div>
-                        <p className="text-sm leading-relaxed text-white/50 font-medium max-w-xs">
+                        <p className="text-sm leading-relaxed text-white/70 font-medium max-w-xs">
                             Curadoria premium de eyewear e tecnologia alemã em lentes. Enxergue o mundo com clareza, estilo e a elegância que você merece.
                         </p>
                         <div className="flex gap-4 pt-2">
@@ -33,6 +33,7 @@ export function Footer() {
                                     key={i}
                                     href={social.href}
                                     className="w-10 h-10 rounded-full glass-panel flex items-center justify-center hover:bg-secondary hover:text-primary transition-all duration-300 group"
+                                    aria-label={`Visite nosso ${social.icon.name || 'perfil'}`}
                                 >
                                     <social.icon className="w-5 h-5 group-hover:scale-110 transition-transform" />
                                 </a>
@@ -53,7 +54,7 @@ export function Footer() {
                                 { label: 'Contato', href: '#contato' }
                             ].map((item) => (
                                 <li key={item.label}>
-                                    <a href={item.href} className="text-white/40 hover:text-white transition-colors flex items-center gap-2 group">
+                                    <a href={item.href} className="text-white/70 hover:text-white transition-colors flex items-center gap-2 group">
                                         <span className="w-0 h-px bg-secondary group-hover:w-3 transition-all duration-300" />
                                         {item.label}
                                     </a>
@@ -65,18 +66,18 @@ export function Footer() {
                     {/* Column 3: Payment */}
                     <div className="space-y-6">
                         <h4 className="text-xs font-bold text-secondary uppercase tracking-[0.2em]">Pagamento</h4>
-                        <p className="text-sm text-white/50 font-medium">Parcele sua visão em até 10x sem juros nos cartões ou aproveite desconto no PIX.</p>
+                        <p className="text-sm text-white/60 font-medium">Parcele sua visão em até 10x sem juros nos cartões ou aproveite desconto no PIX.</p>
                         <div className="flex flex-wrap gap-2 pt-2">
                             {/* Visual Payment Badges */}
-                            <div className="px-3 py-1.5 glass-panel rounded-md text-[10px] font-bold text-white/60">VISA</div>
-                            <div className="px-3 py-1.5 glass-panel rounded-md text-[10px] font-bold text-white/60">MASTERCARD</div>
-                            <div className="px-3 py-1.5 glass-panel rounded-md text-[10px] font-bold text-white/60">PIX</div>
+                            <div className="px-3 py-1.5 glass-panel rounded-md text-[10px] font-bold text-white/90">VISA</div>
+                            <div className="px-3 py-1.5 glass-panel rounded-md text-[10px] font-bold text-white/90">MASTERCARD</div>
+                            <div className="px-3 py-1.5 glass-panel rounded-md text-[10px] font-bold text-white/90">PIX</div>
                         </div>
                     </div>
                 </div>
 
                 <div className="mt-20 pt-8 border-t border-white/5 text-center">
-                    <p className="text-[10px] font-bold text-white/20 uppercase tracking-[0.3em]">
+                    <p className="text-[10px] font-bold text-white/40 uppercase tracking-[0.3em]">
                         &copy; {new Date().getFullYear()} Óticas Vizz &bull; Crafted for Visionary People
                     </p>
                 </div>

@@ -124,19 +124,28 @@ export function TreatmentsGrid() {
                 </div>
 
                 {/* Horizontal Navigation Buttons */}
-                <div className="flex flex-wrap justify-center gap-3 z-20 relative">
+                <div role="tablist" aria-label="Navegação de tratamentos" className="flex flex-wrap justify-center gap-3 z-20 relative">
                     {treatments.map((item) => (
                         <button
                             key={item.id}
+                            id={`treatment-tab-${item.id}`}
+                            aria-controls={`treatment-panel-${item.id}`}
                             onClick={() => setSelectedId(item.id)}
                             className={cn(
-                                "relative flex items-center gap-2 px-5 py-2.5 rounded-full transition-all duration-300 font-bold text-xs uppercase tracking-wider",
+                                "relative flex items-center gap-2 px-5 py-2.5 rounded-full transition-all duration-300 font-bold text-xs uppercase tracking-wider focus-visible:outline-secondary",
                                 selectedId === item.id
                                     ? "bg-secondary text-primary shadow-lg shadow-secondary/20 scale-105"
-                                    : "glass-card text-muted-foreground hover:bg-secondary/10 hover:text-primary"
+                                    : "glass-card text-primary/70 hover:bg-secondary/10 hover:text-primary"
                             )}
                             aria-label={`Ver detalhes do tratamento ${item.name}`}
                             aria-pressed={selectedId === item.id}
+                            role="tab"
+                            onKeyDown={(e) => {
+                                if (e.key === "Enter" || e.key === " ") {
+                                    e.preventDefault();
+                                    setSelectedId(item.id);
+                                }
+                            }}
                         >
                             {item.shortLabel}
                         </button>
@@ -175,7 +184,7 @@ export function TreatmentsGrid() {
                                 </div>
                                 {/* Label: Sem Tratamento */}
                                 <div className="absolute top-[20%] right-[5%] lg:right-[30%] z-20 flex flex-col items-center group">
-                                    <span className="px-4 py-1.5 text-[10px] sm:text-xs font-bold text-gray-500 bg-gray-50/80 backdrop-blur-sm border border-gray-200 rounded-full shadow-lg shadow-gray-200/20 whitespace-nowrap uppercase tracking-widest transition-transform group-hover:scale-110">
+                                    <span className="px-4 py-1.5 text-[10px] sm:text-xs font-bold text-primary/80 bg-white/90 backdrop-blur-sm border border-gray-300 rounded-full shadow-lg shadow-gray-200/20 whitespace-nowrap uppercase tracking-widest transition-transform group-hover:scale-110">
                                         Sem Tratamento
                                     </span>
                                     <div className="w-px h-10 bg-linear-to-b from-gray-300 to-transparent" />
@@ -191,7 +200,7 @@ export function TreatmentsGrid() {
                                     viewport={{ once: true }}
                                     className="flex flex-col items-center sm:items-start gap-2 p-4 sm:p-6 rounded-3xl hover:bg-white/10 transition-colors sm:w-1/3"
                                 >
-                                    <span className="text-[10px] sm:text-xs font-black text-secondary uppercase tracking-[0.2em] mb-1">Benefícios</span>
+                                    <h3 className="text-[10px] sm:text-xs font-black text-secondary uppercase tracking-[0.2em] mb-1">Benefícios</h3>
                                     {selected.benefits.map((b, i) => (
                                         <div key={i} className="flex items-center gap-2 text-[10px] sm:text-sm text-primary/80 font-bold text-center sm:text-left">
                                             <div className="w-1.5 h-1.5 rounded-full bg-secondary shrink-0" />
@@ -211,9 +220,9 @@ export function TreatmentsGrid() {
                                     transition={{ delay: 0.1 }}
                                     className="flex flex-col items-center sm:items-end gap-2 p-4 sm:p-6 rounded-3xl hover:bg-white/10 transition-colors sm:w-1/3"
                                 >
-                                    <span className="text-[10px] sm:text-xs font-black text-gray-400 uppercase tracking-[0.2em] mb-1">Malefícios</span>
+                                    <h3 className="text-[10px] sm:text-xs font-black text-gray-400 uppercase tracking-[0.2em] mb-1">Malefícios</h3>
                                     {selected.drawbacks.map((d, i) => (
-                                        <div key={i} className="flex items-center gap-2 text-[10px] sm:text-sm text-muted-foreground font-medium text-center sm:text-right">
+                                        <div key={i} className="flex items-center gap-2 text-[10px] sm:text-sm text-primary/70 font-bold text-center sm:text-right">
                                             {d}
                                             <div className="w-1.5 h-1.5 rounded-full bg-gray-300 shrink-0" />
                                         </div>

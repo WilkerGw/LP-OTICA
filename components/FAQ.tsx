@@ -75,6 +75,12 @@ export function FAQ() {
                                 onClick={() => toggle(index)}
                                 className="w-full flex items-center justify-between gap-4 p-5 bg-muted/50 hover:bg-muted rounded-2xl transition-colors text-left cursor-pointer group"
                                 aria-expanded={aberto === index}
+                                onKeyDown={(e) => {
+                                    if (e.key === "Enter" || e.key === " ") {
+                                        e.preventDefault();
+                                        toggle(index);
+                                    }
+                                }}
                             >
                                 <span className="font-semibold text-primary text-sm md:text-base leading-tight">
                                     {item.pergunta}

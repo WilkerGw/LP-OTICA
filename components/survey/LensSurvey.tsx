@@ -329,6 +329,12 @@ export function LensSurvey() {
                                 </div>
                                 <Button
                                     onClick={closeSurvey}
+                                    onKeyDown={(e) => {
+                                        if (e.key === "Enter" || e.key === " ") {
+                                            e.preventDefault();
+                                            closeSurvey();
+                                        }
+                                    }}
                                     variant="ghost"
                                     className="rounded-full w-10 h-10 p-0 text-primary/40 hover:text-primary hover:bg-primary/5 flex items-center justify-center transition-all"
                                 >
@@ -456,6 +462,12 @@ export function LensSurvey() {
                                             <div className="flex items-center justify-center gap-4 py-4 border-t border-primary/5 sticky bottom-0 bg-white/95 backdrop-blur-sm z-20">
                                                 <Button
                                                     onClick={goBack}
+                                                    onKeyDown={(e) => {
+                                                        if (e.key === "Enter" || e.key === " ") {
+                                                            e.preventDefault();
+                                                            goBack();
+                                                        }
+                                                    }}
                                                     variant="ghost"
                                                     className={`h-12 px-6 rounded-xl text-xs font-black transition-all ${currentStepIndex === 0
                                                         ? "hidden"
@@ -469,6 +481,12 @@ export function LensSurvey() {
 
                                                 <Button
                                                     onClick={goNext}
+                                                    onKeyDown={(e) => {
+                                                        if (e.key === "Enter" || e.key === " ") {
+                                                            e.preventDefault();
+                                                            goNext();
+                                                        }
+                                                    }}
                                                     disabled={!canAdvance()}
                                                     variant={canAdvance() ? "default" : "outline"}
                                                     className={`h-12 px-10 rounded-xl text-sm font-black transition-all min-w-[200px] ${canAdvance()
@@ -609,6 +627,15 @@ function OptionCard({
             animate="animate"
             exit="exit"
             onClick={onClick}
+            onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    onClick();
+                }
+            }}
+            tabIndex={0}
+            role="button"
+            aria-pressed={selected}
             className={`group relative text-left p-3 md:p-4 rounded-[24px] border-2 transition-all duration-300 cursor-pointer ${selected
                 ? "border-primary bg-primary/5 shadow-2xl shadow-primary/10"
                 : "border-primary/5 bg-primary/2 hover:border-primary/10 hover:bg-white hover:shadow-xl"
