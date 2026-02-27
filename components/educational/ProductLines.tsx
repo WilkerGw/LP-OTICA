@@ -184,6 +184,9 @@ export function ProductLines() {
                                     ? "bg-primary text-white border-primary shadow-xl shadow-primary/20 transform scale-105"
                                     : "bg-muted/50 border-transparent text-muted-foreground hover:bg-secondary/10 hover:text-primary"
                             )}
+                            aria-label={`Ver detalhes da lente ${product.name}`}
+                            aria-selected={selectedProductId === product.id}
+                            role="tab"
                         >
                             {product.badge && (
                                 <span className={cn(

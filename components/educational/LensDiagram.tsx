@@ -154,11 +154,13 @@ export function LensDiagram() {
                             {/* Hover zones for interaction */}
                             <div className="absolute inset-x-8 inset-y-8 z-20 flex flex-col">
                                 {zones.map((zone) => (
-                                    <div
+                                    <button
                                         key={zone.id}
-                                        className="flex-1 w-full cursor-pointer"
+                                        className="flex-1 w-full cursor-pointer bg-transparent border-none p-0"
                                         onClick={() => setActiveZone(zone.id)}
                                         onMouseEnter={() => setActiveZone(zone.id)}
+                                        aria-label={`Selecionar ${zone.label}`}
+                                        aria-pressed={activeZone === zone.id}
                                     />
                                 ))}
                             </div>

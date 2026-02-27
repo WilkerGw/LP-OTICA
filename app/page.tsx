@@ -17,7 +17,7 @@ import { SectionNavigator } from "@/components/SectionNavigator";
 
 export default function Home() {
   return (
-    <main className="min-h-screen">
+    <main id="main-content" className="min-h-screen">
       <SectionNavigator />
       <div id="hero" className="relative h-dvh">
         <HeroCarousel />

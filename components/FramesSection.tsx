@@ -182,7 +182,15 @@ function FrameCard({ produto, index }: { produto: Armacao; index: number }) {
             transition={{ duration: 0.3, delay: index * 0.05 }}
             onMouseEnter={() => setPaused(true)}
             onMouseLeave={() => setPaused(false)}
-            className="group relative bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer"
+            onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                    window.open(produto.link, "_blank");
+                }
+            }}
+            tabIndex={0}
+            role="button"
+            aria-label={`Ver detalhes de ${produto.nome}`}
+            className="group relative bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-secondary"
         >
             {/* Image Area */}
             <div className="relative overflow-hidden aspect-3/2 bg-linear-to-br from-gray-50 to-gray-100">

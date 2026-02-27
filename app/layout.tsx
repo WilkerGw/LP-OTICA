@@ -70,6 +70,9 @@ export default function RootLayout({
       <body
         className={`${poppins.variable} ${inter.variable} antialiased font-sans`}
       >
+        <a href="#main-content" className="skip-link">
+          Saltar para o conteúdo
+        </a>
         <SchemaOrg />
         {children}
         <ChatWidget />

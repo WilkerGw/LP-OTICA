@@ -166,12 +166,14 @@ export default function ChatWidget() {
                                 value={input}
                                 onChange={(e) => setInput(e.target.value)}
                                 placeholder="Como posso ajudar?"
+                                aria-label="Mensagem para o Vizzy"
                                 className="flex-1 bg-secondary/5 border-none rounded-2xl px-5 py-3 text-base focus:ring-1 focus:ring-secondary transition-all outline-none text-gray-700"
                                 disabled={isLoading}
                             />
                             <button
                                 type="submit"
                                 disabled={!input.trim() || isLoading}
+                                aria-label="Enviar mensagem"
                                 className="bg-secondary text-primary p-3 rounded-2xl hover:brightness-110 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-lg shadow-secondary/20 flex items-center justify-center"
                             >
                                 <Send size={18} />
@@ -190,6 +192,8 @@ export default function ChatWidget() {
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     onClick={() => setIsOpen(!isOpen)}
+                    aria-label={isOpen ? "Fechar chat" : "Abrir chat"}
+                    aria-expanded={isOpen}
                     className={`w-14 h-14 rounded-full shadow-2xl flex items-center justify-center transition-all duration-500 overflow-hidden ${isOpen ? 'bg-primary text-secondary translate-x-12 opacity-0 pointer-events-none' : 'bg-primary text-secondary'
                         }`}
                 >

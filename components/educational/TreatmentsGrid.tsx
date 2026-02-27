@@ -135,6 +135,8 @@ export function TreatmentsGrid() {
                                     ? "bg-secondary text-primary shadow-lg shadow-secondary/20 scale-105"
                                     : "glass-card text-muted-foreground hover:bg-secondary/10 hover:text-primary"
                             )}
+                            aria-label={`Ver detalhes do tratamento ${item.name}`}
+                            aria-pressed={selectedId === item.id}
                         >
                             {item.shortLabel}
                         </button>

@@ -66,8 +66,21 @@ export function HeroCarousel() {
         return () => clearInterval(timer);
     }, []);
 
+    const handleKeyDown = (e: React.KeyboardEvent) => {
+        if (e.key === "ArrowLeft") {
+            setCurrent((prev) => (prev - 1 + slides.length) % slides.length);
+        } else if (e.key === "ArrowRight") {
+            setCurrent((prev) => (prev + 1) % slides.length);
+        }
+    };
+
     return (
-        <section className="relative h-dvh w-full overflow-hidden bg-[#f0efed]">
+        <section
+            className="relative h-dvh w-full overflow-hidden bg-[#f0efed]"
+            onKeyDown={handleKeyDown}
+            aria-roledescription="carousel"
+            aria-label="Promoções em destaque"
+        >
             {/* Header Bar */}
             <div className="absolute top-0 left-0 right-0 z-30 p-2 md:px-10 lg:px-16">
                 <div className="flex items-center justify-between">
@@ -97,6 +110,10 @@ export function HeroCarousel() {
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.7 }}
+                    aria-live="polite"
+                    role="group"
+                    aria-roledescription="slide"
+                    aria-label={`${current + 1} de ${slides.length}`}
                 >
                     {/* Background Images */}
                     <div className="absolute inset-0 z-0">
@@ -173,7 +190,7 @@ export function HeroCarousel() {
             </AnimatePresence>
 
             {/* Navigation Dots */}
-            <div className="absolute bottom-28 md:bottom-20 left-8 md:left-12 lg:left-20 flex space-x-3 z-20">
+            <div className="absolute bottom-28 md:bottom-20 left-8 md:left-12 lg:left-20 flex space-x-3 z-20" role="tablist" aria-label="Navegação do carrossel">
                 {slides.map((_, index) => (
                     <button
                         key={index}
@@ -183,6 +200,8 @@ export function HeroCarousel() {
                             : "bg-foreground/20 hover:bg-foreground/40 w-3"
                             }`}
                         aria-label={`Ir para slide ${index + 1}`}
+                        role="tab"
+                        aria-selected={index === current}
                     />
                 ))}
             </div>

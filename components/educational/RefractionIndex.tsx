@@ -48,6 +48,8 @@ export function RefractionIndex() {
                                                 ? "bg-secondary text-primary shadow-lg shadow-secondary/20 scale-105"
                                                 : "text-muted-foreground hover:text-primary hover:bg-white/50"
                                         )}
+                                        aria-label={`Índice de refração ${index.value.toFixed(2)}`}
+                                        aria-pressed={selectedIndex === index.value}
                                     >
                                         {index.value.toFixed(2)}
                                     </button>
