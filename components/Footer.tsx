@@ -77,7 +77,7 @@ export function Footer() {
                 </div>
 
                 <div className="mt-20 pt-8 border-t border-white/5 text-center">
-                    <p className="text-[10px] font-bold text-white/90 uppercase tracking-[0.3em]">
+                    <p className="text-[10px] font-bold text-white/70 uppercase tracking-[0.3em]">
                         &copy; {new Date().getFullYear()} Óticas Vizz &bull; Crafted for Visionary People
                     </p>
                 </div>

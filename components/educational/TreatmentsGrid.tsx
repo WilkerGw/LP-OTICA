@@ -177,17 +177,17 @@ export function TreatmentsGrid() {
                                 />
                                 {/* Label: Com Tratamento */}
                                 <div className="absolute top-[20%] left-[5%] lg:left-[30%] z-20 flex flex-col items-center group">
-                                    <span className="px-4 py-1.5 text-[10px] sm:text-xs font-bold text-amber-900 bg-amber-100/90 backdrop-blur-sm border border-amber-400 rounded-full shadow-lg shadow-amber-200/20 whitespace-nowrap uppercase tracking-widest transition-transform group-hover:scale-110">
+                                    <span className="px-5 py-2 text-[10px] sm:text-xs font-black text-amber-950 bg-amber-50 border border-amber-400 rounded-full shadow-lg shadow-amber-200/20 whitespace-nowrap uppercase tracking-widest transition-transform group-hover:scale-110">
                                         Com Tratamento
                                     </span>
                                     <div className="w-px h-10 bg-linear-to-b from-amber-400 to-transparent" />
                                 </div>
                                 {/* Label: Sem Tratamento */}
                                 <div className="absolute top-[20%] right-[5%] lg:right-[30%] z-20 flex flex-col items-center group">
-                                    <span className="px-4 py-1.5 text-[10px] sm:text-xs font-bold text-primary bg-white backdrop-blur-sm border border-gray-400 rounded-full shadow-lg shadow-gray-200/20 whitespace-nowrap uppercase tracking-widest transition-transform group-hover:scale-110">
+                                    <span className="px-5 py-2 text-[10px] sm:text-xs font-black text-slate-950 bg-white border border-slate-400 rounded-full shadow-lg shadow-slate-200/20 whitespace-nowrap uppercase tracking-widest transition-transform group-hover:scale-110">
                                         Sem Tratamento
                                     </span>
-                                    <div className="w-px h-10 bg-linear-to-b from-gray-400 to-transparent" />
+                                    <div className="w-px h-10 bg-linear-to-b from-slate-400 to-transparent" />
                                 </div>
                             </div>
 

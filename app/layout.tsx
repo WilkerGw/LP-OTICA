@@ -3,7 +3,7 @@ import { Poppins, Inter } from "next/font/google";
 import "./globals.css";
 import dynamic from "next/dynamic";
 
-const ChatWidget = dynamic(() => import("@/components/chat/ChatWidget"));
+import DynamicChat from "@/components/chat/DynamicChat";
 import { SchemaOrg } from "@/components/SchemaOrg";
 
 const poppins = Poppins({
@@ -78,7 +78,7 @@ export default function RootLayout({
         </a>
         <SchemaOrg />
         {children}
-        <ChatWidget />
+        <DynamicChat />
       </body>
     </html>
   );

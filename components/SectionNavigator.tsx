@@ -125,7 +125,7 @@ export function SectionNavigator() {
                                     scrollToSection(idx);
                                 }
                             }}
-                            className="relative flex justify-center items-center group p-2 -m-2"
+                            className="relative flex justify-center items-center group p-3 -m-3"
                             aria-label={`Ir para seção ${SECTION_IDS[idx]}`}
                         >
                             <span
