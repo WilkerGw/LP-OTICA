@@ -91,6 +91,7 @@ export function ContactSection() {
                                 loading="lazy"
                                 referrerPolicy="no-referrer-when-downgrade"
                                 className="absolute inset-0"
+                                title="Localização da loja Óticas Vizz no Google Maps"
                             ></iframe>
                         </div>
                     </div>

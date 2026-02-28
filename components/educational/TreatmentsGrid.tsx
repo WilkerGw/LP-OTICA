@@ -138,7 +138,7 @@ export function TreatmentsGrid() {
                                     : "glass-card text-primary/70 hover:bg-secondary/10 hover:text-primary"
                             )}
                             aria-label={`Ver detalhes do tratamento ${item.name}`}
-                            aria-pressed={selectedId === item.id}
+                            aria-selected={selectedId === item.id}
                             role="tab"
                             onKeyDown={(e) => {
                                 if (e.key === "Enter" || e.key === " ") {
@@ -177,17 +177,17 @@ export function TreatmentsGrid() {
                                 />
                                 {/* Label: Com Tratamento */}
                                 <div className="absolute top-[20%] left-[5%] lg:left-[30%] z-20 flex flex-col items-center group">
-                                    <span className="px-4 py-1.5 text-[10px] sm:text-xs font-bold text-secondary bg-amber-50/80 backdrop-blur-sm border border-amber-200 rounded-full shadow-lg shadow-amber-200/20 whitespace-nowrap uppercase tracking-widest transition-transform group-hover:scale-110">
+                                    <span className="px-4 py-1.5 text-[10px] sm:text-xs font-bold text-amber-900 bg-amber-100/90 backdrop-blur-sm border border-amber-400 rounded-full shadow-lg shadow-amber-200/20 whitespace-nowrap uppercase tracking-widest transition-transform group-hover:scale-110">
                                         Com Tratamento
                                     </span>
-                                    <div className="w-px h-10 bg-linear-to-b from-amber-300 to-transparent" />
+                                    <div className="w-px h-10 bg-linear-to-b from-amber-400 to-transparent" />
                                 </div>
                                 {/* Label: Sem Tratamento */}
                                 <div className="absolute top-[20%] right-[5%] lg:right-[30%] z-20 flex flex-col items-center group">
-                                    <span className="px-4 py-1.5 text-[10px] sm:text-xs font-bold text-primary/80 bg-white/90 backdrop-blur-sm border border-gray-300 rounded-full shadow-lg shadow-gray-200/20 whitespace-nowrap uppercase tracking-widest transition-transform group-hover:scale-110">
+                                    <span className="px-4 py-1.5 text-[10px] sm:text-xs font-bold text-primary bg-white backdrop-blur-sm border border-gray-400 rounded-full shadow-lg shadow-gray-200/20 whitespace-nowrap uppercase tracking-widest transition-transform group-hover:scale-110">
                                         Sem Tratamento
                                     </span>
-                                    <div className="w-px h-10 bg-linear-to-b from-gray-300 to-transparent" />
+                                    <div className="w-px h-10 bg-linear-to-b from-gray-400 to-transparent" />
                                 </div>
                             </div>
 
@@ -200,9 +200,9 @@ export function TreatmentsGrid() {
                                     viewport={{ once: true }}
                                     className="flex flex-col items-center sm:items-start gap-2 p-4 sm:p-6 rounded-3xl hover:bg-white/10 transition-colors sm:w-1/3"
                                 >
-                                    <h3 className="text-[10px] sm:text-xs font-black text-secondary uppercase tracking-[0.2em] mb-1">Benefícios</h3>
+                                    <h3 className="text-[10px] sm:text-xs font-black text-secondary-dark uppercase tracking-[0.2em] mb-1">Benefícios</h3>
                                     {selected.benefits.map((b, i) => (
-                                        <div key={i} className="flex items-center gap-2 text-[10px] sm:text-sm text-primary/80 font-bold text-center sm:text-left">
+                                        <div key={i} className="flex items-center gap-2 text-[10px] sm:text-sm text-primary font-bold text-center sm:text-left">
                                             <div className="w-1.5 h-1.5 rounded-full bg-secondary shrink-0" />
                                             {b}
                                         </div>
@@ -220,11 +220,11 @@ export function TreatmentsGrid() {
                                     transition={{ delay: 0.1 }}
                                     className="flex flex-col items-center sm:items-end gap-2 p-4 sm:p-6 rounded-3xl hover:bg-white/10 transition-colors sm:w-1/3"
                                 >
-                                    <h3 className="text-[10px] sm:text-xs font-black text-gray-400 uppercase tracking-[0.2em] mb-1">Malefícios</h3>
+                                    <h3 className="text-[10px] sm:text-xs font-black text-gray-500 uppercase tracking-[0.2em] mb-1">Malefícios</h3>
                                     {selected.drawbacks.map((d, i) => (
-                                        <div key={i} className="flex items-center gap-2 text-[10px] sm:text-sm text-primary/70 font-bold text-center sm:text-right">
+                                        <div key={i} className="flex items-center gap-2 text-[10px] sm:text-sm text-primary font-bold text-center sm:text-right">
                                             {d}
-                                            <div className="w-1.5 h-1.5 rounded-full bg-gray-300 shrink-0" />
+                                            <div className="w-1.5 h-1.5 rounded-full bg-gray-400 shrink-0" />
                                         </div>
                                     ))}
                                 </motion.div>

@@ -207,12 +207,12 @@ export default function ChatWidget() {
                     className="w-14 h-14 rounded-full bg-secondary text-primary shadow-2xl flex items-center justify-center hover:scale-110 active:scale-95 transition-all duration-300 group z-50 relative pointer-events-auto"
                     aria-label={isOpen ? "Fechar chat" : "Abrir chat"}
                 >
-                    <div className="relative">
-                        <MessageCircle size={28} className="text-secondary" />
+                    <div className="relative flex items-center justify-center">
+                        <MessageCircle size={28} />
                         <motion.span
                             animate={{ scale: [1, 1.2, 1] }}
                             transition={{ repeat: Infinity, duration: 2 }}
-                            className="absolute -top-1 -right-1 w-3.5 h-3.5 bg-secondary rounded-full border-2 border-primary"
+                            className="absolute -top-1 -right-1 w-3.5 h-3.5 bg-secondary rounded-full border-[1.5px] border-primary"
                         />
                     </div>
                 </motion.button>

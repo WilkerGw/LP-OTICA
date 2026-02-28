@@ -243,7 +243,7 @@ function FrameCard({ produto, index }: { produto: Armacao; index: number }) {
                                 tabIndex={0}
                                 role="button"
                                 aria-label={`Ver imagem ${i + 1} do modelo ${produto.nome}`}
-                                aria-selected={currentImg === i}
+                                aria-pressed={currentImg === i}
                                 className={`rounded-full transition-all duration-200 cursor-pointer ${i === currentImg
                                     ? "bg-primary w-4 h-1.5"
                                     : "bg-primary/25 hover:bg-primary/50 w-1.5 h-1.5"
@@ -271,6 +271,7 @@ function FrameCard({ produto, index }: { produto: Armacao; index: number }) {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="mt-3 w-full flex items-center justify-center gap-1.5 bg-primary text-white text-sm py-2 rounded-xl hover:bg-primary/90 transition-colors font-medium cursor-pointer"
+                    aria-label={`Comprar modelo ${produto.nome}`}
                 >
                     <ShoppingBag className="w-3.5 h-3.5" />
                     Comprar

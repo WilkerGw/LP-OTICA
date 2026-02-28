@@ -217,7 +217,7 @@ export function LensDiagram() {
                                         <div key={z.id} className="flex items-center gap-4">
                                             <span className={cn(
                                                 "text-[10px] font-bold uppercase tracking-wider w-24 shrink-0 transition-colors",
-                                                z.id === activeZone ? "text-secondary" : "text-primary/70"
+                                                z.id === activeZone ? "text-amber-800" : "text-primary"
                                             )}>{z.shortLabel}</span>
                                             <div className="flex-1 h-2 bg-muted rounded-full relative overflow-hidden">
                                                 <motion.div

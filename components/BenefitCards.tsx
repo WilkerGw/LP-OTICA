@@ -35,9 +35,9 @@ export function BenefitCards() {
                             <div className="shrink-0 rounded-xl bg-foreground/90 p-2.5 text-white group-hover:scale-105 transition-transform duration-200">
                                 <benefit.icon className="h-4 w-4 md:h-5 md:w-5" />
                             </div>
-                            <h3 className="font-heading text-xs md:text-sm font-bold text-foreground leading-tight uppercase tracking-wider">
+                            <p className="font-heading text-xs md:text-sm font-bold text-foreground leading-tight uppercase tracking-wider">
                                 {benefit.title}
-                            </h3>
+                            </p>
                         </div>
                     ))}
                 </div>

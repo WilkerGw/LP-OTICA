@@ -125,12 +125,16 @@ export function SectionNavigator() {
                                     scrollToSection(idx);
                                 }
                             }}
-                            className={`rounded-full transition-all duration-300 cursor-pointer ${idx === currentIndex
-                                ? "w-2 h-4 bg-primary"
-                                : "w-2 h-2 bg-gray-300 hover:bg-primary/40"
-                                }`}
+                            className="relative flex justify-center items-center group p-2 -m-2"
                             aria-label={`Ir para seção ${SECTION_IDS[idx]}`}
-                        />
+                        >
+                            <span
+                                className={`rounded-full transition-all duration-300 ${idx === currentIndex
+                                    ? "w-2.5 h-2.5 bg-primary shadow-sm"
+                                    : "w-2 h-2 bg-gray-300 group-hover:bg-primary/40"
+                                    }`}
+                            />
+                        </button>
                     ))}
                 </div>
 
