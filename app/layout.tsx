@@ -1,7 +1,9 @@
 import type { Metadata, Viewport } from "next";
 import { Poppins, Inter } from "next/font/google";
 import "./globals.css";
-import ChatWidget from "@/components/chat/ChatWidget";
+import dynamic from "next/dynamic";
+
+const ChatWidget = dynamic(() => import("@/components/chat/ChatWidget"));
 import { SchemaOrg } from "@/components/SchemaOrg";
 
 const poppins = Poppins({
@@ -17,6 +19,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.oticasvizz.com.br"),
   title: "Óticas Vizz | Óculos de Grau e Lentes na Zona Leste de São Paulo",
   description:
     "Óticas Vizz na Av. do Oratório, 4869 – Zona Leste SP. Armações, lentes multifocais, tratamentos premium e exame de vista. Parcele em 12x sem juros ou 10% no PIX.",

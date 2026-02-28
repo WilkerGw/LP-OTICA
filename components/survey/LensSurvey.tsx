@@ -132,7 +132,7 @@ function AnimatedPrice({ value }: { value: number }) {
 
 // ─── Component ───
 
-export function LensSurvey() {
+export default function LensSurvey() {
     const [isOpen, setIsOpen] = useState(false);
     const [step, setStep] = useState(0);
     const [selections, setSelections] = useState<Selections>(INITIAL_SELECTIONS);

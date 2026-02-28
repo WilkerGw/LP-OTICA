@@ -1,6 +1,8 @@
 import { HeroCarousel } from "@/components/HeroCarousel";
 import { BenefitCards } from "@/components/BenefitCards";
-import { LensSurvey } from "@/components/survey/LensSurvey";
+import dynamic from "next/dynamic";
+
+const LensSurvey = dynamic(() => import("@/components/survey/LensSurvey"));
 import { AboutSection } from "@/components/AboutSection";
 import { LensDiagram } from "@/components/educational/LensDiagram";
 import { ProductLines } from "@/components/educational/ProductLines";
